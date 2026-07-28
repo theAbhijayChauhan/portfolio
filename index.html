@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhijay Chauhan — DevOps Engineer & SRE</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+    <!-- SEO & Social Media Share Meta Cards (OpenGraph / Twitter) -->
+    <meta name="title" content="Abhijay Chauhan — DevOps Engineer & SRE">
+    <meta name="description" content="Fresher with a hacker's mindset — automating everything, breaking nothing, and building infrastructure that just works.">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Abhijay Chauhan — DevOps Engineer & SRE">
+    <meta property="og:description" content="Fresher with a hacker's mindset — automating everything, breaking nothing, and building infrastructure that just works.">
+    <meta property="og:image" content="assets/photo.jpg">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Abhijay Chauhan — DevOps Engineer & SRE">
+    <meta property="twitter:description" content="Fresher with a hacker's mindset — automating everything, breaking nothing, and building infrastructure that just works.">
+    <meta property="twitter:image" content="assets/photo.jpg">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['-apple-system', 'BlinkMacSystemFont', '"San Francisco"', '"Segoe UI"', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+                        mono: ['-apple-system', 'BlinkMacSystemFont', '"San Francisco"', '"Segoe UI"', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- OPTIONAL ENHANCEMENTS MODULE (Comment out or delete to disable all 5 extra features) -->
+    <link rel="stylesheet" href="css/enhancements.css">
+</head>
+<body>
+
+    <!-- LOADER -->
+    <div id="loader">
+        <div class="loader-logo font-display text-sm tracking-[6px] text-[var(--muted)] uppercase">Init</div>
+        <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+        <div class="loader-boot-logs" id="bootLogsContainer"></div>
+    </div>
+
+    <!-- CURSORS -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- CANVASES -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home" onclick="closeMobile()">Home</a>
+        <a href="#about" onclick="closeMobile()">About</a>
+        <a href="#skills" onclick="closeMobile()">Skills</a>
+        <a href="#projects" onclick="closeMobile()">Projects</a>
+        <a href="#education" onclick="closeMobile()">Education</a>
+        <a href="#certifications" onclick="closeMobile()">Certs</a>
+        <a href="#contact" onclick="closeMobile()">Contact</a>
+    </div>
+
+    <!-- NAV -->
+    <nav id="navbar">
+        <div class="nav-inner">
+            <div class="flex items-center gap-3">
+                <span id="instaBanner" class="insta-logo-glow" title="Instagram" aria-label="Instagram Profile">
+                    <i class="fab fa-instagram"></i>
+                </span>
+                <a id="navLogo" href="https://instagram.com/YOUR_INSTAGRAM_HANDLE" target="_blank" rel="noopener noreferrer" class="font-display text-sm tracking-[3px] text-[var(--text)] hover:text-[var(--accent)] transition-colors">theAbhijay.</a>
+            </div>
+            <div class="nav-links">
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#education" class="nav-link">Education</a>
+                <a href="#certifications" class="nav-link">Certs</a>
+                <a href="#contact" class="nav-btn">Contact</a>
+            </div>
+            <button id="menuToggle" class="md:hidden text-[var(--text)] text-xl" onclick="toggleMobile()" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════ HERO ═══════════════════ -->
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <!-- HERO PROFILE AVATAR (Top, Centered, 140px x 140px) -->
+            <div id="heroAvatarContainer" class="hero-avatar-wrapper reveal">
+                <div class="hero-main-avatar" title="Abhijay Chauhan">
+                    <img id="heroMiniPhoto" src="assets/photo.jpg" alt="Profile Photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="hero-mini-fallback" style="display:none;"><i class="fas fa-user"></i></div>
+                </div>
+            </div>
+
+            <div class="hero-status reveal">
+                <span class="status-dot"></span>
+                <span class="status-text">System Operational</span>
+            </div>
+            <h1 class="hero-name reveal reveal-d1">
+                <span id="heroName" class="text-shimmer">YOUR_NAME</span>
+            </h1>
+            <div class="hero-subtitle reveal reveal-d2">
+                <span id="typingText" class="typing-cursor"></span>
+            </div>
+            <p id="heroTagline" class="hero-tagline reveal reveal-d3">
+                Fresher with a hacker's mindset — automating everything, breaking nothing, and building infrastructure that just works.
+            </p>
+            <div class="hero-actions reveal reveal-d4">
+                <a id="resumeLink" href="assets/resume.pdf" class="btn-primary">
+                    <i class="fas fa-download mr-2"></i>Resume
+                </a>
+                <a href="#projects" class="btn-secondary">
+                    <span>View Projects</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ STATS ═══════════════════ -->
+    <section class="stats-section" id="statsSection">
+        <div class="stats-grid" id="statsGrid">
+            <!-- Populated by JS from CONFIG.stats -->
+        </div>
+    </section>
+
+    <!-- ═══════════════════ ABOUT ═══════════════════ -->
+    <section id="about" class="section">
+        <div class="section-inner">
+            <div class="section-label reveal"><span>About Me</span></div>
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2 class="section-title reveal reveal-d1">
+                        Building <span class="text-[var(--accent)]">Resilient</span> Systems From Day One
+                    </h2>
+                    <p id="aboutP1" class="text-body reveal reveal-d2"></p>
+                    <p id="aboutP2" class="text-body reveal reveal-d3"></p>
+
+                    <div id="availabilityBadge" class="avail-badge reveal reveal-d4">
+                        <div class="avail-photo">
+                            <img id="profilePhoto" src="assets/photo.jpg" alt="Profile"
+                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="avail-photo-fallback" style="display:none;"><i class="fas fa-user"></i></div>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium">Currently Available</div>
+                            <div class="text-xs text-[var(--success)] flex items-center gap-2">
+                                <span class="pulse-dot"></span>
+                                Open to opportunities
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="socialLinks" class="social-row reveal reveal-d5">
+                        <!-- Populated by JS from CONFIG.links -->
+                    </div>
+                </div>
+
+                <div class="terminal reveal reveal-d2">
+                    <div class="terminal-header">
+                        <div class="term-dot" style="background:#ff5f56"></div>
+                        <div class="term-dot" style="background:#ffbd2e"></div>
+                        <div class="term-dot" style="background:#27c93f"></div>
+                        <span class="term-title">about_me.sh</span>
+                    </div>
+                    <div class="terminal-body" id="terminalBody">
+                        <!-- Populated by JS from CONFIG.terminal -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ SKILLS ═══════════════════ -->
+    <section id="skills" class="section section-alt">
+        <div class="section-inner">
+            <div class="section-label reveal"><span>Skills</span></div>
+            <h2 class="section-title reveal reveal-d1">
+                Tech <span class="text-[var(--accent2)]">Arsenal</span>
+            </h2>
+            <div class="skills-grid" id="skillsGrid">
+                <!-- Populated by JS from CONFIG.skills -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ PROJECTS ═══════════════════ -->
+    <section id="projects" class="section">
+        <div class="section-inner">
+            <div class="section-label reveal"><span>Projects</span></div>
+            <h2 class="section-title reveal reveal-d1">
+                What I've <span class="text-[var(--accent)]">Built</span>
+            </h2>
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Populated by JS from CONFIG.projects -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ EDUCATION ═══════════════════ -->
+    <section id="education" class="section section-alt">
+        <div class="section-inner">
+            <div class="section-label reveal"><span>Education</span></div>
+            <h2 class="section-title reveal reveal-d1">
+                Academic <span class="text-[var(--accent2)]">Background</span>
+            </h2>
+            <div class="timeline" id="educationTimeline">
+                <!-- Populated by JS from CONFIG.education -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ CERTIFICATIONS ═══════════════════ -->
+    <section id="certifications" class="section">
+        <div class="section-inner">
+            <div class="section-label reveal"><span>Certifications</span></div>
+            <h2 class="section-title reveal reveal-d1">
+                Validated <span class="text-[var(--accent)]">Skills</span>
+            </h2>
+            <div class="certs-grid" id="certsGrid">
+                <!-- Populated by JS from CONFIG.certifications -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ ACHIEVEMENTS ═══════════════════ -->
+    <section id="achievements" class="section section-alt">
+        <div class="section-inner">
+            <div class="section-label reveal"><span>Achievements</span></div>
+            <h2 class="section-title reveal reveal-d1">
+                Beyond The <span class="text-[var(--accent2)]">Resume</span>
+            </h2>
+            <div class="achievements-grid" id="achievementsGrid">
+                <!-- Populated by JS from CONFIG.achievements -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════ CONTACT ═══════════════════ -->
+    <section id="contact" class="section">
+        <div class="section-inner">
+            <div class="section-label reveal"><span>Contact</span></div>
+            <h2 class="section-title reveal reveal-d1">
+                Let's <span class="text-[var(--accent)]">Connect</span>
+            </h2>
+            <p class="section-subtitle reveal reveal-d2">
+                Got a challenging project? Looking for a motivated fresher? I'm all ears.
+            </p>
+            <div class="contact-grid">
+                <form id="contactForm" class="contact-form reveal reveal-d2" onsubmit="handleSubmit(event)">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" name="name" class="form-input" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-input" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <input type="text" name="subject" class="form-input" placeholder="Let's collaborate">
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea name="message" class="form-input" rows="5" placeholder="Tell me about your project..." required></textarea>
+                    </div>
+                    <button type="submit" id="contactSubmitBtn" class="btn-primary w-full justify-center">
+                        <i class="fas fa-paper-plane mr-2"></i>Send Message
+                    </button>
+                </form>
+                <div class="contact-info reveal reveal-d3">
+                    <div class="info-card">
+                        <div class="info-icon icon-accent"><i class="fas fa-envelope"></i></div>
+                        <div>
+                            <div class="info-label">Email</div>
+                            <a id="contactEmail" href="mailto:" class="info-value"></a>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon icon-accent2"><i class="fas fa-phone"></i></div>
+                        <div>
+                            <div class="info-label">Phone</div>
+                            <a id="contactPhone" href="tel:" class="info-value"></a>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon icon-accent"><i class="fas fa-map-marker-alt"></i></div>
+                        <div>
+                            <div class="info-label">Location</div>
+                            <p id="contactLocation" class="info-value"></p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon icon-accent2"><i class="fas fa-clock"></i></div>
+                        <div>
+                            <div class="info-label">Status</div>
+                            <p class="info-value">Open to opportunities</p>
+                        </div>
+                    </div>
+                    <div class="contact-socials" id="contactSocials">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI STATEMENT BADGE -->
+    <section class="ai-statement-section">
+        <div class="ai-statement-card reveal">
+            <div class="ai-statement-icon"><i class="fas fa-brain"></i></div>
+            <p class="ai-statement-line1">"Yes, I built this with AI. In today's world, the real race isn't about avoiding the tools—it's about who can leverage them to build something better and faster,"</p>
+            <p class="ai-statement-line2">"Built efficiently using AI, guided by human strategy. Embracing the future of development means mastering the tools that accelerate execution."</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="text-sm md:text-base text-[var(--muted)] font-medium">
+                &copy; <span id="footerYear"></span> <span id="footerName">YOUR_NAME</span>. Engineered with <span class="text-[var(--accent)]">&hearts;</span> and caffeine.
+            </div>
+            <div class="footer-status">
+                <span class="footer-dot"></span>
+                <span class="text-xs md:text-sm text-[var(--muted)] tracking-wider font-mono">All systems operational</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS — order matters -->
+    <script src="js/config.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/main.js"></script>
+    <!-- OPTIONAL ENHANCEMENTS MODULE (Comment out or delete to disable all 5 extra features) -->
+    <script src="js/enhancements.js"></script>
+</body>
+</html>
