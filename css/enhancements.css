@@ -1,0 +1,651 @@
+/* ╔══════════════════════════════════════════════════════════════════════════════╗
+   ║  PORTFOLIO ENHANCEMENTS — Independent Module Styles                          ║
+   ║  All 5 supercool features: Side Bars, Spotlight, Command Palette, Wire Game  ║
+   ╚══════════════════════════════════════════════════════════════════════════════╝ */
+
+/* ── THEME VARIATIONS ──────────────────────────────── */
+body.theme-cyberpunk {
+    --bg: #090314;
+    --surface: #12072b;
+    --card: #1a0b36;
+    --card-hover: #26114d;
+    --border: #3b1875;
+    --border-lt: #5b28a8;
+    --text: #f0e6ff;
+    --text-dim: #b899e6;
+    --muted: #835eb8;
+    --accent: #ff007f;
+    --accent-rgb: 255, 0, 127;
+    --accent2: #00f0ff;
+    --accent2-rgb: 0, 240, 255;
+}
+
+body.theme-matrix {
+    --bg: #020a05;
+    --surface: #05140b;
+    --card: #0a2113;
+    --card-hover: #10331e;
+    --border: #154d2a;
+    --border-lt: #1f733e;
+    --text: #d4ffd9;
+    --text-dim: #80e68d;
+    --muted: #4db35d;
+    --accent: #00ff41;
+    --accent-rgb: 0, 255, 65;
+    --accent2: #39ff14;
+    --accent2-rgb: 57, 255, 20;
+}
+
+body.theme-oled {
+    --bg: #000000;
+    --surface: #080808;
+    --card: #101010;
+    --card-hover: #181818;
+    --border: #222222;
+    --border-lt: #333333;
+    --text: #ffffff;
+    --text-dim: #aaaaaa;
+    --muted: #666666;
+    --accent: #3b82f6;
+    --accent-rgb: 59, 130, 246;
+    --accent2: #8b5cf6;
+    --accent2-rgb: 139, 92, 246;
+}
+
+body.theme-amber {
+    --bg: #0f0c08;
+    --surface: #19140e;
+    --card: #241d14;
+    --card-hover: #33291d;
+    --border: #423525;
+    --border-lt: #5c4a34;
+    --text: #fff3e6;
+    --text-dim: #d9b88f;
+    --muted: #a6855d;
+    --accent: #ff9900;
+    --accent-rgb: 255, 153, 0;
+    --accent2: #ff5500;
+    --accent2-rgb: 255, 85, 0;
+}
+
+/* ── 1. FLOATING SIDE MARGIN WIDGETS & MAGNETIC NAV ──── */
+.side-widget-left {
+    position: fixed;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 9990;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 10px;
+    background: rgba(13, 17, 23, 0.75);
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.side-widget-left:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(var(--accent-rgb), 0.2);
+}
+
+.side-status-indicator {
+    width: 8px;
+    height: 8px;
+    background: var(--success);
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+}
+
+.side-status-indicator::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1px solid var(--success);
+    animation: statusPulse 2s infinite;
+}
+
+@keyframes statusPulse {
+    0% { transform: scale(0.8); opacity: 1; }
+    100% { transform: scale(2.2); opacity: 0; }
+}
+
+.side-social-icon {
+    color: var(--muted);
+    font-size: 15px;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.side-social-icon:hover {
+    color: var(--accent);
+    background: rgba(var(--accent-rgb), 0.1);
+    transform: scale(1.15);
+}
+
+.side-vertical-line {
+    width: 1px;
+    height: 24px;
+    background: var(--border);
+}
+
+/* RIGHT MAGNETIC NAV BAR */
+.side-widget-right {
+    position: fixed;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 9990;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 16px 8px;
+    background: rgba(13, 17, 23, 0.75);
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: border-color 0.3s;
+    cursor: default;
+}
+
+.side-widget-right:hover {
+    border-color: rgba(var(--accent-rgb), 0.3);
+}
+
+/* Expanded Hitbox / Magnetic Nav Items */
+.nav-dot-container {
+    width: 32px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.nav-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border-lt);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+}
+
+.nav-dot-container:hover .nav-dot, 
+.nav-dot-container.active .nav-dot {
+    background: var(--accent);
+    transform: scale(1.6);
+    box-shadow: 0 0 12px var(--accent);
+}
+
+.nav-dot-tooltip {
+    position: absolute;
+    right: 36px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--card);
+    border: 1px solid var(--accent);
+    color: var(--text);
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.25s ease;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}
+
+.nav-dot-container:hover .nav-dot-tooltip {
+    opacity: 1;
+    right: 42px;
+}
+
+.quick-action-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--accent2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.3s;
+}
+
+.quick-action-btn:hover {
+    border-color: var(--accent2);
+    background: var(--accent2);
+    color: var(--bg);
+    box-shadow: 0 0 15px rgba(var(--accent2-rgb), 0.4);
+    transform: scale(1.1);
+}
+
+@media (max-width: 1024px) {
+    .side-widget-left, .side-widget-right { display: none; }
+}
+
+/* ── 2. COMMAND PALETTE MODAL (Ctrl+K) ──────────────── */
+.cmd-palette-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 6, 10, 0.85);
+    backdrop-filter: blur(12px);
+    z-index: 100050;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 90px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    cursor: default;
+}
+
+.cmd-palette-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.cmd-palette-modal {
+    width: 90%;
+    max-width: 620px;
+    background: var(--surface);
+    border: 1px solid var(--border-lt);
+    border-radius: 12px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.8), 0 0 30px rgba(var(--accent-rgb), 0.15);
+    overflow: hidden;
+    transform: translateY(-20px) scale(0.96);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: default;
+}
+
+.cmd-palette-backdrop.active .cmd-palette-modal {
+    transform: translateY(0) scale(1);
+}
+
+.cmd-input-container {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    gap: 12px;
+}
+
+.cmd-search-icon {
+    color: var(--accent);
+    font-size: 16px;
+}
+
+.cmd-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 15px;
+    cursor: text;
+}
+
+.cmd-kbd-badge {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 10px;
+    padding: 3px 7px;
+    border-radius: 4px;
+}
+
+.cmd-results-list {
+    max-height: 340px;
+    overflow-y: auto;
+    padding: 8px 0;
+}
+
+.cmd-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.cmd-item:hover, .cmd-item.selected {
+    background: rgba(var(--accent-rgb), 0.12);
+}
+
+.cmd-item-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text);
+}
+
+.cmd-item-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: var(--card);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-size: 13px;
+}
+
+.cmd-item-tag {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+}
+
+.cmd-footer {
+    padding: 10px 20px;
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+/* ── 3. MATRIX DIGITAL RAIN CANVAS ─────────────────── */
+#matrixCanvas {
+    position: fixed;
+    inset: 0;
+    z-index: 9980;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#matrixCanvas.active {
+    opacity: 0.85;
+}
+
+/* ── 4. CARD SPOTLIGHT & AMBIENT BLOBS ─────────────── */
+.ambient-blob-1, .ambient-blob-2 {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    opacity: 0.12;
+    z-index: 0;
+}
+
+.ambient-blob-1 {
+    background: var(--accent);
+    top: 15%;
+    left: -100px;
+    animation: blobFloat 12s ease-in-out infinite alternate;
+}
+
+.ambient-blob-2 {
+    background: var(--accent2);
+    top: 60%;
+    right: -100px;
+    animation: blobFloat 15s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes blobFloat {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(80px, 60px) scale(1.2); }
+}
+
+.skill-card, .project-card, .cert-card, .achievement-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-spotlight {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(var(--accent-rgb), 0.12), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.skill-card:hover .card-spotlight,
+.project-card:hover .card-spotlight,
+.cert-card:hover .card-spotlight,
+.achievement-card:hover .card-spotlight {
+    opacity: 1;
+}
+
+/* ── 5. INTERACTIVE NODE-CONNECTOR DEVOPS MINI-GAME ── */
+.game-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 6, 10, 0.85);
+    backdrop-filter: blur(12px);
+    z-index: 100060;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    cursor: default;
+}
+
+.game-modal-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.game-card {
+    width: 100%;
+    max-width: 650px;
+    background: var(--surface);
+    border: 1px solid var(--accent);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.85), 0 0 35px rgba(var(--accent-rgb), 0.25);
+    position: relative;
+    cursor: default;
+}
+
+.game-close-btn {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-size: 22px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.game-close-btn:hover { color: var(--accent); }
+
+.game-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.game-subtitle {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 20px;
+}
+
+/* Wire Connection Board */
+.game-wire-canvas-container {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+#wireCanvas {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.game-nodes-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+}
+
+.interactive-node {
+    width: 100px;
+    height: 100px;
+    background: var(--surface);
+    border: 2px solid var(--border-lt);
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    user-select: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.interactive-node:hover {
+    border-color: var(--accent2);
+    transform: scale(1.08);
+    box-shadow: 0 0 20px rgba(var(--accent2-rgb), 0.3);
+}
+
+.interactive-node.selected {
+    border-color: var(--accent);
+    box-shadow: 0 0 25px rgba(var(--accent-rgb), 0.5);
+    transform: scale(1.1);
+}
+
+.interactive-node.connected {
+    border-color: var(--success);
+    background: rgba(34, 197, 94, 0.12);
+    box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
+}
+
+.node-icon {
+    font-size: 22px;
+    color: var(--accent);
+}
+
+.interactive-node.connected .node-icon {
+    color: var(--success);
+}
+
+.node-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text);
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.game-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.game-status-text {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+}
+
+/* ── 6. RED GLOWING & FADING THEME DOT (NO OUTER CIRCLE) ── */
+.theme-toggle-btn {
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    margin-left: 12px;
+    padding: 0;
+}
+
+.theme-glow-dot {
+    width: 10px;
+    height: 10px;
+    background: #ef4444;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #ef4444, 0 0 20px rgba(239, 68, 68, 0.8);
+    position: relative;
+    animation: glowFade 2.2s ease-in-out infinite alternate;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle-btn:hover .theme-glow-dot {
+    transform: scale(1.4);
+    box-shadow: 0 0 16px #ff5555, 0 0 28px rgba(255, 85, 85, 0.9);
+}
+
+@keyframes glowFade {
+    0% {
+        opacity: 0.35;
+        box-shadow: 0 0 6px rgba(239, 68, 68, 0.4);
+        transform: scale(0.9);
+    }
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 14px #ef4444, 0 0 22px rgba(239, 68, 68, 0.8);
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 0.35;
+        box-shadow: 0 0 6px rgba(239, 68, 68, 0.4);
+        transform: scale(0.9);
+    }
+}
