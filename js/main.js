@@ -174,6 +174,19 @@ function populateSite() {
     const phoneEl = document.getElementById('contactPhone');
     phoneEl.href = `tel:${C.phone.replace(/\s/g, '')}`;
     phoneEl.textContent = C.phone;
+    const origPhone = C.phone;
+    phoneEl.addEventListener('mouseenter', () => {
+        phoneEl.textContent = "Privacy matters — use Email or LinkedIn";
+        phoneEl.style.fontSize = "1.05rem";
+        phoneEl.style.fontWeight = "600";
+        phoneEl.style.color = "var(--accent)";
+    });
+    phoneEl.addEventListener('mouseleave', () => {
+        phoneEl.textContent = origPhone;
+        phoneEl.style.fontSize = "";
+        phoneEl.style.fontWeight = "";
+        phoneEl.style.color = "";
+    });
     document.getElementById('contactLocation').textContent = C.location;
 
     // Contact socials
@@ -328,6 +341,34 @@ function closeMobile() {
 
 
 // ── CONTACT FORM ───────────────────────────────────────
+function triggerConfetti() {
+    if (typeof confetti !== 'undefined') {
+        const duration = 3000;
+        const end = Date.now() + duration;
+
+        (function frame() {
+            confetti({
+                particleCount: 5,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 },
+                colors: ['#00ffc8', '#ff007f', '#ffbd2e', '#9d00ff', '#00e5ff', '#ffffff']
+            });
+            confetti({
+                particleCount: 5,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 },
+                colors: ['#00ffc8', '#ff007f', '#ffbd2e', '#9d00ff', '#00e5ff', '#ffffff']
+            });
+
+            if (Date.now() < end) {
+                requestAnimationFrame(frame);
+            }
+        }());
+    }
+}
+
 async function handleSubmit(e) {
     e.preventDefault();
     const form = e.target;
@@ -353,6 +394,7 @@ async function handleSubmit(e) {
 
             if (response.ok) {
                 showToast('🎉 Message sent successfully! I will reply soon.');
+                triggerConfetti();
                 form.reset();
             } else {
                 showToast('⚠️ Error sending message. Please try emailing directly.');
@@ -367,6 +409,7 @@ async function handleSubmit(e) {
         }
     } else {
         showToast('Message sent. (Demo Mode Right Now0 Thank-You For Connecting.');
+        triggerConfetti();
         form.reset();
     }
 }
