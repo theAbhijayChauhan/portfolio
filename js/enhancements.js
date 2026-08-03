@@ -40,7 +40,7 @@
             <div class="side-vertical-line"></div>
             <a href="https://github.com/theWitcher00" target="_blank" class="side-social-icon" title="GitHub"><i class="fab fa-github"></i></a>
             <a href="https://linkedin.com/in/abhijaychauhan" target="_blank" class="side-social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="mailto:abhijay@example.com" class="side-social-icon" title="Email"><i class="fas fa-envelope"></i></a>
+            <a href="mailto:abhijay00@gmail.com" class="side-social-icon" title="Email"><i class="fas fa-envelope"></i></a>
         `;
         document.body.appendChild(leftWidget);
 

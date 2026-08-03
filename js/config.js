@@ -36,10 +36,10 @@ const CONFIG = {
     bootDuration: 3500,
     // Edit/Add text lines below to customize the bootup text on page load/refresh
     bootLogs: [
-        "[INIT] Mounting Antigravity Infrastructure v2.0...",
+        "[INIT] Mounting in CSS v2.0...",
         "[OK] Initializing SRE Neural Network...",
         "[OK] Security Protocols & Certificates Verified",
-        "[READY] System Operational — Welcome Abhijay Chauhan"
+        "[READY] System Operational — Welcome to My Portfolio"
     ],
 
     // ── ASSETS & MEDIA FILES ────────────────────────────────
@@ -86,7 +86,7 @@ const CONFIG = {
     // ── CONTACT FORM EMAIL DELIVERY ─────────────────────────
     // Create a free form at https://formspree.io and paste your Endpoint URL below
     // Example: "https://formspree.io/f/xayzvqwl"
-    formspreeEndpoint: "https://formspree.io/f/YOUR_FORMSPREE_ID",
+    formspreeEndpoint: "https://formspree.io/f/xlgqqpbw",
 
     // ── BACKWARDS-COMPATIBLE FALLBACKS (automatically linked to assets above)
     resumeLink: "assets/resume.pdf",
@@ -97,9 +97,7 @@ const CONFIG = {
     links: {
         linkedin: "www.linkedin.com/in/abhijaychauhan",
         github:   "https://github.com/theWitcher00",
-        twitter:  "https://twitter.com/YOUR_HANDLE",
-        medium:   "https://medium.com/@YOUR_HANDLE",
-        devto:    "https://dev.to/YOUR_HANDLE",
+        devto:    "https://dev.to/theabhijaychauhan",
         youtube:  "",                        // leave empty to hide
     },
 

@@ -60,8 +60,6 @@ function populateSite() {
     const socialIcons = {
         linkedin: 'fab fa-linkedin-in',
         github: 'fab fa-github',
-        twitter: 'fab fa-x-twitter',
-        medium: 'fab fa-medium-m',
         devto: 'fab fa-dev',
         youtube: 'fab fa-youtube',
     };
@@ -430,7 +428,7 @@ window.addEventListener('load', () => {
     const isBootEnabled = (CONFIG && CONFIG.showSections && CONFIG.showSections.bootLoader !== false);
     const container = document.getElementById('bootLogsContainer');
     const logs = (CONFIG && CONFIG.bootLogs && CONFIG.bootLogs.length) ? CONFIG.bootLogs : [
-        "[INIT] Mounting Antigravity Infrastructure v2.0...",
+        "[INIT] Mounting in CSS v2.0...",
         "[OK] Initializing SRE Neural Network...",
         "[OK] Security Protocols Verified",
         "[READY] Welcome Abhijay Chauhan"
