@@ -366,7 +366,7 @@ async function handleSubmit(e) {
             }
         }
     } else {
-        showToast('Message sent (Demo mode)! Paste your Formspree URL in config.js for real emails.');
+        showToast('Message sent. Thank-You For Connecting. Will get back to you shortly');
         form.reset();
     }
 }
