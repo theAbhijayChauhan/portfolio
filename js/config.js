@@ -76,11 +76,11 @@ const CONFIG = {
     initials: "theAbhijay",                          // 2-3 letters for top nav logo
     title: "DevOps Engineer & SRE",
     tagline: "Fresher with a professional mindset — automating everything, breaking nothing, and building infrastructure that just works.",
-    email: "abhijay@example.com",
-    phone: "+91 XXXXX XXXXX",
-    location: "Lucknow, India",
+    email: "abhijaychauhan98@example.com",
+    phone: "+91 92501 XXXXX",
+    location: "Lucknow, Uttar Pradesh, India",
     available: true,                         // true = shows "Open to opportunities" badge
-    instagramLink: "https://instagram.com/YOUR_INSTAGRAM_HANDLE",
+    instagramLink: "https://instagram.com/theabhijaychauhan",
     instagramHandle: "@abhijay.chauhan",      // Clickable text next to glowing Insta logo
 
     // ── CONTACT FORM EMAIL DELIVERY ─────────────────────────
