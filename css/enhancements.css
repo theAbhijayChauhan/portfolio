@@ -649,3 +649,36 @@ body.theme-amber {
         transform: scale(0.9);
     }
 }
+
+/* Left Sidebar Email Tooltip */
+.email-icon-tooltip {
+    position: relative;
+}
+.email-icon-tooltip::after {
+    content: attr(aria-label);
+    position: absolute;
+    left: calc(100% + 15px);
+    top: 50%;
+    transform: translateY(-50%) scale(0.95);
+    background: rgba(13, 17, 23, 0.95);
+    border: 1px solid var(--accent);
+    color: var(--text);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 0 15px rgba(0, 255, 200, 0.4);
+    pointer-events: none;
+    z-index: 100;
+}
+.email-icon-tooltip:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) scale(1);
+    left: calc(100% + 10px);
+}
