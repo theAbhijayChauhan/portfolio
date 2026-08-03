@@ -38,7 +38,7 @@
         leftWidget.innerHTML = `
             <div class="side-status-indicator" title="System Operational" onclick="if(window.showToast) window.showToast('🟢 System status: 100% Operational')"></div>
             <div class="side-vertical-line"></div>
-            <a href="https://github.com/theWitcher00" target="_blank" class="side-social-icon" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://github.com/theAbhijayChauhan" target="_blank" class="side-social-icon" title="GitHub"><i class="fab fa-github"></i></a>
             <a href="https://linkedin.com/in/abhijaychauhan" target="_blank" class="side-social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
             <a href="mailto:abhijay00@gmail.com" class="side-social-icon" title="Email"><i class="fas fa-envelope"></i></a>
         `;

@@ -366,7 +366,7 @@ async function handleSubmit(e) {
             }
         }
     } else {
-        showToast('Message sent. Thank-You For Connecting. Will get back to you shortly');
+        showToast('Message sent. (Demo Mode Right Now0 Thank-You For Connecting.');
         form.reset();
     }
 }

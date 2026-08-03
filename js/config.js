@@ -96,7 +96,7 @@ const CONFIG = {
     //    Set any URL to "" to hide that social icon
     links: {
         linkedin: "www.linkedin.com/in/abhijaychauhan",
-        github:   "https://github.com/theWitcher00",
+        github:   "https://github.com/theAbhijayChauhan",
         devto:    "https://dev.to/theabhijaychauhan",
         youtube:  "",                        // leave empty to hide
     },
