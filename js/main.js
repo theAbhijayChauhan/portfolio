@@ -408,7 +408,7 @@ async function handleSubmit(e) {
             }
         }
     } else {
-        showToast('Message sent. (Demo Mode Right Now0 Thank-You For Connecting.');
+        showToast('Message sent. [Demo Mode Right Now] Thank-You For Connecting.');
         triggerConfetti();
         form.reset();
     }
