@@ -36,8 +36,8 @@ Below are a few highlights of the work you will find on my live portfolio site:
 ## 📬 Let's Connect!
 Feel free to reach out to me through any of the platforms below:
 
-* **Email:** [abhijaychauhan98@gmail.com](mailto:myemail.com)
-* **LinkedIn:** [www.linkedin.com/in/abhijaychauhan](https://://linkedin.com/abhijaychauhan)
+* **Email:** [abhijaychauhan98@gmail.com](abhijaychauhan98@gmail.com)
+* **LinkedIn:** [www.linkedin.com/in/abhijaychauhan](www.linkedin.com/in/abhijaychauhan)
 
 ---
 *Thank you for visiting! Drop a ⭐️ if you like my work.*
