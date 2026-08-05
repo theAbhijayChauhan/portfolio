@@ -110,10 +110,15 @@ function populateSite() {
 
     // Projects
     const projGrid = document.getElementById('projectsGrid');
-    projGrid.innerHTML = C.projects.map((p, i) => `
+    const imgKeys = ['project1Image', 'project2Image', 'project3Image', 'project4Image', 'project5Image', 'project6Image'];
+    const showImg = (C.showSections && C.showSections.projectImages !== false);
+    projGrid.innerHTML = C.projects.map((p, i) => {
+        const imgPath = (C.assets && C.assets[imgKeys[i]]) ? C.assets[imgKeys[i]] : p.image;
+        const hasImg = showImg && imgPath;
+        return `
         <div class="project-card reveal reveal-d${(i % 3) + 1}">
-            ${p.image
-                ? `<div class="project-img" style="background-image:url('${p.image}')">
+            ${hasImg
+                ? `<div class="project-img" style="background-image:url('${imgPath}')">
                        <a href="${ensureProtocol(p.link)}" target="_blank" rel="noopener" class="project-link"><i class="fas fa-external-link-alt"></i></a>
                    </div>`
                 : `<div class="project-img-placeholder">
@@ -128,8 +133,8 @@ function populateSite() {
                     ${p.tags.map(t => `<span class="project-tag">${t}</span>`).join('')}
                 </div>
             </div>
-        </div>
-    `).join('');
+        </div>`;
+    }).join('');
 
     // Education
     const eduTimeline = document.getElementById('educationTimeline');
@@ -175,13 +180,14 @@ function populateSite() {
     phoneEl.href = `tel:${C.phone.replace(/\s/g, '')}`;
     phoneEl.textContent = C.phone;
     const origPhone = C.phone;
-    phoneEl.addEventListener('mouseenter', () => {
+    const phoneCard = phoneEl.closest('.info-card') || phoneEl;
+    phoneCard.addEventListener('mouseenter', () => {
         phoneEl.textContent = "Privacy matters — use Email or LinkedIn";
-        phoneEl.style.fontSize = "1.05rem";
+        phoneEl.style.fontSize = "13px";
         phoneEl.style.fontWeight = "600";
         phoneEl.style.color = "var(--accent)";
     });
-    phoneEl.addEventListener('mouseleave', () => {
+    phoneCard.addEventListener('mouseleave', () => {
         phoneEl.textContent = origPhone;
         phoneEl.style.fontSize = "";
         phoneEl.style.fontWeight = "";
@@ -248,6 +254,11 @@ function populateSite() {
         if (C.showSections.instagramBanner === false) {
             if (instaBanner) instaBanner.style.display = 'none';
         }
+
+        if (C.showSections.desktopQuestions === false) {
+            const dqBtn = document.getElementById('desktopQuestionsBtn');
+            if (dqBtn) dqBtn.style.display = 'none';
+        }
     }
 
     // ── ALWAYS apply Instagram link from config (outside showSections guard) ──
@@ -275,11 +286,11 @@ function initCursor() {
     }, { passive: true });
 
     function renderCursor() {
-        dot.style.transform = `translate3d(${mx - 4}px, ${my - 4}px, 0)`;
+        dot.style.transform = `translate3d(${mx}px, ${my}px, 0)`;
 
         rx += (mx - rx) * 0.38;
         ry += (my - ry) * 0.38;
-        ring.style.transform = `translate3d(${rx - 18}px, ${ry - 18}px, 0)`;
+        ring.style.transform = `translate3d(${rx}px, ${ry}px, 0)`;
 
         requestAnimationFrame(renderCursor);
     }
@@ -408,7 +419,7 @@ async function handleSubmit(e) {
             }
         }
     } else {
-        showToast('Message sent. [Demo Mode Right Now] Thank-You For Connecting.');
+        showToast('Message sent. (Demo Mode) Thank you for connecting!');
         triggerConfetti();
         form.reset();
     }
@@ -464,6 +475,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     initNav();
     initSmoothScroll();
+    initDesktopQuestions();
 });
 
 // Hide loader with Cyberpunk Bootup Sequence
@@ -504,3 +516,120 @@ window.addEventListener('load', () => {
         }, 600);
     }
 });
+
+// ── DESKTOP ASK ME ANYTHING TERMINAL ──────────────────────
+function initDesktopQuestions() {
+    const openBtn  = document.getElementById('desktopQuestionsBtn');
+    const modal    = document.getElementById('desktopQModal');
+    const closeBtn = document.getElementById('closeDesktopQModal');
+    const body     = document.getElementById('desktopQModalBody');
+    if (!openBtn || !modal || !closeBtn || !body) return;
+
+    const responses = {
+        strength: [
+            '── Query: Biggest Strength',
+            '> Automating repetitive infrastructure tasks so teams can focus on shipping features.',
+            '> Deep troubleshooting mindset: tracing system calls, packet drops, & memory leaks under pressure.',
+            '> Building self-healing Kubernetes clusters with automated fallback & proactive autoscaling.',
+            '> Writing clean, reusable IaC modules in Terraform & Ansible with 100% test coverage.',
+            '> Relentless pursuit of 99.99% uptime with zero-downtime blue/green deployment strategies.'
+        ],
+        weakness: [
+            '── Query: Honest Weakness',
+            '> Over-engineering shell scripts and IaC modules just to optimize execution by 50ms.',
+            '> Under-estimating documentation timelines because I prefer writing code over Markdown.',
+            '> Working on it: strict time-boxing on rabbit holes & using automated docs generators.',
+            '> Learning to delegate early instead of solo-fixing edge-case infrastructure bottlenecks.'
+        ],
+        hire: [
+            '── Query: Why Hire You?',
+            '> I treat your production infrastructure with the highest level of care & ownership.',
+            '> Fresher drive combined with a professional SRE mindset — 10x energy, 0 ego, fast learner.',
+            '> I don\'t just patch symptoms; I perform root-cause analysis so bugs never recur.',
+            '> Multi-cloud fluency across AWS, GCP, Docker, Kubernetes, Prometheus, and Terraform.',
+            '> Ready to contribute to your CI/CD pipelines & on-call reliability from Day 1.'
+        ],
+        devops: [
+            '── Query: Why DevOps & SRE?',
+            '> Closing the gap between software development & production ops is the ultimate challenge.',
+            '> Owning the full lifecycle: local dev → containerization → CI/CD → multi-region cloud ship.',
+            '> Infrastructure as Code turns hardware provisioning into version-controlled software.',
+            '> Monitoring systems live with real-time telemetry brings incredible satisfaction under load.'
+        ],
+        stack: [
+            '── Query: Favorite Tech Stack',
+            '> Core Cloud: AWS (EC2, EKS, S3, IAM, CloudFront, VPC) & GCP Cloud Run.',
+            '> Containerization & Orchestration: Docker, Kubernetes, Helm, ArgoCD GitOps.',
+            '> Infrastructure as Code: Terraform, Ansible, CloudFormation.',
+            '> Scripting & Code: Python (Boto3/FastAPI), Go (Microservices), Bash (Automation).',
+            '> Observability: Prometheus, Grafana, ELK Stack (Elasticsearch, Logstash, Kibana), Loki.'
+        ],
+        coffee: [
+            '── Query: Coffee or Code First?',
+            '> System Initialization Sequence:',
+            '> 1. Execute brew_coffee.sh --type=espresso --shots=2',
+            '> 2. Hydrate & parse system metrics for the morning standup',
+            '> 3. Compile mental stack → Run tests → Ship production-ready code',
+            '> Status: 1 cup of dark roast yields ~350 lines of validated, lint-clean YAML & Python.'
+        ],
+        future: [
+            '── Query: 5-Year Vision',
+            '> Lead Cloud Infrastructure & Reliability Architect for high-throughput global platforms.',
+            '> Architect zero-downtime, multi-region failover systems handling millions of requests/sec.',
+            '> Author open-source SRE tools & contribute back to CNCF cloud projects.',
+            '> Mentor aspiring DevOps engineers and drive DevOps culture across engineering teams.'
+        ],
+        outage: [
+            '── Query: Handling Outages & Incident Response',
+            '> Rule 1: Stay calm. Clear communication > panicking during P0 incidents.',
+            '> Rule 2: Triage telemetry logs (Prometheus metrics, Grafana dashboards, Loki aggregators).',
+            '> Rule 3: Isolate blast radius & trigger automatic rollback to last stable build if needed.',
+            '> Rule 4: Conduct a blameless post-mortem analysis to build preventive automation.'
+        ],
+        learning: [
+            '── Query: How Do You Learn?',
+            '> Hands-on lab experimentation beats passive video lectures every single time.',
+            '> Build a project from scratch → deliberate chaos breaking tests → read official docs to fix.',
+            '> Study production outages from Big Tech post-mortems to learn real-world architecture patterns.',
+            '> Write technical write-ups to solidify conceptual understanding and share knowledge.'
+        ],
+        os: [
+            '── Query: Linux vs Windows for Servers?',
+            '> Linux 100%. POSIX CLI pipelines, systemd services, and SSH keys feel like home.',
+            '> Ubuntu Server & Alpine Linux for ultra-lightweight Docker microservice base images.',
+            '> Windows is fine for workstation gaming; Linux powers 99.9% of the cloud edge.'
+        ],
+        fun: [
+            '── Query: Fun Fact',
+            '> I once wrote a bash script to auto-trigger coffee brewing whenever CPU load stayed > 85%.',
+            '> My very first Kubernetes cluster ran on 3 Raspberry Pi 4 nodes taped to my desk wall.',
+            '> I name all my local test Virtual Machines after ships & characters from Sci-Fi movies.'
+        ]
+    };
+
+    openBtn.addEventListener('click', () => {
+        modal.style.display = 'flex';
+    });
+    closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
+    modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.style.display === 'flex') modal.style.display = 'none'; });
+
+    modal.querySelectorAll('.dq-chat-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const q = btn.getAttribute('data-q');
+            if (!responses[q]) return;
+            body.innerHTML = '';
+            let delay = 0;
+            responses[q].forEach(line => {
+                setTimeout(() => {
+                    const el = document.createElement('div');
+                    el.className = 't-line vis ' + (line.startsWith('─') ? 't-dim' : 't-cmd');
+                    el.textContent = line;
+                    body.appendChild(el);
+                    body.scrollTop = body.scrollHeight;
+                }, delay);
+                delay += 400;
+            });
+        });
+    });
+}

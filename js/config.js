@@ -12,7 +12,7 @@ const CONFIG = {
         stats: true,          // Quick Stats Counter Bar under Hero (true = show, false = hide)
         about: true,          // About Me & Terminal section (true = show, false = hide)
         skills: true,         // Technical Skills Arsenal (true = show, false = hide)
-        projects: false,       // Featured Projects Grid (true = show, false = hide)
+        projects: true,        // Featured Projects Grid (true = show, false = hide)
         education: true,      // Academic Background & Timeline (true = show, false = hide)
         certifications: false, // Validated Certifications (true = show, false = hide)
         achievements: true,   // Achievements & Highlights (true = show, false = hide)
@@ -29,6 +29,19 @@ const CONFIG = {
         bootLoader: true,     // 2-Second Cyberpunk System Boot Log Loader (true = enable, false = disable)
         particles: true,      // Interactive background particle canvas effect (true = enable, false = disable)
         instagramBanner: true, // Glowing Instagram banner next to header logo (true = show, false = hide)
+        mobileGames: true,    // Interactive Mobile Mini-Games Section (true = show, false = hide)
+        desktopQuestions: true, // Ask Me Anything Terminal Modal button (true = enable, false = disable)
+    },
+
+    // ── MOBILE MINI-GAMES TOGGLES (Set individual games to true/false) ──
+    mobileGamesList: {
+        bugSmasher: true,      // 👾 Server Bug Smasher (Tap to fix bugs)
+        cyberSnake: false,     // 🐍 Terminal Cyber-Snake (Set to false per user request)
+        rocketBalancer: true,  // 🚀 Rocket Payload Balancer (Keep rocket level)
+        ddosDefense: true,     // 🛡️ DDoS Attack Tower Defense (Defend server from bad IPs)
+        devTrivia: true,       // 🎲 Developer Trivia Quiz (Test DevOps knowledge)
+        serverOptimizer: true, // 🔋 Battery & Server Optimizer (Balance CPU power & heat)
+        spaceInvaders: true,   // 🌌 Space Invaders Cyber Edition (Shoot malware invaders)
     },
 
     // ── SYSTEM BOOT LOG TEXTS & DURATION ────────────────────
@@ -178,43 +191,43 @@ const CONFIG = {
             title: "K8s Auto-Scaler",
             desc: "Custom Kubernetes HPA controller using Prometheus metrics for intelligent, predictive auto-scaling based on historical traffic patterns.",
             tags: ["Go", "Kubernetes", "Prometheus"],
-            image: "assets/projects/1.jpg",
-            link: "https://github.com/YOUR_HANDLE/project1",
+            image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=800&auto=format&fit=crop&q=80",
+            link: "https://github.com/theAbhijayChauhan/k8s-autoscaler",
         },
         {
             title: "Terraform Module Library",
             desc: "Reusable Terraform modules for multi-region AWS setup — VPC, EKS, RDS, S3 — with CI-tested examples and documentation.",
             tags: ["Terraform", "AWS", "Python"],
-            image: "assets/projects/2.jpg",
-            link: "https://github.com/YOUR_HANDLE/project2",
+            image: "https://images.unsplash.com/photo-1618401471353-b98aedd04e11?w=800&auto=format&fit=crop&q=80",
+            link: "https://github.com/theAbhijayChauhan/terraform-aws-modules",
         },
         {
             title: "Slack Incident Bot",
             desc: "Node.js bot for automated incident management — creates channels, pages on-call, tracks resolution time, and generates postmortems.",
             tags: ["Node.js", "Slack API", "MongoDB"],
-            image: "assets/projects/3.jpg",
-            link: "https://github.com/YOUR_HANDLE/project3",
+            image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&auto=format&fit=crop&q=80",
+            link: "https://github.com/theAbhijayChauhan/slack-incident-bot",
         },
         {
             title: "GitOps Dashboard",
             desc: "Real-time React dashboard visualizing ArgoCD app states, sync status, deployment history, and rollback controls.",
             tags: ["React", "ArgoCD", "WebSocket"],
-            image: "assets/projects/4.jpg",
-            link: "https://github.com/YOUR_HANDLE/project4",
+            image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80",
+            link: "https://github.com/theAbhijayChauhan/gitops-dashboard",
         },
         {
             title: "Log Aggregation Pipeline",
             desc: "Lightweight ELK alternative using Fluentd, Kafka, and ClickHouse for cost-effective log aggregation and querying.",
             tags: ["Fluentd", "Kafka", "ClickHouse"],
-            image: "assets/projects/5.jpg",
-            link: "https://github.com/YOUR_HANDLE/project5",
+            image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop&q=80",
+            link: "https://github.com/theAbhijayChauhan/log-pipeline",
         },
         {
             title: "Infrastructure Monitoring Stack",
             desc: "Complete observability stack with Prometheus, Grafana, Alertmanager, and Loki — deployed via Helm with custom dashboards.",
             tags: ["Prometheus", "Grafana", "Helm"],
-            image: "assets/projects/6.jpg",
-            link: "https://github.com/YOUR_HANDLE/project6",
+            image: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&auto=format&fit=crop&q=80",
+            link: "https://github.com/theAbhijayChauhan/monitoring-stack",
         },
     ],
 

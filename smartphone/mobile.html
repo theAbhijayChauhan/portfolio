@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--
+        BASE TAG — Critical!
+        All relative URLs in this file resolve from the parent Portfolio 1/ directory.
+        This means:
+          - assets/photo.jpg   → Portfolio 1/assets/photo.jpg  ✓
+          - js/config.js       → Portfolio 1/js/config.js      ✓ (shared config)
+          - assets/favicon.svg → Portfolio 1/assets/favicon.svg ✓
+        Only smartphone-specific files use the smartphone/ prefix below.
+    -->
+    <base href="../">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Abhijay Chauhan — DevOps Engineer &amp; SRE</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <meta name="description" content="Fresher with a hacker's mindset — automating everything, breaking nothing, and building infrastructure that just works.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Smartphone-specific stylesheet -->
+    <link rel="stylesheet" href="smartphone/css/mobile.css">
+</head>
+<body>
+
+    <!-- MOBILE BACKGROUND PARTICLE CANVAS -->
+    <canvas id="mobileParticleCanvas" class="mobile-particle-canvas"></canvas>
+
+    <!-- LOADER (INIT Boot Screen) -->
+    <div id="mobileLoader" class="mobile-loader">
+        <div class="loader-logo">INIT</div>
+        <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+        <div class="loader-boot-logs" id="mobileBootLogs"></div>
+    </div>
+
+    <!-- SCROLL PROGRESS BAR (Mobile exclusive) -->
+    <div id="scrollProgress" class="scroll-progress"></div>
+
+    <!-- TOAST -->
+    <div id="toast" class="mobile-toast"></div>
+
+    <!-- HEADER -->
+    <header class="mobile-header">
+        <div class="header-left">
+            <span id="instaBanner" class="insta-glow" title="Instagram"><i class="fab fa-instagram"></i></span>
+            <a id="navLogo" href="#" class="header-logo">theAbhijay<span class="accent-dot">.</span></a>
+        </div>
+        <div class="header-right">
+            <button id="themeToggle" class="theme-toggle" aria-label="Toggle Cyberpunk Mode">
+                <i class="fas fa-bolt"></i>
+            </button>
+            <a id="resumeLink" href="#" class="header-resume-btn" target="_blank" rel="noopener">
+                <i class="fas fa-file-alt"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="mobile-main">
+
+        <!-- HERO -->
+        <section id="home" class="mobile-section hero-section">
+            <div id="heroAvatarContainer" class="hero-avatar">
+                <img id="heroPhoto" src="assets/photo.jpg" alt="Profile Photo"
+                     onerror="this.style.display='none'; document.getElementById('heroInitials').style.display='flex'">
+                <div id="heroInitials" class="hero-initials" style="display:none"></div>
+            </div>
+            <div class="hero-badges">
+                <div class="hero-status">
+                    <span class="status-dot"></span>
+                    <span id="heroTelemetry">System Operational</span>
+                </div>
+                <div class="hero-status streak-status">
+                    <span id="streakIcon">🔥</span>
+                    <span id="streakText">Loading streak...</span>
+                </div>
+            </div>
+            <h1 id="heroName" class="hero-name"></h1>
+            <p class="hero-role"><span id="typingText"></span><span class="typing-cursor">|</span></p>
+            <p id="heroTagline" class="hero-tagline"></p>
+            <div class="hero-actions">
+                <a id="resumeBtn" href="#" class="btn btn-primary" target="_blank" rel="noopener">
+                    <i class="fas fa-eye"></i> Resume
+                </a>
+                <a href="javascript:void(0)" onclick="document.getElementById('projects')?.scrollIntoView({behavior:'smooth'})" class="btn btn-secondary">View Projects</a>
+                <button id="shareBtn" class="btn btn-share" style="display:none" aria-label="Share portfolio">
+                    <i class="fas fa-share-alt"></i>
+                </button>
+            </div>
+            
+            <!-- Questions terminal trigger -->
+            <button id="questionsBtn" class="btn-questions">
+                <i class="fas fa-terminal"></i> Ask Me Anything
+            </button>
+        </section>
+
+        <!-- STATS -->
+        <section id="statsSection" class="mobile-section">
+            <div class="stats-grid" id="statsGrid"></div>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about" class="mobile-section">
+            <div class="section-label"><span>About Me</span></div>
+            <h2 class="section-title">Building <span class="clr-accent">Resilient</span> Systems From Day One</h2>
+            <div class="about-card">
+                <p id="aboutP1" class="text-dim"></p>
+                <p id="aboutP2" class="text-dim"></p>
+                <div id="availabilityBadge" class="avail-badge">
+                    <div class="avail-photo">
+                        <img id="profilePhoto" src="assets/photo.jpg" alt="Profile"
+                             onerror="this.style.display='none'">
+                    </div>
+                    <div>
+                        <div class="avail-name">Currently Available</div>
+                        <div class="avail-status"><span class="pulse-dot"></span> Open to opportunities</div>
+                    </div>
+                </div>
+                <div id="socialLinks" class="social-links-row"></div>
+            </div>
+            <div class="terminal" id="terminalContainer">
+                <div class="terminal-header">
+                    <div class="term-dot" style="background:#ff5f56"></div>
+                    <div class="term-dot" style="background:#ffbd2e"></div>
+                    <div class="term-dot" style="background:#27c93f"></div>
+                    <span class="term-title">about_me.sh</span>
+                </div>
+                <!-- Swipe-to-unlock overlay (restored) -->
+                <div id="terminalOverlay" class="terminal-overlay">
+                    <div class="puzzle-content">
+                        <i class="fas fa-lock puzzle-icon"></i>
+                        <p class="puzzle-text">Encrypted. Swipe → to unlock.</p>
+                        <div class="swipe-track">
+                            <div id="swipeThumb" class="swipe-thumb"><i class="fas fa-chevron-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="terminal-body" id="terminalBody"></div>
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills" class="mobile-section">
+            <div class="section-label"><span>Skills</span></div>
+            <h2 class="section-title">Tech <span class="clr-accent2">Arsenal</span></h2>
+            
+            <!-- Feature 9: Skill Sphere -->
+            <div id="skillSphereContainer" class="skill-sphere"></div>
+            
+            <!-- Feature 1: Scratch Card -->
+            <div class="scratch-card-container">
+                <div class="scratch-card-wrapper" id="scratchCardWrapper">
+                    <div class="scratch-content" id="scratchContent">
+                        <i class="fas fa-magic clr-accent scratch-icon"></i>
+                        <h4 class="scratch-title">Hidden Talent <span id="scratchTalentNum" class="clr-accent2">#1</span></h4>
+                        <p id="scratchTalentText" class="scratch-text">I automated my own coffee machine using an IoT relay & cron job! ☕</p>
+                    </div>
+                    <canvas id="scratchCanvas" class="scratch-canvas"></canvas>
+                </div>
+                <button id="scratchNextBtn" class="scratch-next-btn"><i class="fas fa-sync-alt"></i> Scratch Another Talent</button>
+            </div>
+            
+            <div class="skills-list" id="skillsGrid"></div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="projects" class="mobile-section">
+            <div class="section-label"><span>Projects</span></div>
+            <h2 class="section-title">What I've <span class="clr-accent">Built</span></h2>
+            <p class="tinder-hint"><i class="fas fa-hand-pointer"></i> Swipe card left/right or tap buttons below!</p>
+            <div class="projects-tinder-wrapper">
+                <div class="projects-stack" id="projectsGrid"></div>
+                <div class="tinder-controls">
+                    <button id="tinderPassBtn" class="tinder-btn tinder-pass" title="Pass / Next"><i class="fas fa-times"></i></button>
+                    <button id="tinderLikeBtn" class="tinder-btn tinder-like" title="Love project!"><i class="fas fa-heart"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION -->
+        <section id="education" class="mobile-section">
+            <div class="section-label"><span>Education</span></div>
+            <h2 class="section-title">Academic <span class="clr-accent2">Background</span></h2>
+            <div class="timeline" id="educationTimeline"></div>
+        </section>
+
+        <!-- CERTIFICATIONS -->
+        <section id="certifications" class="mobile-section">
+            <div class="section-label"><span>Certifications</span></div>
+            <h2 class="section-title">Validated <span class="clr-accent">Skills</span></h2>
+            <div class="certs-list" id="certsGrid"></div>
+        </section>
+
+        <!-- ACHIEVEMENTS -->
+        <section id="achievements" class="mobile-section">
+            <div class="section-label"><span>Achievements</span></div>
+            <h2 class="section-title">Beyond The <span class="clr-accent2">Resume</span></h2>
+            <div class="achievements-list" id="achievementsGrid"></div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="mobile-section">
+            <div class="section-label"><span>Contact</span></div>
+            <h2 class="section-title">Let's <span class="clr-accent">Connect</span></h2>
+            <p class="section-subtitle text-dim">Got a challenging project? Looking for a motivated fresher? I'm all ears.</p>
+            <form id="contactForm" class="mobile-contact-form">
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" name="name" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" placeholder="john@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Subject</label>
+                    <input type="text" name="subject" placeholder="Let's collaborate">
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea name="message" rows="5" placeholder="Tell me about your project..." required></textarea>
+                </div>
+                <button type="submit" id="contactSubmitBtn" class="btn btn-primary btn-full">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+            <div class="contact-info-grid">
+                <div class="info-card" id="emailCard">
+                    <div class="info-icon ic-accent"><i class="fas fa-envelope"></i></div>
+                    <div>
+                        <div class="info-label">Email <span class="copy-hint">(tap to copy)</span></div>
+                        <a id="contactEmail" href="#" class="info-value"></a>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon ic-accent2"><i class="fas fa-phone"></i></div>
+                    <div>
+                        <div class="info-label">Phone</div>
+                        <p id="contactPhone" class="info-value phone-toggle"></p>
+                        <p id="contactPhonePrivacy" class="info-value phone-toggle privacy-msg" style="display:none">🔒 Privacy matters — use LinkedIn or Email</p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon ic-accent"><i class="fas fa-map-marker-alt"></i></div>
+                    <div>
+                        <div class="info-label">Location</div>
+                        <p id="contactLocation" class="info-value"></p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon ic-accent2"><i class="fas fa-clock"></i></div>
+                    <div>
+                        <div class="info-label">Status</div>
+                        <p class="info-value">Open to opportunities</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-socials" id="contactSocials"></div>
+        </section>
+
+        <!-- MINI GAMES SECTION (Arcade - Glowing Yellow Theme) -->
+        <section id="mobileGamesSection" class="mobile-section mobile-games-section">
+            <div class="section-label"><span style="color:#f59e0b;border-color:rgba(245,158,11,0.4)">Arcade</span></div>
+            <h2 class="section-title">Take A Break &amp; <span style="color:#f59e0b">Play</span></h2>
+            <button id="openArcadeBtn" class="arcade-trigger-btn">
+                <div class="arcade-btn-glow"></div>
+                <span class="arcade-icon"><i class="fas fa-gamepad"></i></span>
+                <div class="arcade-btn-text">
+                    <span class="arcade-btn-title">Play A Game ?</span>
+                    <span class="arcade-btn-sub">Tap to open Cyber Arcade</span>
+                </div>
+                <i class="fas fa-play-circle arcade-play-icon"></i>
+            </button>
+        </section>
+
+        <!-- AI STATEMENT -->
+        <section class="mobile-section ai-statement-section">
+            <div class="ai-card">
+                <div class="ai-icon"><i class="fas fa-brain"></i></div>
+                <p class="ai-line1">"Yes, I built this with AI. In today's world, the real race isn't about avoiding the tools—it's about who can leverage them to build something better and faster."</p>
+                <p class="ai-line2">"Built efficiently using AI, guided by human strategy. Embracing the future of development means mastering the tools that accelerate execution."</p>
+            </div>
+        </section>
+
+        <!-- HOLD TO DEPLOY — Bottom of page -->
+        <div class="deploy-section">
+            <div class="deploy-container">
+                <button id="deployBtn" class="btn-deploy">
+                    <span class="deploy-text">🚀 Hold to Deploy</span>
+                    <div class="deploy-progress"></div>
+                </button>
+                <p class="deploy-hint">Hold until rockets launch you back to top!</p>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="mobile-footer">
+            <p>&copy; <span id="footerYear"></span> <span id="footerName"></span>. Engineered with <span class="clr-accent">&hearts;</span> and caffeine.</p>
+            <div class="footer-status">
+                <span class="footer-dot"></span>
+                <span>All systems operational</span>
+            </div>
+        </footer>
+    </main>
+
+    <!-- GAME PLAY / ARCADE MODAL (Top level fixed overlay) -->
+    <div id="gameModal" class="game-modal" style="display:none">
+        <div class="game-modal-inner">
+            <div class="game-modal-header">
+                <button id="backArcadeBtn" class="game-modal-back" style="display:none"><i class="fas fa-arrow-left"></i></button>
+                <span id="gameModalTitle" class="game-modal-title"><i class="fas fa-gamepad"></i> Cyber Arcade</span>
+                <button id="closeGameModal" class="game-modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div id="gameModalBody" class="game-modal-body"></div>
+        </div>
+    </div>
+
+    <!-- BACK TO TOP (Mobile exclusive) -->
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- QUESTIONS TERMINAL MODAL -->
+    <div id="questionsModal" class="questions-modal" style="display:none">
+        <div class="questions-modal-inner">
+            <div class="qmodal-header">
+                <span class="qmodal-title"><i class="fas fa-terminal"></i> ask_me.sh</span>
+                <button id="closeQModal" class="qmodal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="qmodal-btns">
+                <button class="chat-btn" data-q="strength">💪 Biggest strength?</button>
+                <button class="chat-btn" data-q="weakness">🤔 Honest weakness?</button>
+                <button class="chat-btn" data-q="hire">🎯 Why hire you?</button>
+                <button class="chat-btn" data-q="devops">🛠️ Why DevOps?</button>
+                <button class="chat-btn" data-q="stack">💻 Favorite Tech Stack?</button>
+                <button class="chat-btn" data-q="coffee">☕ Coffee or Code?</button>
+                <button class="chat-btn" data-q="future">🚀 5-Year Goal?</button>
+                <button class="chat-btn" data-q="outage">🛡️ Handling Outages?</button>
+                <button class="chat-btn" data-q="learning">📖 How do you learn?</button>
+                <button class="chat-btn" data-q="os">⚡ Linux vs Windows?</button>
+                <button class="chat-btn" data-q="fun">🎮 Fun fact?</button>
+            </div>
+            <div class="qmodal-body" id="qmodalBody">
+                <span class="t-line vis t-dim">> Select a question above to begin...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAV -->
+    <nav class="bottom-nav" id="bottomNav">
+        <a href="javascript:void(0)" class="nav-item active" data-sec="home">    <i class="fas fa-home"></i>        <span>Home</span></a>
+        <a href="javascript:void(0)" class="nav-item" data-sec="about">          <i class="fas fa-user"></i>        <span>About</span></a>
+        <a href="javascript:void(0)" class="nav-item" data-sec="skills">         <i class="fas fa-code"></i>        <span>Skills</span></a>
+        <a href="javascript:void(0)" class="nav-item" data-sec="projects">       <i class="fas fa-layer-group"></i> <span>Work</span></a>
+        <a href="javascript:void(0)" class="nav-item" data-sec="contact">        <i class="fas fa-envelope"></i>    <span>Contact</span></a>
+    </nav>
+
+    <!-- SCRIPTS — config.js is shared from parent Portfolio 1/js/ -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="smartphone/js/mobile.js"></script>
+</body>
+</html>

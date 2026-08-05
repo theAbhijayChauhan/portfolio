@@ -2,6 +2,14 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
+    <script>
+        (function() {
+            var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+            if (isMobile) {
+                window.location.replace('smartphone/mobile.html');
+            }
+        })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abhijay Chauhan — DevOps Engineer & SRE</title>
     <!-- Favicon -->
@@ -119,12 +127,19 @@
                 Fresher with a hacker's mindset — automating everything, breaking nothing, and building infrastructure that just works.
             </p>
             <div class="hero-actions reveal reveal-d4">
-                <a id="resumeLink" href="assets/resume.pdf" class="btn-primary">
-                    <i class="fas fa-download mr-2"></i>Resume
-                </a>
-                <a href="#projects" class="btn-secondary">
-                    <span>View Projects</span>
-                </a>
+                <div class="hero-actions-row">
+                    <a id="resumeLink" href="assets/resume.pdf" class="btn-primary">
+                        <i class="fas fa-download mr-2"></i>Resume
+                    </a>
+                    <a href="#projects" class="btn-secondary">
+                        <span>View Projects</span>
+                    </a>
+                </div>
+                <div class="hero-actions-subrow">
+                    <button id="desktopQuestionsBtn" class="desktop-questions-btn">
+                        <i class="fas fa-terminal"></i> Ask Me Anything
+                    </button>
+                </div>
             </div>
         </div>
     </section>
@@ -179,6 +194,8 @@
                         <!-- Populated by JS from CONFIG.terminal -->
                     </div>
                 </div>
+
+
             </div>
         </div>
     </section>
@@ -338,6 +355,32 @@
             </div>
         </div>
     </footer>
+
+    <!-- QUESTIONS TERMINAL MODAL -->
+    <div id="desktopQModal" class="desktop-qmodal" style="display:none">
+        <div class="desktop-qmodal-inner">
+            <div class="dqmodal-header">
+                <span class="dqmodal-title"><i class="fas fa-terminal"></i> ask_me.sh</span>
+                <button id="closeDesktopQModal" class="dqmodal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="dqmodal-btns">
+                <button class="dq-chat-btn" data-q="strength">💪 Biggest strength?</button>
+                <button class="dq-chat-btn" data-q="weakness">🤔 Honest weakness?</button>
+                <button class="dq-chat-btn" data-q="hire">🎯 Why hire you?</button>
+                <button class="dq-chat-btn" data-q="devops">🛠️ Why DevOps?</button>
+                <button class="dq-chat-btn" data-q="stack">💻 Favorite Tech Stack?</button>
+                <button class="dq-chat-btn" data-q="coffee">☕ Coffee or Code?</button>
+                <button class="dq-chat-btn" data-q="future">🚀 5-Year Goal?</button>
+                <button class="dq-chat-btn" data-q="outage">🛡️ Handling Outages?</button>
+                <button class="dq-chat-btn" data-q="learning">📖 How do you learn?</button>
+                <button class="dq-chat-btn" data-q="os">⚡ Linux vs Windows?</button>
+                <button class="dq-chat-btn" data-q="fun">🎮 Fun fact?</button>
+            </div>
+            <div class="dqmodal-body" id="desktopQModalBody">
+                <span class="t-line vis t-dim">> Select a question above to begin...</span>
+            </div>
+        </div>
+    </div>
 
     <!-- SCRIPTS — order matters -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
