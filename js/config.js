@@ -76,6 +76,7 @@ const CONFIG = {
         // Format: JPG, PNG, or WEBP (.jpg / .png / .webp)
         // Recommended size: 800x450 px or 600x400 px (Landscape aspect ratio)
         // Note: Set to "" if missing (displays fallback code icon)
+
         project1Image: "assets/projects/1.jpg", // K8s Auto-Scaler project thumbnail
         project2Image: "assets/projects/2.jpg", // Terraform Module Library thumbnail
         project3Image: "assets/projects/3.jpg", // Slack Incident Bot thumbnail
@@ -188,18 +189,18 @@ const CONFIG = {
     // ── PROJECTS ───────────────────────────────────────────
     projects: [
         {
-            title: "K8s Auto-Scaler",
+            title: "TruthNote - Fake News Detection System",
             desc: "Custom Kubernetes HPA controller using Prometheus metrics for intelligent, predictive auto-scaling based on historical traffic patterns.",
             tags: ["Go", "Kubernetes", "Prometheus"],
             image: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=800&auto=format&fit=crop&q=80",
-            link: "https://github.com/theAbhijayChauhan/k8s-autoscaler",
+            link: "https://github.com/theAbhijayChauhan/TruthNote",
         },
         {
-            title: "Terraform Module Library",
+            title: "SchedFlow - Timetable Management SaaS",
             desc: "Reusable Terraform modules for multi-region AWS setup — VPC, EKS, RDS, S3 — with CI-tested examples and documentation.",
             tags: ["Terraform", "AWS", "Python"],
             image: "https://images.unsplash.com/photo-1618401471353-b98aedd04e11?w=800&auto=format&fit=crop&q=80",
-            link: "https://github.com/theAbhijayChauhan/terraform-aws-modules",
+            link: "https://github.com/theAbhijayChauhan/SchedFlow",
         },
         {
             title: "Slack Incident Bot",
