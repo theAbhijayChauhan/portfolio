@@ -40,7 +40,7 @@
             <div class="side-vertical-line"></div>
             <a href="https://github.com/theAbhijayChauhan" target="_blank" class="side-social-icon" title="GitHub"><i class="fab fa-github"></i></a>
             <a href="https://linkedin.com/in/abhijaychauhan" target="_blank" class="side-social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="mailto:abhijaychauhan98@gmail.com" class="side-social-icon email-icon-tooltip" aria-label="abhijaychauhan98@gmail.com"><i class="fas fa-envelope"></i></a>
+            <a href="mailto:abhijaychauhan.dev@gmail.com" class="side-social-icon email-icon-tooltip" aria-label="abhijaychauhan.dev@gmail.com"><i class="fas fa-envelope"></i></a>
         `;
         document.body.appendChild(leftWidget);
 
