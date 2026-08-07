@@ -13,8 +13,8 @@ const CONFIG = {
         about: true,          // About Me & Terminal section (true = show, false = hide)
         skills: true,         // Technical Skills Arsenal (true = show, false = hide)
         projects: true,        // Featured Projects Grid (true = show, false = hide)
-        education: true,      // Academic Background & Timeline (true = show, false = hide)
-        certifications: false, // Validated Certifications (true = show, false = hide)
+        education: true,      // Academic Background & Timeline (true = show, false = hide) 
+        certifications: true, // Validated Certifications (true = show, false = hide)
         achievements: true,   // Achievements & Highlights (true = show, false = hide)
         contact: true,        // Contact Form & Information (true = show, false = hide)
 
@@ -89,7 +89,7 @@ const CONFIG = {
     name: "Abhijay Chauhan",
     initials: "theAbhijay",                          // 2-3 letters for top nav logo
     title: "DevOps Engineer & SRE",
-    tagline: "Fresher with a professional mindset — automating everything, breaking nothing, and building infrastructure that just works.",
+    tagline: "Engineering Scalable Systems Through Automation - From Code to Cloud, Engineered for Reliability.",
     email: "abhijaychauhan98@example.com",
     phone: "+91 92501 XXXXX",
     location: "Lucknow, Uttar Pradesh, India",
@@ -110,9 +110,9 @@ const CONFIG = {
     //    Set any URL to "" to hide that social icon
     links: {
         linkedin: "www.linkedin.com/in/abhijaychauhan",
-        github:   "https://github.com/theAbhijayChauhan",
-        devto:    "https://dev.to/theabhijaychauhan",
-        youtube:  "",                        // leave empty to hide
+        github: "https://github.com/theAbhijayChauhan",
+        devto: "https://dev.to/theabhijaychauhan",
+        youtube: "",                        // leave empty to hide
     },
 
     // ── HERO TYPING STRINGS ────────────────────────────────
@@ -127,16 +127,17 @@ const CONFIG = {
 
     // ── STATS ──────────────────────────────────────────────
     stats: [
-        { value: 3,  suffix: "+", label: "Projects Built" },
-        { value: 8,   suffix: "+",  label: "Certifications" },
-        { value: 10,  suffix: "+", label: "Technologies" },
+        { value: 3, suffix: "+", label: "Projects Built" },
+        { value: 15, suffix: "+", label: "Certifications" },
+        { value: 10, suffix: "+", label: "Technologies" },
         { value: 500, suffix: "+", label: "GitHub Commits" },
     ],
 
     // ── ABOUT ──────────────────────────────────────────────
     about: [
-        "I'm a recent graduate passionate about DevOps, Site Reliability Engineering, and cloud-native technologies. While I may be a fresher by title, I've spent the last year building real infrastructure projects, earning industry certifications, and contributing to open source — because the best way to learn production systems is to build them.",
-        "I believe in infrastructure as code, automation over manual work, and that every outage is a learning opportunity. I'm looking for a team where I can grow, contribute, and help build systems that are reliable at scale.",
+        "I'm a Computer Science undergraduate specializing in Cloud Computing with a strong focus on DevOps, Cloud Infrastructure, and Site Reliability Engineering. My interests span Linux system administration, networking, containerization, orchestration, CI/CD, Infrastructure as Code, cloud platforms, monitoring, and observability. I believe reliable software begins with well-engineered infrastructure, and I'm continuously building projects that strengthen my understanding of production environments, deployment pipelines, and modern DevOps practices.",
+
+        "I approach every project with an engineering mindset—prioritizing automation over repetition, scalability over short-term fixes, and reliability over convenience. Beyond writing code, I'm driven to understand how applications are built, deployed, monitored, secured, and maintained throughout their entire lifecycle. Currently, I'm focused on mastering the technologies and practices that power modern cloud-native systems while contributing to meaningf  ul projects and preparing for opportunities where I can help engineering teams build resilient, secure, and production-ready infrastructure.",
     ],
 
     // ── TERMINAL INFO ──────────────────────────────────────
@@ -144,7 +145,7 @@ const CONFIG = {
         name: "Abhijay Chauhan",
         role: "DevOps Engineer & SRE",
         location: "Lucknow, Uttar Pradesh, India",
-        email: "abhijaychauhan98@gmail.com",
+        email: "abhijaychauhan.dev@gmail.com",
         education: "B.Tech in Computer Science",
         languages: ["Python", "Git", "Shell", "Docker"],
         interests: ["Kubernetes", "CI/CD", "Cloud Native", "Observability"],
@@ -153,15 +154,15 @@ const CONFIG = {
     // ── SKILLS ─────────────────────────────────────────────
     //    color options: "accent" (teal) or "accent2" (amber)
     skills: [
-        { name: "Docker & Containers",    icon: "fab fa-docker",         level: 85, color: "accent"  },
-        { name: "Kubernetes",             icon: "fas fa-dharmachakra",   level: 75, color: "accent"  },
-        { name: "CI/CD Pipelines",        icon: "fas fa-code-branch",    level: 80, color: "accent2" },
-        { name: "AWS Cloud",              icon: "fab fa-aws",            level: 70, color: "accent2" },
-        { name: "Terraform & IaC",        icon: "fas fa-cubes",          level: 72, color: "accent"  },
-        { name: "Linux Administration",   icon: "fab fa-linux",          level: 82, color: "accent2" },
-        { name: "Python Scripting",       icon: "fab fa-python",         level: 85, color: "accent"  },
-        { name: "Git & GitHub",           icon: "fab fa-github",         level: 88, color: "accent2" },
-        { name: "Monitoring & Logging",   icon: "fas fa-chart-area",     level: 68, color: "accent"  },
+        { name: "Docker & Containers", icon: "fab fa-docker", level: 85, color: "accent" },
+        { name: "Kubernetes", icon: "fas fa-dharmachakra", level: 75, color: "accent" },
+        { name: "CI/CD Pipelines", icon: "fas fa-code-branch", level: 80, color: "accent2" },
+        { name: "AWS Cloud", icon: "fab fa-aws", level: 70, color: "accent2" },
+        { name: "Terraform & IaC", icon: "fas fa-cubes", level: 72, color: "accent" },
+        { name: "Linux Administration", icon: "fab fa-linux", level: 82, color: "accent2" },
+        { name: "Python Scripting", icon: "fab fa-python", level: 85, color: "accent" },
+        { name: "Git & GitHub", icon: "fab fa-github", level: 88, color: "accent2" },
+        { name: "Monitoring & Logging", icon: "fas fa-chart-area", level: 78, color: "accent" },
     ],
 
     // ── EDUCATION ──────────────────────────────────────────
@@ -172,8 +173,8 @@ const CONFIG = {
             year: "2023 — 2027",
             gpa: "8.5 / 10",
             highlights: [
-                "Relevant coursework: Operating Systems, Computer Networks, Cloud Computing, DBMS",
-                "Published a paper on container orchestration in XYZ Journal",
+                "Favourite coursework: Operating Systems, Computer Networks, Cloud Computing, DBMS",
+                "Published my paper on container orchestration in My College Paper Fest",
                 "Led the college Cloud Computing Club",
             ],
         },
@@ -181,7 +182,7 @@ const CONFIG = {
             degree: "Higher Secondary (XII) — Science (PCM + CS)",
             institution: "St. Joseph Montessori School",
             year: "2021 — 2023",
-            gpa: "82%",
+            gpa: "80%",
             highlights: [],
         },
     ],
@@ -224,27 +225,27 @@ const CONFIG = {
             link: "https://github.com/theAbhijayChauhan/log-pipeline",
         },
         {
-            title: "Infrastructure Monitoring Stack",
+            title: "TruthNote - Fake News Detection System",
             desc: "Complete observability stack with Prometheus, Grafana, Alertmanager, and Loki — deployed via Helm with custom dashboards.",
-            tags: ["Prometheus", "Grafana", "Helm"],
+            tags: ["Flask", "MySQL", "WorkFlow"],
             image: "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=800&auto=format&fit=crop&q=80",
-            link: "https://github.com/theAbhijayChauhan/monitoring-stack",
+            link: "https://github.com/theAbhijayChauhan/Fake-News-Detection/tree/main/News%20Detection/Minor%20Project",
         },
     ],
 
     // ── CERTIFICATIONS ─────────────────────────────────────
     certifications: [
-        { name: "AWS Solutions & EC2", issuer: "Amazon Web Services", year: "2026", icon: "fab fa-aws",          iconColor: "#ff9900" },
-        { name: "Certified Kubernetes Administrator", issuer: "CNCF",                year: "2024", icon: "fas fa-dharmachakra", iconColor: "#326ce5" },
-        { name: "HashiCorp Terraform Associate",     issuer: "HashiCorp",            year: "2023", icon: "fas fa-cubes",        iconColor: "#7b42bc" },
-        { name: "AWS Cloud Practitioner",             issuer: "Amazon Web Services", year: "2023", icon: "fab fa-aws",          iconColor: "#ff9900" },
-        { name: "GitHub Actions Certification",       issuer: "GitHub",               year: "2024", icon: "fab fa-github",       iconColor: "#e2e8f0" },
-        { name: "Linux Foundation SysAdmin",          issuer: "Linux Foundation",     year: "2023", icon: "fab fa-linux",        iconColor: "#fcc624" },
+        { name: "AWS Solutions & EC2", issuer: "Amazon Web Services", year: "2026", icon: "fab fa-aws", iconColor: "#ff9900" },
+        { name: "Certified Kubernetes Administrator", issuer: "CNCF", year: "2024", icon: "fas fa-dharmachakra", iconColor: "#326ce5" },
+        { name: "HashiCorp Terraform Associate", issuer: "HashiCorp", year: "2023", icon: "fas fa-cubes", iconColor: "#7b42bc" },
+        { name: "AWS Cloud Practitioner", issuer: "Amazon Web Services", year: "2023", icon: "fab fa-aws", iconColor: "#ff9900" },
+        { name: "GitHub Actions Certification", issuer: "GitHub", year: "2024", icon: "fab fa-github", iconColor: "#e2e8f0" },
+        { name: "Linux Foundation SysAdmin", issuer: "Linux Foundation", year: "2023", icon: "fab fa-linux", iconColor: "#fcc624" },
     ],
 
     // ── ACHIEVEMENTS ───────────────────────────────────────
     achievements: [
-        "Top 50 in Smart India Hackathon 2025",
+        "Top 100 in Smart India Hackathon 2025",
         // "Open source contributor",
         "Won Best Infrastructure Project at college",
         "500+ GitHub contributions in the last year",
