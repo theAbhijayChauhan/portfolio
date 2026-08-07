@@ -90,7 +90,7 @@ const CONFIG = {
     initials: "theAbhijay",                          // 2-3 letters for top nav logo
     title: "DevOps Engineer & SRE",
     tagline: "Engineering Scalable Systems Through Automation - From Code to Cloud, Engineered for Reliability.",
-    email: "abhijaychauhan98@example.com",
+    email: "abhijaychauhan.dev@gmail.com",
     phone: "+91 92501 XXXXX",
     location: "Lucknow, Uttar Pradesh, India",
     available: true,                         // true = shows "Open to opportunities" badge
