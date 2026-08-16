@@ -1000,10 +1000,10 @@ function initMobileParticles() {
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
-    // ── ROTATION STATE (2.20X GLOBE ROTATION SPEED) ──
+    // ── ROTATION STATE (FAST LIVELY 3D GLOBE ROTATION) ──
     let angleX = 0.30;
     let angleY = 0.0;
-    const ROTATION_SPEED = 0.0022;
+    const ROTATION_SPEED = 0.0036;
 
     let scrollY = window.scrollY || 0;
     let targetScrollY = scrollY;
@@ -1027,7 +1027,7 @@ function initMobileParticles() {
         });
     }
 
-    // ── 2. 3D FIBONACCI SPHERE POINT CLOUD ─────────────────────────
+    // ── 2. 3D FIBONACCI SPHERE POINT CLOUD (VIBRANT & CRYSTAL CLEAR) ──
     const TOTAL_POINTS = 420;
     const spherePoints = [];
     const phi = Math.PI * (3 - Math.sqrt(5)); // Golden angle
@@ -1042,9 +1042,9 @@ function initMobileParticles() {
 
         spherePoints.push({
             x, y, z,
-            baseAlpha: Math.random() * 0.5 + 0.35,
+            baseAlpha: Math.random() * 0.35 + 0.65,
             size: Math.random() * 1.3 + 0.9,
-            color: Math.random() > 0.85 ? '#fbbf24' : (Math.random() > 0.4 ? '#00ffc8' : '#00b4d8')
+            color: Math.random() > 0.85 ? '#fbbf24' : (Math.random() > 0.4 ? '#00ffc8' : '#00f0ff')
         });
     }
 
@@ -1166,9 +1166,9 @@ function initMobileParticles() {
         scrollY += (targetScrollY - scrollY) * 0.08;
         angleX = 0.28 + Math.sin(angleY * 0.4) * 0.08;
 
-        // Smooth scroll fade calculation for 3D Globe
-        const scrollFade = Math.min(1, Math.max(0, (scrollY - 70) / 200));
-        globeOpacity += (scrollFade - globeOpacity) * 0.08;
+        // Smooth scroll fade calculation for 3D Globe (Appears immediately as soon as user scrolls)
+        const scrollFade = Math.min(1, Math.max(0, scrollY / 45));
+        globeOpacity += (scrollFade - globeOpacity) * 0.12;
 
         canvas.style.opacity = '1';
         ctx.clearRect(0, 0, width, height);
@@ -1252,23 +1252,23 @@ function initMobileParticles() {
             ctx.stroke();
             ctx.setLineDash([]);
 
-        // ── C. 3D Sphere Surface Point Cloud ──
-        for (let i = 0; i < spherePoints.length; i++) {
-            const sp = spherePoints[i];
-            const proj = project3D(sp, radius, cx, cy);
+            // ── C. 3D Sphere Surface Point Cloud (Brighter & Crisp) ──
+            for (let i = 0; i < spherePoints.length; i++) {
+                const sp = spherePoints[i];
+                const proj = project3D(sp, radius, cx, cy);
 
-            const depthAlpha = proj.isFront
-                ? sp.baseAlpha * (0.45 + proj.z * 0.55)
-                : sp.baseAlpha * 0.12;
+                const depthAlpha = proj.isFront
+                    ? sp.baseAlpha * (0.75 + proj.z * 0.45)
+                    : sp.baseAlpha * 0.32;
 
-            const dotSize = Math.max(0.6, sp.size * proj.scale * (proj.isFront ? 1.0 : 0.65));
+                const dotSize = Math.max(0.6, sp.size * proj.scale * (proj.isFront ? 1.0 : 0.65));
 
-            ctx.beginPath();
-            ctx.arc(proj.projX, proj.projY, dotSize, 0, Math.PI * 2);
-            ctx.fillStyle = sp.color;
-            ctx.globalAlpha = depthAlpha * globeOpacity;
-            ctx.fill();
-        }
+                ctx.beginPath();
+                ctx.arc(proj.projX, proj.projY, dotSize, 0, Math.PI * 2);
+                ctx.fillStyle = sp.color;
+                ctx.globalAlpha = depthAlpha * globeOpacity;
+                ctx.fill();
+            }
 
         // ── D. Projected Cloud Region Nodes ──
         const projectedNodes = CLOUD_NODES.map(node => {
@@ -1428,6 +1428,15 @@ function initMobileParticles() {
 
 // ── FEATURE 1: Scratch-Off Card with Multi-Talents ──────────────
 function initScratchCard() {
+    const isScratchEnabled = (CONFIG.scratchCard !== undefined) ? !!CONFIG.scratchCard :
+                             (CONFIG.showSections && CONFIG.showSections.scratchCard === true);
+    const container = document.querySelector('.scratch-card-container');
+    if (!isScratchEnabled) {
+        if (container) container.style.display = 'none';
+        return;
+    }
+    if (container) container.style.display = '';
+
     const canvas = document.getElementById('scratchCanvas');
     const textEl = document.getElementById('scratchTalentText');
     const numEl  = document.getElementById('scratchTalentNum');
