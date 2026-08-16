@@ -291,6 +291,27 @@
                     <div class="deploy-progress"></div>
                 </button>
                 <p class="deploy-hint">Hold until rockets launch you back to top!</p>
+
+                <!-- QUICK CONNECT TRIGGER (Desktop-style QuickLink feature) -->
+                <div class="mobile-quicklinks-container">
+                    <button id="mobileQuickLinkBtn" class="mobile-quicklink-btn" aria-expanded="false" aria-label="Toggle Quick Links">
+                        <i class="fas fa-bolt"></i> <span>Quick Connect</span> <i class="fas fa-chevron-down mq-chevron" id="mqChevron"></i>
+                    </button>
+                    <div id="mobileQuickLinkMenu" class="mobile-quicklink-menu" style="display: none;">
+                        <a id="mqTelegramLink" href="https://t.me/theabhijaychauhan" target="_blank" rel="noopener noreferrer" class="mq-btn mq-telegram">
+                            <i class="fab fa-telegram-plane"></i>
+                            <span>Telegram</span>
+                        </a>
+                        <a id="mqInstagramLink" href="https://instagram.com/theabhijaychauhan" target="_blank" rel="noopener noreferrer" class="mq-btn mq-instagram">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                        </a>
+                        <button id="mqCopyEmailBtn" class="mq-btn mq-email" aria-label="Copy Email Address">
+                            <i class="fas fa-copy"></i>
+                            <span id="mqEmailText">Copy Email</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -343,6 +364,19 @@
             </div>
             <div class="qmodal-body" id="qmodalBody">
                 <span class="t-line vis t-dim">> Select a question above to begin...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOBILE CERTIFICATION VERIFICATION MODAL -->
+    <div id="mobileCertModal" class="mobile-cert-modal">
+        <div class="mobile-cert-modal-inner">
+            <div class="qmodal-header">
+                <span class="qmodal-title"><i class="fas fa-certificate"></i> Verify Credential</span>
+                <button id="closeMobileCertModal" class="qmodal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="mobile-cert-modal-body" id="mobileCertModalBody">
+                <!-- Populated dynamically by JS -->
             </div>
         </div>
     </div>

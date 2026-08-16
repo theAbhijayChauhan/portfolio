@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initContactForm();
     initMobilePremiumFeatures();
     initTinderProjects();
+    initMobileQuickLinks();
+    initMobiusRibbonFavicon();
 });
 
 // ── MOBILE BOOT LOADER ────────────────────────────────────────
@@ -68,6 +70,18 @@ function populateMobileSite() {
 
     // ── Title ──
     document.title = `${C.name} — ${C.title}`;
+
+    // ── Header: Shade Tint (#64e59a) ──
+    const mobileHeader = document.querySelector('.mobile-header');
+    if (mobileHeader) {
+        const isShadeEnabled = (C.headerShade !== undefined) ? !!C.headerShade :
+                               (S.headerShade !== false);
+        if (isShadeEnabled) {
+            mobileHeader.classList.add('has-shade');
+        } else {
+            mobileHeader.classList.remove('has-shade');
+        }
+    }
 
     // ── Header: Instagram Banner ──
     const instaBanner = document.getElementById('instaBanner');
@@ -245,15 +259,67 @@ function populateMobileSite() {
     const certsGrid = document.getElementById('certsGrid');
     if (certsGrid) {
         if (S.certifications !== false) {
-            certsGrid.innerHTML = C.certifications.map(c => `
-                <div class="cert-card">
-                    <i class="${c.icon} cert-icon" style="color:${c.iconColor}"></i>
+            certsGrid.innerHTML = C.certifications.map((c, i) => `
+                <div class="cert-card" data-index="${i}" style="cursor:pointer">
+                    <div class="cert-icon-num" style="background:${c.iconColor}15; color:${c.iconColor}">
+                        ${i + 1}
+                    </div>
                     <div>
                         <div class="cert-title">${c.name}</div>
                         <div class="cert-meta">${c.issuer} &middot; ${c.year}</div>
                     </div>
                 </div>
             `).join('');
+
+            // Mobile Cert Verification Modal
+            const mobileCertModal = document.getElementById('mobileCertModal');
+            const closeMobileCertModal = document.getElementById('closeMobileCertModal');
+            const mobileCertModalBody = document.getElementById('mobileCertModalBody');
+
+            if (mobileCertModal && closeMobileCertModal && mobileCertModalBody) {
+                const openMobileCertModal = () => {
+                    mobileCertModal.classList.add('prep-left');
+                    mobileCertModal.classList.remove('active');
+                    void mobileCertModal.offsetWidth;
+                    mobileCertModal.classList.remove('prep-left');
+                    mobileCertModal.classList.add('active');
+                };
+
+                const closeMobileCertModalFunc = () => {
+                    mobileCertModal.classList.remove('active');
+                };
+
+                certsGrid.querySelectorAll('.cert-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const idx = parseInt(card.getAttribute('data-index'), 10);
+                        const c = C.certifications[idx];
+                        if (!c) return;
+
+                        const imgPath = c.image ? (c.image.startsWith('assets/') ? '../' + c.image : c.image) : '';
+
+                        mobileCertModalBody.innerHTML = `
+                            <div class="mcert-image-wrapper">
+                                <img src="${imgPath || '../assets/favicon.svg'}" alt="${c.name}" class="mcert-image">
+                            </div>
+                            <div class="mcert-name">${c.name}</div>
+                            <div class="mcert-issuer">Issued by: <strong>${c.issuer}</strong> (Issued ${c.date || c.year})</div>
+                            <div class="mcert-id-box">
+                                <span class="mcert-id-label">Verification ID:</span>
+                                <span class="mcert-id-value">${c.verificationId || 'N/A'}</span>
+                            </div>
+                            <div class="mcert-concepts-title">Core concepts covered:</div>
+                            <div class="mcert-concepts-grid">
+                                ${c.concepts ? c.concepts.map(concept => `<span class="mcert-concept-tag">${concept}</span>`).join('') : '<span class="mcert-concept-tag">N/A</span>'}
+                            </div>
+                        `;
+
+                        openMobileCertModal();
+                    });
+                });
+
+                closeMobileCertModal.addEventListener('click', closeMobileCertModalFunc);
+                mobileCertModal.addEventListener('click', e => { if (e.target === mobileCertModal) closeMobileCertModalFunc(); });
+            }
         } else if (certsSection) {
             certsSection.style.display = 'none';
         }
@@ -795,12 +861,12 @@ function initCyberpunkToggle() {
     if (!toggle) return;
     toggle.addEventListener('click', () => {
         document.body.classList.toggle('matrix-mode');
-        if (navigator.vibrate) navigator.vibrate([40, 40]);
+        if (navigator.vibrate) navigator.vibrate([30, 40, 30]);
         if (document.body.classList.contains('matrix-mode')) {
-            showToast('⚡ Cyberpunk Mode Activated');
-            toggle.innerHTML = '<i class="fas fa-power-off"></i>';
+            showToast('🌸⚡ Cyberpunk Pink & Green Mode');
+            toggle.innerHTML = '<i class="fas fa-bolt"></i>';
         } else {
-            showToast('Standard Mode');
+            showToast('⚡ Standard Mode');
             toggle.innerHTML = '<i class="fas fa-bolt"></i>';
         }
     });
@@ -911,74 +977,453 @@ function initTerminalChatbot() {
     });
 }
 
-// ── MOBILE SLOW BACKGROUND PARTICLES ──────────────────────────
+// ── MOBILE 3D HOLOGRAPHIC CYBER CLOUD GLOBE ENGINE (NON-INTERACTIVE) ──
 function initMobileParticles() {
     const canvas = document.getElementById('mobileParticleCanvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
+    
+    let width = 0;
+    let height = 0;
+    let dpr = 1;
 
-    window.addEventListener('resize', () => {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
+    function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = width + 'px';
+        canvas.style.height = height + 'px';
+        ctx.scale(dpr, dpr);
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    // ── ROTATION STATE (2.20X GLOBE ROTATION SPEED) ──
+    let angleX = 0.30;
+    let angleY = 0.0;
+    const ROTATION_SPEED = 0.0022;
+
+    let scrollY = window.scrollY || 0;
+    let targetScrollY = scrollY;
+    window.addEventListener('scroll', () => {
+        targetScrollY = window.scrollY || 0;
     }, { passive: true });
 
-    const particleCount = Math.min(28, Math.max(16, Math.floor((width * height) / 18000)));
-    const particles = [];
-
-    for (let i = 0; i < particleCount; i++) {
-        particles.push({
+    // ── 1. DENSE MULTI-COLORED HERO PARTICLES & CONSTELLATION MESH ──
+    const ambientStars = [];
+    const starCount = Math.min(85, Math.max(55, Math.floor((width * height) / 8000)));
+    const starColors = ['#00ffc8', '#00f0ff', '#ff2a85', '#fbbf24', '#a855f7', '#22c55e', '#f97316'];
+    for (let i = 0; i < starCount; i++) {
+        ambientStars.push({
             x: Math.random() * width,
             y: Math.random() * height,
-            vx: (Math.random() - 0.5) * 0.35,
-            vy: (Math.random() - 0.5) * 0.35,
-            radius: Math.random() * 1.5 + 1
+            vx: (Math.random() - 0.5) * 0.45,
+            vy: (Math.random() - 0.5) * 0.45,
+            size: Math.random() * 2.2 + 0.9,
+            color: starColors[Math.floor(Math.random() * starColors.length)],
+            alpha: Math.random() * 0.38 + 0.28
         });
     }
 
-    let particlesPaused = false;
+    // ── 2. 3D FIBONACCI SPHERE POINT CLOUD ─────────────────────────
+    const TOTAL_POINTS = 420;
+    const spherePoints = [];
+    const phi = Math.PI * (3 - Math.sqrt(5)); // Golden angle
+
+    for (let i = 0; i < TOTAL_POINTS; i++) {
+        const y = 1 - (i / (TOTAL_POINTS - 1)) * 2;
+        const radiusAtY = Math.sqrt(1 - y * y);
+        const theta = phi * i;
+
+        const x = Math.cos(theta) * radiusAtY;
+        const z = Math.sin(theta) * radiusAtY;
+
+        spherePoints.push({
+            x, y, z,
+            baseAlpha: Math.random() * 0.5 + 0.35,
+            size: Math.random() * 1.3 + 0.9,
+            color: Math.random() > 0.85 ? '#fbbf24' : (Math.random() > 0.4 ? '#00ffc8' : '#00b4d8')
+        });
+    }
+
+    // ── 3. CLOUD REGION DATACENTER NODES ────────────────────────────
+    const CLOUD_NODES = [
+        { id: 'USE1', label: 'US-EAST (VA)',      lat: 38.0,  lon: -78.0,  color: '#00ffc8' }, // 0
+        { id: 'USW2', label: 'US-WEST (OR)',      lat: 45.5,  lon: -122.6, color: '#00f0ff' }, // 1
+        { id: 'USC1', label: 'US-CENTRAL (OH)',   lat: 40.0,  lon: -83.0,  color: '#38bdf8' }, // 2
+        { id: 'EUC1', label: 'EU-CENTRAL (FRA)',  lat: 50.1,  lon: 8.6,    color: '#fbbf24' }, // 3
+        { id: 'EUW1', label: 'EU-WEST (LON)',     lat: 51.5,  lon: -0.1,   color: '#00ffc8' }, // 4
+        { id: 'EUN1', label: 'EU-NORTH (STO)',    lat: 59.3,  lon: 18.0,   color: '#38bdf8' }, // 5
+        { id: 'APS1', label: 'AP-SOUTH (MUMBAI)', lat: 19.0,  lon: 72.8,   color: '#00ffc8' }, // 6
+        { id: 'APSE1', label: 'AP-SE (SG)',       lat: 1.35,  lon: 103.8,  color: '#fbbf24' }, // 7
+        { id: 'APE1', label: 'AP-EAST (TOKYO)',   lat: 35.6,  lon: 139.6,  color: '#00f0ff' }, // 8
+        { id: 'APNE2', label: 'AP-NE (SEOUL)',    lat: 37.5,  lon: 127.0,  color: '#38bdf8' }, // 9
+        { id: 'APSE2', label: 'AP-SE (SYDNEY)',   lat: -33.8, lon: 151.2,  color: '#00ffc8' }, // 10
+        { id: 'SAE1', label: 'SA-EAST (SP)',      lat: -23.5, lon: -46.6,  color: '#f59e0b' }, // 11
+        { id: 'MES1', label: 'ME-SOUTH (BHR)',    lat: 26.0,  lon: 50.5,   color: '#fbbf24' }, // 12
+        { id: 'AFS1', label: 'AF-SOUTH (CT)',     lat: -33.9, lon: 18.4,   color: '#00f0ff' }, // 13
+        { id: 'CAC1', label: 'CA-CENTRAL (MTL)',  lat: 45.5,  lon: -73.5,  color: '#00ffc8' }  // 14
+    ];
+
+    // ── 4. MULTI-DIRECTIONAL 3D LASER DATA ARCS (1.60X SPEED TUNING) ──
+    const ARCS = [
+        { from: 0, to: 3, packets: [{ t: 0.1, speed: 0.0025 }, { t: 0.6, speed: 0.0025 }] }, // US-East <-> Frankfurt
+        { from: 0, to: 4, packets: [{ t: 0.25, speed: 0.0024 }, { t: 0.75, speed: 0.0024 }] }, // US-East <-> London
+        { from: 0, to: 1, packets: [{ t: 0.05, speed: 0.0030 }, { t: 0.55, speed: 0.0030 }] }, // US-East <-> US-West
+        { from: 0, to: 2, packets: [{ t: 0.3, speed: 0.0032 }] },                            // US-East <-> Ohio
+        { from: 0, to: 14, packets: [{ t: 0.4, speed: 0.0028 }] },                           // US-East <-> Montreal
+        { from: 0, to: 11, packets: [{ t: 0.2, speed: 0.0024 }, { t: 0.7, speed: 0.0024 }] }, // US-East <-> São Paulo
+        { from: 14, to: 4, packets: [{ t: 0.2, speed: 0.0027 }, { t: 0.7, speed: 0.0027 }] }, // Montreal <-> London
+        { from: 14, to: 1, packets: [{ t: 0.35, speed: 0.0028 }] },                          // Montreal <-> US-West
+        { from: 11, to: 1, packets: [{ t: 0.45, speed: 0.0024 }] },                          // São Paulo <-> US-West
+        { from: 11, to: 13, packets: [{ t: 0.5, speed: 0.0022 }, { t: 0.95, speed: 0.0022 }] }, // São Paulo <-> Cape Town
+        { from: 3, to: 4, packets: [{ t: 0.15, speed: 0.0035 }, { t: 0.65, speed: 0.0035 }] }, // Frankfurt <-> London
+        { from: 3, to: 5, packets: [{ t: 0.35, speed: 0.0028 }, { t: 0.85, speed: 0.0028 }] }, // Frankfurt <-> Stockholm
+        { from: 4, to: 5, packets: [{ t: 0.2, speed: 0.0032 }] },                            // London <-> Stockholm
+        { from: 3, to: 12, packets: [{ t: 0.1, speed: 0.0025 }, { t: 0.6, speed: 0.0025 }] }, // Frankfurt <-> Bahrain
+        { from: 4, to: 12, packets: [{ t: 0.4, speed: 0.0024 }] },                           // London <-> Bahrain
+        { from: 3, to: 13, packets: [{ t: 0.3, speed: 0.0024 }, { t: 0.8, speed: 0.0024 }] }, // Frankfurt <-> Cape Town
+        { from: 12, to: 13, packets: [{ t: 0.25, speed: 0.0025 }] },                         // Bahrain <-> Cape Town
+        { from: 12, to: 6, packets: [{ t: 0.3, speed: 0.0028 }, { t: 0.8, speed: 0.0028 }] }, // Bahrain <-> Mumbai
+        { from: 3, to: 6, packets: [{ t: 0.2, speed: 0.0024 }, { t: 0.7, speed: 0.0024 }] },  // Frankfurt <-> Mumbai
+        { from: 6, to: 7, packets: [{ t: 0.05, speed: 0.0028 }, { t: 0.55, speed: 0.0028 }] }, // Mumbai <-> Singapore
+        { from: 6, to: 9, packets: [{ t: 0.35, speed: 0.0024 }] },                           // Mumbai <-> Seoul
+        { from: 7, to: 8, packets: [{ t: 0.4, speed: 0.0027 }, { t: 0.9, speed: 0.0027 }] },  // Singapore <-> Tokyo
+        { from: 7, to: 10, packets: [{ t: 0.25, speed: 0.0025 }, { t: 0.75, speed: 0.0025 }] }, // Singapore <-> Sydney
+        { from: 8, to: 9, packets: [{ t: 0.2, speed: 0.0035 }, { t: 0.7, speed: 0.0035 }] }, // Tokyo <-> Seoul
+        { from: 8, to: 10, packets: [{ t: 0.1, speed: 0.0024 }, { t: 0.6, speed: 0.0024 }] }, // Tokyo <-> Sydney
+        { from: 9, to: 10, packets: [{ t: 0.45, speed: 0.0024 }] },                          // Seoul <-> Sydney
+        { from: 1, to: 8, packets: [{ t: 0.15, speed: 0.0022 }, { t: 0.65, speed: 0.0022 }] }, // US-West <-> Tokyo
+        { from: 1, to: 9, packets: [{ t: 0.3, speed: 0.0024 }] },                            // US-West <-> Seoul
+        { from: 1, to: 10, packets: [{ t: 0.45, speed: 0.0022 }, { t: 0.9, speed: 0.0022 }] }, // US-West <-> Sydney
+        { from: 13, to: 10, packets: [{ t: 0.2, speed: 0.0022 }] },                          // Cape Town <-> Sydney
+        { from: 5, to: 8, packets: [{ t: 0.15, speed: 0.0022 }] },                           // Stockholm <-> Tokyo
+        { from: 2, to: 4, packets: [{ t: 0.35, speed: 0.0027 }] }                            // Ohio <-> London
+    ];
+
+    const nodePings = [];
+
+    // Helper: Convert Lat/Lon to 3D Sphere Vector
+    function latLonToVector3D(lat, lon) {
+        const phiAngle = (90 - lat) * (Math.PI / 180);
+        const thetaAngle = (lon + 180) * (Math.PI / 180);
+        return {
+            x: -(Math.sin(phiAngle) * Math.cos(thetaAngle)),
+            y: Math.cos(phiAngle),
+            z: Math.sin(phiAngle) * Math.sin(thetaAngle)
+        };
+    }
+
+    // Helper: Rotate 3D Point and Project to 2D Screen
+    function project3D(p, radius, cx, cy, fov = 600) {
+        const cosX = Math.cos(angleX);
+        const sinX = Math.sin(angleX);
+        const y1 = p.y * cosX - p.z * sinX;
+        const z1 = p.y * sinX + p.z * cosX;
+
+        const cosY = Math.cos(angleY);
+        const sinY = Math.sin(angleY);
+        const x2 = p.x * cosY + z1 * sinY;
+        const z2 = -p.x * sinY + z1 * cosY;
+
+        const scale = fov / (fov + (z2 * radius));
+        const projX = cx + (x2 * radius) * scale;
+        const projY = cy + (y1 * radius) * scale;
+
+        return {
+            projX, projY,
+            z: z2,
+            scale,
+            isFront: z2 > -0.15
+        };
+    }
+
+    // Helper: 3D Quadratic Bezier Curve interpolation
+    function get3DBezierPoint(p0, p1, p2, t) {
+        const invT = 1 - t;
+        return {
+            x: invT * invT * p0.x + 2 * invT * t * p1.x + t * t * p2.x,
+            y: invT * invT * p0.y + 2 * invT * t * p1.y + t * t * p2.y,
+            z: invT * invT * p0.z + 2 * invT * t * p1.z + t * t * p2.z
+        };
+    }
+
+    // ── LIFECYCLE & BATTERY OPTIMIZATION ────────────────────────────
+    let isPaused = false;
     document.addEventListener('visibilitychange', () => {
-        particlesPaused = document.hidden;
-        if (!particlesPaused) animate(); // Resume when tab comes back
+        isPaused = document.hidden;
+        if (!isPaused) requestAnimationFrame(renderLoop);
     }, { passive: true });
 
-    function animate() {
-        if (particlesPaused) return; // Pause when tab hidden — saves battery!
+    let globeOpacity = 0;
+
+    function renderLoop() {
+        if (isPaused) return;
+
+        angleY += ROTATION_SPEED;
+        scrollY += (targetScrollY - scrollY) * 0.08;
+        angleX = 0.28 + Math.sin(angleY * 0.4) * 0.08;
+
+        // Smooth scroll fade calculation for 3D Globe
+        const scrollFade = Math.min(1, Math.max(0, (scrollY - 70) / 200));
+        globeOpacity += (scrollFade - globeOpacity) * 0.08;
+
+        canvas.style.opacity = '1';
         ctx.clearRect(0, 0, width, height);
 
-        for (let i = 0; i < particles.length; i++) {
-            const p = particles[i];
-            p.x += p.vx;
-            p.y += p.vy;
+        // ══════════════════════════════════════════════════════════════
+        //  LAYER 1: Ambient Constellation Stars & Hero Particle Mesh
+        //  (Active on landing, smoothly disappears as 3D globe appears)
+        // ══════════════════════════════════════════════════════════════
+        const heroParticleOpacity = Math.max(0, 1 - globeOpacity * 1.25);
+        if (heroParticleOpacity > 0.01) {
+            for (let i = 0; i < ambientStars.length; i++) {
+                const p = ambientStars[i];
+                p.x += p.vx;
+                p.y += p.vy;
 
-            if (p.x < 0 || p.x > width) p.vx = -p.vx;
-            if (p.y < 0 || p.y > height) p.vy = -p.vy;
+                if (p.x < -15) p.x = width + 15;
+                if (p.x > width + 15) p.x = -15;
+                if (p.y < -15) p.y = height + 15;
+                if (p.y > height + 15) p.y = -15;
 
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(0, 255, 200, 0.45)';
-            ctx.fill();
+                // Render Dot
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.globalAlpha = p.alpha * heroParticleOpacity;
+                ctx.fill();
 
-            for (let j = i + 1; j < particles.length; j++) {
-                const p2 = particles[j];
-                const dx = p.x - p2.x;
-                const dy = p.y - p2.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-
-                if (dist < 90) {
-                    ctx.beginPath();
-                    ctx.moveTo(p.x, p.y);
-                    ctx.lineTo(p2.x, p2.y);
-                    ctx.strokeStyle = `rgba(0, 255, 200, ${0.15 * (1 - dist / 90)})`;
-                    ctx.lineWidth = 0.8;
-                    ctx.stroke();
+                // Connect nearby stars in hero view
+                for (let j = i + 1; j < ambientStars.length; j++) {
+                    const q = ambientStars[j];
+                    const dx = p.x - q.x;
+                    const dy = p.y - q.y;
+                    const dist = Math.hypot(dx, dy);
+                    if (dist < 115) {
+                        ctx.beginPath();
+                        ctx.moveTo(p.x, p.y);
+                        ctx.lineTo(q.x, q.y);
+                        ctx.strokeStyle = p.color;
+                        ctx.globalAlpha = (1 - dist / 115) * 0.16 * heroParticleOpacity;
+                        ctx.lineWidth = 0.75;
+                        ctx.stroke();
+                    }
                 }
             }
         }
-        requestAnimationFrame(animate);
+
+        // ══════════════════════════════════════════════════════════════
+        //  LAYER 2: 3D CYBER CLOUD GLOBE (EMERGES ON SCROLL)
+        // ══════════════════════════════════════════════════════════════
+        if (globeOpacity > 0.02) {
+            const cx = width * 0.5;
+            const cy = height * 0.52;
+            const radius = Math.min(width * 0.72, height * 0.46, 360);
+
+            // ── A. Atmospheric Halo Glow ──
+            const haloGrad = ctx.createRadialGradient(cx, cy, radius * 0.7, cx, cy, radius * 1.35);
+            haloGrad.addColorStop(0, 'rgba(0, 255, 200, ' + (0.05 * globeOpacity) + ')');
+            haloGrad.addColorStop(0.6, 'rgba(0, 180, 216, ' + (0.025 * globeOpacity) + ')');
+            haloGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            ctx.beginPath();
+            ctx.arc(cx, cy, radius * 1.35, 0, Math.PI * 2);
+            ctx.fillStyle = haloGrad;
+            ctx.globalAlpha = globeOpacity;
+            ctx.fill();
+
+            // ── B. Orbital Equatorial Ring ──
+            ctx.beginPath();
+            const ringSteps = 42;
+            for (let i = 0; i <= ringSteps; i++) {
+                const theta = (i / ringSteps) * Math.PI * 2;
+                const rx = Math.cos(theta);
+                const rz = Math.sin(theta);
+                const ringProj = project3D({ x: rx, y: 0, z: rz }, radius * 1.16, cx, cy);
+                if (i === 0) ctx.moveTo(ringProj.projX, ringProj.projY);
+                else ctx.lineTo(ringProj.projX, ringProj.projY);
+            }
+            ctx.strokeStyle = 'rgba(0, 255, 200, 0.16)';
+            ctx.lineWidth = 1.0;
+            ctx.setLineDash([4, 6]);
+            ctx.globalAlpha = globeOpacity * 0.7;
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+        // ── C. 3D Sphere Surface Point Cloud ──
+        for (let i = 0; i < spherePoints.length; i++) {
+            const sp = spherePoints[i];
+            const proj = project3D(sp, radius, cx, cy);
+
+            const depthAlpha = proj.isFront
+                ? sp.baseAlpha * (0.45 + proj.z * 0.55)
+                : sp.baseAlpha * 0.12;
+
+            const dotSize = Math.max(0.6, sp.size * proj.scale * (proj.isFront ? 1.0 : 0.65));
+
+            ctx.beginPath();
+            ctx.arc(proj.projX, proj.projY, dotSize, 0, Math.PI * 2);
+            ctx.fillStyle = sp.color;
+            ctx.globalAlpha = depthAlpha * globeOpacity;
+            ctx.fill();
+        }
+
+        // ── D. Projected Cloud Region Nodes ──
+        const projectedNodes = CLOUD_NODES.map(node => {
+            const vec = latLonToVector3D(node.lat, node.lon);
+            const proj = project3D(vec, radius, cx, cy);
+            return { ...node, vec, proj };
+        });
+
+        // ── E. 3D Curved Laser Data Arcs & Packets ──
+        ARCS.forEach(arc => {
+            const n1 = projectedNodes[arc.from];
+            const n2 = projectedNodes[arc.to];
+            if (!n1 || !n2) return;
+
+            const midVec = {
+                x: (n1.vec.x + n2.vec.x) * 0.5,
+                y: (n1.vec.y + n2.vec.y) * 0.5,
+                z: (n1.vec.z + n2.vec.z) * 0.5
+            };
+            const midLen = Math.sqrt(midVec.x * midVec.x + midVec.y * midVec.y + midVec.z * midVec.z) || 1;
+            const arcAltitude = 1.30;
+            const p1 = {
+                x: (midVec.x / midLen) * arcAltitude,
+                y: (midVec.y / midLen) * arcAltitude,
+                z: (midVec.z / midLen) * arcAltitude
+            };
+
+            ctx.beginPath();
+            const arcSteps = 18;
+            let isArcVisible = false;
+
+            for (let step = 0; step <= arcSteps; step++) {
+                const t = step / arcSteps;
+                const curve3D = get3DBezierPoint(n1.vec, p1, n2.vec, t);
+                const ptProj = project3D(curve3D, radius, cx, cy);
+
+                if (ptProj.isFront) isArcVisible = true;
+
+                if (step === 0) ctx.moveTo(ptProj.projX, ptProj.projY);
+                else ctx.lineTo(ptProj.projX, ptProj.projY);
+            }
+
+            ctx.strokeStyle = isArcVisible ? 'rgba(0, 255, 200, 0.24)' : 'rgba(0, 255, 200, 0.05)';
+            ctx.lineWidth = 1.2;
+            ctx.globalAlpha = globeOpacity * (isArcVisible ? 0.85 : 0.2);
+            ctx.stroke();
+
+            // Animate Glowing Laser Data Packets along Arc
+            arc.packets.forEach(pkt => {
+                pkt.t += pkt.speed;
+                if (pkt.t > 1.0) {
+                    pkt.t = 0.0;
+                    nodePings.push({
+                        nodeIdx: arc.to,
+                        radius: 3,
+                        maxRadius: 20,
+                        alpha: 1.0
+                    });
+                }
+
+                const pkt3D = get3DBezierPoint(n1.vec, p1, n2.vec, pkt.t);
+                const pktProj = project3D(pkt3D, radius, cx, cy);
+
+                if (pktProj.isFront) {
+                    ctx.beginPath();
+                    ctx.arc(pktProj.projX, pktProj.projY, 3.2 * pktProj.scale, 0, Math.PI * 2);
+                    ctx.fillStyle = '#fbbf24';
+                    ctx.globalAlpha = globeOpacity * 0.95;
+                    ctx.fill();
+
+                    ctx.beginPath();
+                    ctx.arc(pktProj.projX, pktProj.projY, 6.0 * pktProj.scale, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(251, 191, 36, 0.35)';
+                    ctx.fill();
+                }
+            });
+        });
+
+        // ── F. Cloud Nodes & HUD Badges ──
+        projectedNodes.forEach(node => {
+            if (node.proj.isFront) {
+                const nodeScale = node.proj.scale;
+                const dotRadius = Math.max(3.5, 5.0 * nodeScale);
+
+                ctx.beginPath();
+                ctx.arc(node.proj.projX, node.proj.projY, dotRadius, 0, Math.PI * 2);
+                ctx.fillStyle = node.color;
+                ctx.globalAlpha = globeOpacity * 0.98;
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.arc(node.proj.projX, node.proj.projY, dotRadius * 2.2, 0, Math.PI * 2);
+                ctx.strokeStyle = node.color;
+                ctx.lineWidth = 1.3;
+                ctx.globalAlpha = globeOpacity * 0.75;
+                ctx.stroke();
+
+                // High-Contrast HUD Tag Badge
+                const fontSize = Math.max(11, Math.floor(13 * nodeScale));
+                ctx.font = `800 ${fontSize}px "JetBrains Mono", monospace`;
+                const textWidth = ctx.measureText(node.id).width;
+                const tagX = node.proj.projX + dotRadius * 2.0;
+                const tagY = node.proj.projY - (fontSize * 0.5) - 3;
+
+                ctx.fillStyle = 'rgba(8, 11, 18, 0.85)';
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
+                ctx.lineWidth = 1.0;
+                ctx.beginPath();
+                if (ctx.roundRect) {
+                    ctx.roundRect(tagX - 4, tagY, textWidth + 8, fontSize + 6, 4);
+                } else {
+                    ctx.rect(tagX - 4, tagY, textWidth + 8, fontSize + 6);
+                }
+                ctx.globalAlpha = globeOpacity * 0.92;
+                ctx.fill();
+                ctx.stroke();
+
+                ctx.fillStyle = '#ffffff';
+                ctx.globalAlpha = globeOpacity * 1.0;
+                ctx.textBaseline = 'top';
+                ctx.fillText(node.id, tagX, tagY + 3);
+            }
+        });
+
+        // ── G. Radar Pulse Ping Waves ──
+        for (let p = nodePings.length - 1; p >= 0; p--) {
+            const ping = nodePings[p];
+            const targetNode = projectedNodes[ping.nodeIdx];
+
+            if (targetNode && targetNode.proj.isFront) {
+                ping.radius += 0.75;
+                ping.alpha -= 0.035;
+
+                if (ping.alpha <= 0 || ping.radius >= ping.maxRadius) {
+                    nodePings.splice(p, 1);
+                    continue;
+                }
+
+                ctx.beginPath();
+                ctx.arc(targetNode.proj.projX, targetNode.proj.projY, ping.radius, 0, Math.PI * 2);
+                ctx.strokeStyle = targetNode.color;
+                ctx.lineWidth = 1.4;
+                ctx.globalAlpha = ping.alpha * globeOpacity * 0.85;
+                ctx.stroke();
+            } else {
+                nodePings.splice(p, 1);
+            }
+        }
+        } // End of if (globeOpacity > 0.02)
+
+        ctx.globalAlpha = 1;
+        requestAnimationFrame(renderLoop);
     }
-    animate();
+
+    requestAnimationFrame(renderLoop);
 }
 
 // ── FEATURE 1: Scratch-Off Card with Multi-Talents ──────────────
@@ -2404,3 +2849,196 @@ function initMobileGames() {
         });
     }
 }
+
+// ── MOBILE QUICK CONNECT (3 Options with Collapsible Toggle) ──
+function initMobileQuickLinks() {
+    const triggerBtn = document.getElementById('mobileQuickLinkBtn');
+    const menu       = document.getElementById('mobileQuickLinkMenu');
+    const telegram   = document.getElementById('mqTelegramLink');
+    const instagram  = document.getElementById('mqInstagramLink');
+    const copyBtn    = document.getElementById('mqCopyEmailBtn');
+    const copyLabel  = document.getElementById('mqEmailText');
+    if (!triggerBtn || !menu) return;
+
+    // Load custom links from CONFIG
+    const cfg = window.CONFIG || {};
+    const tLink = cfg.telegramLink || (cfg.links && cfg.links.telegram) || 'https://t.me/theabhijaychauhan';
+    const iLink = cfg.instagramLink || (cfg.links && cfg.links.instagram) || 'https://instagram.com/theabhijaychauhan';
+    const email = cfg.email || 'abhijaychauhan007@gmail.com';
+
+    if (telegram) telegram.href = tLink;
+    if (instagram) instagram.href = iLink;
+
+    let isOpen = false;
+    triggerBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        isOpen = !isOpen;
+        triggerBtn.classList.toggle('open', isOpen);
+        triggerBtn.setAttribute('aria-expanded', String(isOpen));
+        
+        if (isOpen) {
+            menu.style.display = 'flex';
+            if (navigator.vibrate) navigator.vibrate(25);
+        } else {
+            menu.style.display = 'none';
+        }
+    });
+
+    if (copyBtn) {
+        copyBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            navigator.clipboard.writeText(email).then(() => {
+                if (navigator.vibrate) navigator.vibrate([30, 50, 30]);
+                if (copyLabel) copyLabel.textContent = 'Copied! ✓';
+                copyBtn.style.borderColor = 'var(--accent)';
+                copyBtn.style.color = 'var(--accent)';
+                showToast('📋 Email copied to clipboard!');
+                setTimeout(() => {
+                    if (copyLabel) copyLabel.textContent = 'Copy Email';
+                    copyBtn.style.borderColor = '';
+                    copyBtn.style.color = '';
+                }, 2400);
+            }).catch(() => {
+                showToast(email);
+            });
+        });
+    }
+}
+
+// ── DEVOPS MÖBIUS RIBBON ANIMATED FAVICON ENGINE (120 FPS) ──
+function initMobiusRibbonFavicon() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 64;
+    canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let link = document.querySelector("link[rel*='icon']");
+    if (!link) {
+        link = document.createElement('link');
+        link.rel = 'icon';
+        document.head.appendChild(link);
+    }
+
+    let isPaused = false;
+    document.addEventListener('visibilitychange', () => {
+        isPaused = document.hidden;
+        if (!isPaused) requestAnimationFrame(drawFavicon);
+    });
+
+    let lastDrawTime = 0;
+    const TARGET_INTERVAL = 1000 / 60; // 60-120 FPS adaptive
+
+    // Lemniscate of Gerono (Infinity Curve) Point Calculation
+    function getMobiusPoint(t, a = 20, b = 13) {
+        const x = 32 + a * Math.cos(t);
+        const y = 32 + b * Math.sin(2 * t) * 0.5;
+        return { x, y };
+    }
+
+    function drawFavicon(now) {
+        if (isPaused) return;
+
+        if (!lastDrawTime || now - lastDrawTime >= TARGET_INTERVAL) {
+            lastDrawTime = now;
+            const time = (now || performance.now()) * 0.0028;
+
+            ctx.clearRect(0, 0, 64, 64);
+
+            // 1. Dark Obsidian Rounded Squircle Container
+            ctx.beginPath();
+            if (ctx.roundRect) {
+                ctx.roundRect(2, 2, 60, 60, 16);
+            } else {
+                ctx.rect(2, 2, 60, 60);
+            }
+            ctx.fillStyle = '#060913';
+            ctx.fill();
+
+            // Gradient perimeter border
+            const rimGrad = ctx.createLinearGradient(0, 0, 64, 64);
+            rimGrad.addColorStop(0, '#00ffc8');
+            rimGrad.addColorStop(0.5, '#00f0ff');
+            rimGrad.addColorStop(1, '#fbbf24');
+            ctx.strokeStyle = rimGrad;
+            ctx.lineWidth = 2.2;
+            ctx.stroke();
+
+            // 2. Ambient Dual-Lobe Glow Aura
+            ctx.beginPath();
+            ctx.arc(22, 32, 12, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0, 255, 200, 0.12)';
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(42, 32, 12, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(251, 191, 36, 0.12)';
+            ctx.fill();
+
+            // 3. Draw 3D DevOps Mobius Infinity Ribbon Path
+            ctx.beginPath();
+            const totalSteps = 64;
+            for (let i = 0; i <= totalSteps; i++) {
+                const t = (i / totalSteps) * Math.PI * 2;
+                const pt = getMobiusPoint(t);
+                if (i === 0) ctx.moveTo(pt.x, pt.y);
+                else ctx.lineTo(pt.x, pt.y);
+            }
+            ctx.closePath();
+
+            // Gradient along the ribbon
+            const ribbonGrad = ctx.createLinearGradient(10, 32, 54, 32);
+            ribbonGrad.addColorStop(0, '#00ffc8');
+            ribbonGrad.addColorStop(0.48, '#00f0ff');
+            ribbonGrad.addColorStop(0.52, '#ffffff');
+            ribbonGrad.addColorStop(1, '#fbbf24');
+            ctx.strokeStyle = ribbonGrad;
+            ctx.lineWidth = 4.5;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+
+            // 4. Central Intersection Depth Highlight
+            ctx.beginPath();
+            ctx.arc(32, 32, 2.5, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+
+            // 5. Circulating High-Voltage Energy Photon Particle along Mobius Curve
+            const photonT = time % (Math.PI * 2);
+            const photonPt = getMobiusPoint(photonT);
+
+            // Photon Comet Tail (3 trail dots)
+            for (let trail = 3; trail >= 1; trail--) {
+                const trailT = (photonT - trail * 0.12 + Math.PI * 2) % (Math.PI * 2);
+                const trailPt = getMobiusPoint(trailT);
+                ctx.beginPath();
+                ctx.arc(trailPt.x, trailPt.y, 2.0 - trail * 0.4, 0, Math.PI * 2);
+                ctx.fillStyle = trailPt.x < 32 ? `rgba(0, 255, 200, ${0.4 - trail * 0.1})` : `rgba(251, 191, 36, ${0.4 - trail * 0.1})`;
+                ctx.fill();
+            }
+
+            // Photon Glow Halo
+            ctx.beginPath();
+            ctx.arc(photonPt.x, photonPt.y, 6.0, 0, Math.PI * 2);
+            ctx.fillStyle = photonPt.x < 32 ? 'rgba(0, 255, 200, 0.4)' : 'rgba(251, 191, 36, 0.4)';
+            ctx.fill();
+
+            // Photon Core
+            ctx.beginPath();
+            ctx.arc(photonPt.x, photonPt.y, 3.2, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+
+            link.href = canvas.toDataURL('image/png');
+        }
+
+        requestAnimationFrame(drawFavicon);
+    }
+
+    requestAnimationFrame(drawFavicon);
+}
+
+
+
