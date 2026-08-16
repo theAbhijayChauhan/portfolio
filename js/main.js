@@ -152,9 +152,9 @@ function populateSite() {
     // Certifications
     const certsGrid = document.getElementById('certsGrid');
     certsGrid.innerHTML = C.certifications.map((c, i) => `
-        <div class="cert-card reveal reveal-d${(i % 2) + 1}">
+        <div class="cert-card reveal reveal-d${(i % 2) + 1}" data-index="${i}">
             <div class="cert-icon" style="background:${c.iconColor}15; color:${c.iconColor}">
-                <i class="${c.icon}"></i>
+                ${i + 1}
             </div>
             <div>
                 <div class="cert-name">${c.name}</div>
@@ -476,7 +476,143 @@ window.addEventListener('DOMContentLoaded', () => {
     initNav();
     initSmoothScroll();
     initDesktopQuestions();
+    initCertificateVerification();
+    initMobiusRibbonFavicon();
 });
+
+// ── DEVOPS MÖBIUS RIBBON ANIMATED FAVICON ENGINE (120 FPS) ──
+function initMobiusRibbonFavicon() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 64;
+    canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let link = document.querySelector("link[rel*='icon']");
+    if (!link) {
+        link = document.createElement('link');
+        link.rel = 'icon';
+        document.head.appendChild(link);
+    }
+
+    let isPaused = false;
+    document.addEventListener('visibilitychange', () => {
+        isPaused = document.hidden;
+        if (!isPaused) requestAnimationFrame(drawFavicon);
+    });
+
+    let lastDrawTime = 0;
+    const TARGET_INTERVAL = 1000 / 60; // 60-120 FPS adaptive
+
+    // Lemniscate of Gerono (Infinity Curve) Point Calculation
+    function getMobiusPoint(t, a = 20, b = 13) {
+        const x = 32 + a * Math.cos(t);
+        const y = 32 + b * Math.sin(2 * t) * 0.5;
+        return { x, y };
+    }
+
+    function drawFavicon(now) {
+        if (isPaused) return;
+
+        if (!lastDrawTime || now - lastDrawTime >= TARGET_INTERVAL) {
+            lastDrawTime = now;
+            const time = (now || performance.now()) * 0.0028;
+
+            ctx.clearRect(0, 0, 64, 64);
+
+            // 1. Dark Obsidian Rounded Squircle Container
+            ctx.beginPath();
+            if (ctx.roundRect) {
+                ctx.roundRect(2, 2, 60, 60, 16);
+            } else {
+                ctx.rect(2, 2, 60, 60);
+            }
+            ctx.fillStyle = '#060913';
+            ctx.fill();
+
+            // Gradient perimeter border
+            const rimGrad = ctx.createLinearGradient(0, 0, 64, 64);
+            rimGrad.addColorStop(0, '#00ffc8');
+            rimGrad.addColorStop(0.5, '#00f0ff');
+            rimGrad.addColorStop(1, '#fbbf24');
+            ctx.strokeStyle = rimGrad;
+            ctx.lineWidth = 2.2;
+            ctx.stroke();
+
+            // 2. Ambient Dual-Lobe Glow Aura
+            ctx.beginPath();
+            ctx.arc(22, 32, 12, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(0, 255, 200, 0.12)';
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.arc(42, 32, 12, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(251, 191, 36, 0.12)';
+            ctx.fill();
+
+            // 3. Draw 3D DevOps Mobius Infinity Ribbon Path
+            ctx.beginPath();
+            const totalSteps = 64;
+            for (let i = 0; i <= totalSteps; i++) {
+                const t = (i / totalSteps) * Math.PI * 2;
+                const pt = getMobiusPoint(t);
+                if (i === 0) ctx.moveTo(pt.x, pt.y);
+                else ctx.lineTo(pt.x, pt.y);
+            }
+            ctx.closePath();
+
+            // Gradient along the ribbon
+            const ribbonGrad = ctx.createLinearGradient(10, 32, 54, 32);
+            ribbonGrad.addColorStop(0, '#00ffc8');
+            ribbonGrad.addColorStop(0.48, '#00f0ff');
+            ribbonGrad.addColorStop(0.52, '#ffffff');
+            ribbonGrad.addColorStop(1, '#fbbf24');
+            ctx.strokeStyle = ribbonGrad;
+            ctx.lineWidth = 4.5;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+
+            // 4. Central Intersection Depth Highlight
+            ctx.beginPath();
+            ctx.arc(32, 32, 2.5, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+
+            // 5. Circulating High-Voltage Energy Photon Particle along Mobius Curve
+            const photonT = time % (Math.PI * 2);
+            const photonPt = getMobiusPoint(photonT);
+
+            // Photon Comet Tail (3 trail dots)
+            for (let trail = 3; trail >= 1; trail--) {
+                const trailT = (photonT - trail * 0.12 + Math.PI * 2) % (Math.PI * 2);
+                const trailPt = getMobiusPoint(trailT);
+                ctx.beginPath();
+                ctx.arc(trailPt.x, trailPt.y, 2.0 - trail * 0.4, 0, Math.PI * 2);
+                ctx.fillStyle = trailPt.x < 32 ? `rgba(0, 255, 200, ${0.4 - trail * 0.1})` : `rgba(251, 191, 36, ${0.4 - trail * 0.1})`;
+                ctx.fill();
+            }
+
+            // Photon Glow Halo
+            ctx.beginPath();
+            ctx.arc(photonPt.x, photonPt.y, 6.0, 0, Math.PI * 2);
+            ctx.fillStyle = photonPt.x < 32 ? 'rgba(0, 255, 200, 0.4)' : 'rgba(251, 191, 36, 0.4)';
+            ctx.fill();
+
+            // Photon Core
+            ctx.beginPath();
+            ctx.arc(photonPt.x, photonPt.y, 3.2, 0, Math.PI * 2);
+            ctx.fillStyle = '#ffffff';
+            ctx.fill();
+
+            link.href = canvas.toDataURL('image/png');
+        }
+
+        requestAnimationFrame(drawFavicon);
+    }
+
+    requestAnimationFrame(drawFavicon);
+}
 
 // Hide loader with Cyberpunk Bootup Sequence
 window.addEventListener('load', () => {
@@ -516,6 +652,21 @@ window.addEventListener('load', () => {
         }, 600);
     }
 });
+
+// ── MODAL CONVEYOR ANIMATION HELPERS ──────────────────────
+function openModalConveyor(modal) {
+    if (!modal) return;
+    modal.classList.add('prep-left');
+    modal.classList.remove('active');
+    void modal.offsetWidth; // Force CSS reflow
+    modal.classList.remove('prep-left');
+    modal.classList.add('active');
+}
+
+function closeModalConveyor(modal) {
+    if (!modal) return;
+    modal.classList.remove('active');
+}
 
 // ── DESKTOP ASK ME ANYTHING TERMINAL ──────────────────────
 function initDesktopQuestions() {
@@ -608,11 +759,11 @@ function initDesktopQuestions() {
     };
 
     openBtn.addEventListener('click', () => {
-        modal.style.display = 'flex';
+        openModalConveyor(modal);
     });
-    closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
-    modal.addEventListener('click', e => { if (e.target === modal) modal.style.display = 'none'; });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.style.display === 'flex') modal.style.display = 'none'; });
+    closeBtn.addEventListener('click', () => { closeModalConveyor(modal); });
+    modal.addEventListener('click', e => { if (e.target === modal) closeModalConveyor(modal); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModalConveyor(modal); });
 
     modal.querySelectorAll('.dq-chat-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -632,4 +783,57 @@ function initDesktopQuestions() {
             });
         });
     });
+}
+
+// ── CERTIFICATE VERIFICATION MODAL ────────────────────────
+function initCertificateVerification() {
+    const cards = document.querySelectorAll('.cert-card');
+    const modal = document.getElementById('certModal');
+    const closeBtn = document.getElementById('closeCertModal');
+    const body = document.getElementById('certModalBody');
+    if (!modal || !closeBtn || !body) return;
+
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            const idx = parseInt(card.getAttribute('data-index'), 10);
+            const c = CONFIG.certifications[idx];
+            if (!c) return;
+
+            body.innerHTML = `
+                <div class="cert-verify-container">
+                    <div class="cert-image-wrapper">
+                        <img src="${c.image || 'assets/favicon.svg'}" alt="${c.name}" class="cert-image">
+                    </div>
+                    <h3 class="cert-verify-name">${c.name}</h3>
+                    <p class="cert-verify-issuer">Issued by: <strong>${c.issuer}</strong> (Issued ${c.date || c.year})</p>
+                    
+                    <div class="cert-verify-id-box">
+                        <span class="cert-verify-id-label">Verification ID:</span>
+                        <span class="cert-verify-id-value">${c.verificationId || 'N/A'}</span>
+                    </div>
+                    
+                    <h4 class="cert-verify-concepts-title">Core concepts covered:</h4>
+                    <div class="cert-verify-concepts-grid">
+                        ${c.concepts ? c.concepts.map(concept => `<span class="cert-verify-concept-tag">${concept}</span>`).join('') : '<span class="cert-verify-concept-tag">N/A</span>'}
+                    </div>
+                </div>
+            `;
+
+            openModalConveyor(modal);
+            if (typeof ParticleSystem !== 'undefined' && typeof ParticleSystem.boost === 'function') {
+                ParticleSystem.boost(true);
+            }
+        });
+    });
+
+    const closeModal = () => {
+        closeModalConveyor(modal);
+        if (typeof ParticleSystem !== 'undefined' && typeof ParticleSystem.boost === 'function') {
+            ParticleSystem.boost(false);
+        }
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
 }

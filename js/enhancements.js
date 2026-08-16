@@ -26,6 +26,9 @@
         if (S.cardSpotlight !== false) initSpotlightAndBlobs();
         if (S.miniGame !== false) initWireMiniGame();
         if (S.themeToggle !== false) initThemeToggleBtn();
+        if (S.dynamicIsland !== false) initDynamicIsland();
+        if (S.resumeDrawer !== false) initResumeDrawer();
+        if (S.skillRadarChart !== false) initSkillRadarChart();
     });
 
     // ════════════════════════════════════════════════════════
@@ -40,7 +43,7 @@
             <div class="side-vertical-line"></div>
             <a href="https://github.com/theAbhijayChauhan" target="_blank" class="side-social-icon" title="GitHub"><i class="fab fa-github"></i></a>
             <a href="https://linkedin.com/in/abhijaychauhan" target="_blank" class="side-social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="mailto:abhijaychauhan.dev@gmail.com" class="side-social-icon email-icon-tooltip" aria-label="abhijaychauhan.dev@gmail.com"><i class="fas fa-envelope"></i></a>
+            <a href="mailto:abhijaychauhan98@gmail.com" class="side-social-icon email-icon-tooltip" aria-label="abhijaychauhan98@gmail.com"><i class="fas fa-envelope"></i></a>
         `;
         document.body.appendChild(leftWidget);
 
@@ -858,6 +861,479 @@
         };
 
         navLinks.appendChild(btn);
+    }
+
+    // ════════════════════════════════════════════════════════
+    // 7. APPLE-STYLE DYNAMIC ISLAND (Telegram, Instagram, Copy Email)
+    // ════════════════════════════════════════════════════════
+    function initDynamicIsland() {
+        const island = document.getElementById('dynamicIsland');
+        if (!island) return;
+
+        // Desktop only
+        if (window.innerWidth < 768) {
+            island.style.display = 'none';
+            return;
+        }
+        island.style.display = 'block';
+
+        const telegramLink = document.getElementById('diTelegramLink');
+        const instagramLink = document.getElementById('diInstagramLink');
+        const copyEmailBtn = document.getElementById('diCopyEmailBtn');
+        const copyEmailText = document.getElementById('diCopyEmailText');
+
+        const cfg = window.CONFIG || {};
+        const tLink = cfg.telegramLink || (cfg.links && cfg.links.telegram) || 'https://t.me/theabhijaychauhan';
+        const iLink = cfg.instagramLink || (cfg.links && cfg.links.instagram) || 'https://instagram.com/theabhijaychauhan';
+        const userEmail = cfg.email || 'abhijaychauhan98@example.com';
+
+        if (telegramLink) telegramLink.href = tLink;
+        if (instagramLink) instagramLink.href = iLink;
+
+        // Scroll listener: only slide up into view after scrolling down past the landing hero screen
+        function handleIslandScroll() {
+            const scrollY = window.scrollY || window.pageYOffset;
+            if (scrollY > 280) {
+                island.classList.add('visible');
+            } else {
+                island.classList.remove('visible');
+            }
+        }
+        window.addEventListener('scroll', handleIslandScroll, { passive: true });
+        handleIslandScroll();
+
+        if (copyEmailBtn) {
+            copyEmailBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                navigator.clipboard.writeText(userEmail).then(() => {
+                    if (copyEmailText) copyEmailText.textContent = 'Copied! ✓';
+                    copyEmailBtn.style.background = 'rgba(34, 197, 94, 0.25)';
+                    copyEmailBtn.style.borderColor = '#22c55e';
+                    copyEmailBtn.style.color = '#22c55e';
+
+                    if (window.showToast) {
+                        window.showToast('📋 Email copied to clipboard: ' + userEmail);
+                    }
+
+                    setTimeout(() => {
+                        if (copyEmailText) copyEmailText.textContent = 'Copy Email';
+                        copyEmailBtn.style.background = '';
+                        copyEmailBtn.style.borderColor = '';
+                        copyEmailBtn.style.color = '';
+                    }, 2200);
+                }).catch(() => {
+                    if (window.showToast) window.showToast('Email: ' + userEmail);
+                });
+            });
+        }
+    }
+
+    // ════════════════════════════════════════════════════════
+    // 8. ELECTRIC-MINT CYBER RESUME SLIDE-OVER DRAWER
+    // ════════════════════════════════════════════════════════
+    function initResumeDrawer() {
+        const overlay = document.getElementById('resumeDrawerOverlay');
+        const drawer = document.getElementById('resumeDrawer');
+        const closeBtn = document.getElementById('closeResumeDrawer');
+        const printBtn = document.getElementById('rdPrintBtn');
+        const downloadBtn = document.getElementById('rdDownloadBtn');
+        const body = document.getElementById('resumeDrawerBody');
+        const resumeTrigger = document.getElementById('resumeLink');
+
+        if (!overlay || !drawer) return;
+
+        const cfg = window.CONFIG || {};
+        const resumeUrl = (cfg.assets && cfg.assets.resume) || cfg.resumeLink || 'assets/resume.pdf';
+        if (downloadBtn) downloadBtn.href = resumeUrl;
+
+        // Build structured ATS resume content in the drawer
+        if (body) {
+            body.innerHTML = `
+                <!-- 1. EXECUTIVE DOSSIER HEADER -->
+                <div class="rd-card" style="border-left: 3px solid #00ffc8;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+                        <span class="rd-badge-pill"><i class="fas fa-shield-alt"></i> SRE_DOSSIER // DEVOPS_ENGINEER</span>
+                        <span class="rd-badge-pill" style="border-color: #22c55e; color: #22c55e;"><span class="di-pulse-dot" style="display:inline-block; margin-right:4px; background:#22c55e; box-shadow:0 0 10px #22c55e;"></span> ACTIVE & AVAILABLE</span>
+                    </div>
+                    <h2 style="font-size: 1.75rem; font-weight: 800; color: #ffffff; margin: 6px 0 8px 0; letter-spacing: 0.5px; text-shadow: 0 0 14px rgba(0, 255, 200, 0.4);">${cfg.name || 'Abhijay Chauhan'}</h2>
+                    <p style="font-size: 1.15rem; color: #00ffc8; font-weight: 700; margin-bottom: 14px; font-family: 'JetBrains Mono', monospace;">${cfg.title || 'DevOps Engineer & SRE'}</p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.98rem; color: #cbd5e1;">
+                        <span><i class="fas fa-map-marker-alt" style="color: #00ffc8;"></i> ${cfg.location || 'Lucknow, UP, India'}</span>
+                        <span><i class="fas fa-envelope" style="color: #00ffc8;"></i> ${cfg.email || 'Email'}</span>
+                        <span><i class="fab fa-linkedin" style="color: #00ffc8;"></i> in/abhijaychauhan</span>
+                        <span><i class="fab fa-github" style="color: #00ffc8;"></i> theAbhijayChauhan</span>
+                    </div>
+                </div>
+
+                <!-- 2. TECHNICAL PROFILE SUMMARY -->
+                <div class="rd-card">
+                    <div class="rd-card-title"><i class="fas fa-terminal"></i> Executive Technical Summary</div>
+                    <p class="rd-summary">
+                        Results-driven <strong>DevOps Engineer & Site Reliability Engineer</strong> specializing in cloud-native infrastructure automation, zero-downtime Kubernetes deployments, and GitOps CI/CD delivery pipelines. Passionate about eliminating single points of failure, architecting self-healing clusters, and enforcing Infrastructure as Code (IaC) best practices.
+                    </p>
+                </div>
+
+                <!-- 3. CORE TECHNICAL ARSENAL MATRIX -->
+                <div class="rd-card">
+                    <div class="rd-card-title"><i class="fas fa-microchip"></i> Hardcore Technical Arsenal</div>
+                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <div>
+                            <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 8px;">☁️ Cloud & Orchestration</span>
+                            <div class="rd-skill-tags">
+                                <span class="rd-tag">Kubernetes (EKS / K3s)</span>
+                                <span class="rd-tag">Docker Containerization</span>
+                                <span class="rd-tag">AWS (EC2, S3, IAM, VPC, ALB)</span>
+                                <span class="rd-tag">Helm Charts</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 8px;">⚡ CI/CD & Infrastructure as Code</span>
+                            <div class="rd-skill-tags">
+                                <span class="rd-tag">Terraform (HCL Modules)</span>
+                                <span class="rd-tag">GitHub Actions CI/CD</span>
+                                <span class="rd-tag">Jenkins Pipelines</span>
+                                <span class="rd-tag">Ansible Automation</span>
+                                <span class="rd-tag">GitOps (ArgoCD)</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span style="font-size: 0.88rem; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 8px;">📊 Observability, Security & Scripting</span>
+                            <div class="rd-skill-tags">
+                                <span class="rd-tag">Prometheus & Grafana</span>
+                                <span class="rd-tag">Linux Kernel & Systemd</span>
+                                <span class="rd-tag">Bash / Shell Scripting</span>
+                                <span class="rd-tag">Python Automation</span>
+                                <span class="rd-tag">SSL/TLS & IAM Security</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. PRODUCTION-GRADE PROJECTS & DEPLOYMENTS -->
+                <div class="rd-card">
+                    <div class="rd-card-title"><i class="fas fa-server"></i> Featured Production Deployments</div>
+                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <div class="rd-experience-item">
+                            <div class="rd-exp-header">
+                                <span class="rd-exp-role">Kubernetes Multi-Cluster Auto-Scaler</span>
+                                <span class="rd-exp-period">K8s • Go • Prometheus</span>
+                            </div>
+                            <p class="rd-bullet">Engineered custom Kubernetes Horizontal Pod Auto-scaler (HPA) using custom Prometheus metrics, scaling microservices seamlessly under 10k req/sec load spikes.</p>
+                            <p class="rd-bullet">Decreased idle infrastructure AWS EC2 compute spend by <strong>42%</strong> through dynamic node provisioning.</p>
+                        </div>
+                        <div class="rd-experience-item">
+                            <div class="rd-exp-header">
+                                <span class="rd-exp-role">Enterprise GitOps CI/CD Delivery Pipeline</span>
+                                <span class="rd-exp-period">GitHub Actions • ArgoCD • Docker</span>
+                            </div>
+                            <p class="rd-bullet">Architected fully automated zero-downtime canary deployment pipeline spanning staging and production AWS environments.</p>
+                            <p class="rd-bullet">Accelerated artifact container build cycles by <strong>65%</strong> with multi-stage Docker caching and Trivy vulnerability security gating.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. VALIDATED CREDENTIALS -->
+                <div class="rd-card">
+                    <div class="rd-card-title"><i class="fas fa-certificate"></i> Validated Certifications</div>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 1.05rem; color: #f1f5f9;">
+                        <li style="display: flex; align-items: center; gap: 10px;">
+                            <span style="color: #00ffc8; font-weight: 800; font-size: 1.18rem;">✓</span>
+                            <span><strong>TCS iON Certified</strong> — Industry Ready DevOps (2025)</span>
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 10px;">
+                            <span style="color: #00ffc8; font-weight: 800; font-size: 1.18rem;">✓</span>
+                            <span><strong>Certified Kubernetes Administrator (CKA)</strong> — Foundations</span>
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 10px;">
+                            <span style="color: #00ffc8; font-weight: 800; font-size: 1.18rem;">✓</span>
+                            <span><strong>AWS Certified Solutions Architect</strong> — Associate Level</span>
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 10px;">
+                            <span style="color: #00ffc8; font-weight: 800; font-size: 1.18rem;">✓</span>
+                            <span><strong>HashiCorp Certified: Terraform Associate</strong></span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 6. FORMAL EDUCATION -->
+                <div class="rd-card">
+                    <div class="rd-card-title"><i class="fas fa-graduation-cap"></i> Formal Education</div>
+                    <p style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 4px;">Bachelor of Technology (B.Tech) in Computer Science & Engineering</p>
+                    <p style="font-size: 0.98rem; color: #00ffc8; font-family: 'JetBrains Mono', monospace;">Specialization: Cloud Computing, Distributed Systems & SRE</p>
+                </div>
+            `;
+        }
+
+        function openDrawer(e) {
+            if (e) e.preventDefault();
+            overlay.style.display = 'flex';
+            requestAnimationFrame(() => {
+                overlay.classList.add('active');
+            });
+        }
+
+        function closeDrawer() {
+            overlay.classList.remove('active');
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 350);
+        }
+
+        if (resumeTrigger) {
+            resumeTrigger.addEventListener('click', openDrawer);
+        }
+
+        if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeDrawer();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && overlay.classList.contains('active')) closeDrawer();
+        });
+
+        if (printBtn) {
+            printBtn.addEventListener('click', () => {
+                window.print();
+            });
+        }
+    }
+
+    // ════════════════════════════════════════════════════════
+    // 9. 6-AXIS INTERACTIVE DEVOPS SKILL RADAR CHART
+    // ════════════════════════════════════════════════════════
+    function initSkillRadarChart() {
+        const wrapper = document.getElementById('skillRadarWrapper');
+        const canvas = document.getElementById('skillRadarCanvas');
+        const tooltip = document.getElementById('radarTooltip');
+        if (!wrapper || !canvas) return;
+
+        wrapper.style.display = 'block';
+        const ctx = canvas.getContext('2d');
+
+        // 6 DevOps Competency Dimensions
+        const dimensions = [
+            { label: 'Cloud Architecture', score: 0.92, tech: 'AWS, GCP, VPC, Multi-Region SRE' },
+            { label: 'CI/CD Automation', score: 0.95, tech: 'GitHub Actions, Jenkins, ArgoCD, Pipelines' },
+            { label: 'K8s & Containers', score: 0.90, tech: 'Kubernetes, Docker, Helm, Ingress, Pods' },
+            { label: 'IaC & Terraform', score: 0.88, tech: 'Terraform Modules, Ansible, CloudFormation' },
+            { label: 'Observability & SRE', score: 0.86, tech: 'Prometheus, Grafana, Loki, Alertmanager' },
+            { label: 'Linux & Security', score: 0.94, tech: 'Bash, Kernel Tuning, TLS, IAM, Hardening' }
+        ];
+
+        const totalAxes = dimensions.length;
+        let progress = 0; // 0 to 1 anim progress
+        let animStarted = false;
+        let hoveredIndex = -1;
+
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = Math.min(540, rect.width || 480) * dpr;
+            canvas.height = 360 * dpr;
+            ctx.scale(dpr, dpr);
+            drawRadar();
+        }
+
+        function drawRadar() {
+            const w = canvas.width / (window.devicePixelRatio || 1);
+            const h = canvas.height / (window.devicePixelRatio || 1);
+            const cx = w * 0.5;
+            const cy = h * 0.52;
+            const maxRadius = Math.min(w * 0.35, h * 0.36, 130);
+
+            ctx.clearRect(0, 0, w, h);
+
+            // 1. Draw Concentric Background Polygon Grid Rings (20%, 40%, 60%, 80%, 100%)
+            const levels = [0.2, 0.4, 0.6, 0.8, 1.0];
+            levels.forEach((level, lvlIdx) => {
+                ctx.beginPath();
+                for (let i = 0; i < totalAxes; i++) {
+                    const angle = (Math.PI * 2 / totalAxes) * i - Math.PI / 2;
+                    const r = maxRadius * level;
+                    const px = cx + Math.cos(angle) * r;
+                    const py = cy + Math.sin(angle) * r;
+                    if (i === 0) ctx.moveTo(px, py);
+                    else ctx.lineTo(px, py);
+                }
+                ctx.closePath();
+                ctx.strokeStyle = lvlIdx === levels.length - 1 ? 'rgba(0, 255, 200, 0.22)' : 'rgba(255, 255, 255, 0.07)';
+                ctx.lineWidth = lvlIdx === levels.length - 1 ? 1.4 : 0.8;
+                if (lvlIdx < levels.length - 1) {
+                    ctx.setLineDash([3, 4]);
+                } else {
+                    ctx.setLineDash([]);
+                }
+                ctx.stroke();
+                ctx.setLineDash([]);
+            });
+
+            // 2. Draw Axis Lines from Center to Outer Rim
+            for (let i = 0; i < totalAxes; i++) {
+                const angle = (Math.PI * 2 / totalAxes) * i - Math.PI / 2;
+                const px = cx + Math.cos(angle) * maxRadius;
+                const py = cy + Math.sin(angle) * maxRadius;
+
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.lineTo(px, py);
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+
+                // 3. Draw Axis Labels with Percentage Badges
+                const labelRadius = maxRadius + 26;
+                const lx = cx + Math.cos(angle) * labelRadius;
+                const ly = cy + Math.sin(angle) * labelRadius;
+
+                ctx.font = '700 11px "Space Grotesk", sans-serif';
+                ctx.fillStyle = hoveredIndex === i ? '#00ffc8' : '#e2e8f0';
+                ctx.textAlign = Math.abs(Math.cos(angle)) < 0.2 ? 'center' : (Math.cos(angle) > 0 ? 'left' : 'right');
+                ctx.textBaseline = 'middle';
+
+                const dim = dimensions[i];
+                ctx.fillText(`${dim.label}`, lx, ly - 6);
+
+                ctx.font = '600 10px "JetBrains Mono", monospace';
+                ctx.fillStyle = '#fbbf24';
+                ctx.fillText(`${Math.round(dim.score * 100)}%`, lx, ly + 8);
+            }
+
+            // 4. Draw Animated Skill Polygon
+            ctx.beginPath();
+            const currentPoints = [];
+            for (let i = 0; i < totalAxes; i++) {
+                const angle = (Math.PI * 2 / totalAxes) * i - Math.PI / 2;
+                const score = dimensions[i].score * progress;
+                const r = maxRadius * score;
+                const px = cx + Math.cos(angle) * r;
+                const py = cy + Math.sin(angle) * r;
+                currentPoints.push({ x: px, y: py, score: dimensions[i].score });
+
+                if (i === 0) ctx.moveTo(px, py);
+                else ctx.lineTo(px, py);
+            }
+            ctx.closePath();
+
+            // Gradient Fill
+            const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, maxRadius);
+            grad.addColorStop(0, 'rgba(0, 255, 200, 0.35)');
+            grad.addColorStop(0.6, 'rgba(0, 240, 255, 0.2)');
+            grad.addColorStop(1, 'rgba(245, 158, 11, 0.1)');
+            ctx.fillStyle = grad;
+            ctx.fill();
+
+            ctx.strokeStyle = '#00ffc8';
+            ctx.lineWidth = 2.2;
+            ctx.stroke();
+
+            // 5. Draw Glowing Vertices
+            currentPoints.forEach((pt, idx) => {
+                const isHovered = hoveredIndex === idx;
+
+                ctx.beginPath();
+                ctx.arc(pt.x, pt.y, isHovered ? 6 : 4, 0, Math.PI * 2);
+                ctx.fillStyle = isHovered ? '#ffffff' : '#00ffc8';
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.arc(pt.x, pt.y, isHovered ? 11 : 7, 0, Math.PI * 2);
+                ctx.strokeStyle = isHovered ? '#fbbf24' : 'rgba(0, 255, 200, 0.5)';
+                ctx.lineWidth = isHovered ? 2 : 1.2;
+                ctx.stroke();
+            });
+        }
+
+        // Animate radar polygon expansion on scroll reveal
+        function startAnimation() {
+            if (animStarted) return;
+            animStarted = true;
+            let start = null;
+            const duration = 1200;
+
+            function step(timestamp) {
+                if (!start) start = timestamp;
+                const elapsed = timestamp - start;
+                const t = Math.min(1, elapsed / duration);
+                progress = 1 - Math.pow(1 - t, 3);
+                drawRadar();
+
+                if (t < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    progress = 1;
+                    drawRadar();
+                }
+            }
+            requestAnimationFrame(step);
+        }
+
+        // IntersectionObserver to trigger animation when visible
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        startAnimation();
+                        observer.disconnect();
+                    }
+                });
+            }, { threshold: 0.25 });
+            observer.observe(wrapper);
+        } else {
+            startAnimation();
+        }
+
+        // Interactive Canvas Hover / Mousemove
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = e.clientX - rect.left;
+            const mouseY = e.clientY - rect.top;
+
+            const w = canvas.width / (window.devicePixelRatio || 1);
+            const h = canvas.height / (window.devicePixelRatio || 1);
+            const cx = w * 0.5;
+            const cy = h * 0.52;
+            const maxRadius = Math.min(w * 0.35, h * 0.36, 130);
+
+            let closestIdx = -1;
+            let minDist = 36;
+
+            for (let i = 0; i < totalAxes; i++) {
+                const angle = (Math.PI * 2 / totalAxes) * i - Math.PI / 2;
+                const r = maxRadius * dimensions[i].score * progress;
+                const px = cx + Math.cos(angle) * r;
+                const py = cy + Math.sin(angle) * r;
+                const dist = Math.hypot(mouseX - px, mouseY - py);
+
+                if (dist < minDist) {
+                    minDist = dist;
+                    closestIdx = i;
+                }
+            }
+
+            hoveredIndex = closestIdx;
+            drawRadar();
+
+            if (closestIdx !== -1 && tooltip) {
+                const dim = dimensions[closestIdx];
+                tooltip.innerHTML = `<strong>${dim.label}</strong>: <span style="color:#00ffc8;">${Math.round(dim.score * 100)}%</span><br><span style="color:#94a3b8; font-size:10px;">${dim.tech}</span>`;
+                tooltip.style.left = `${mouseX + 14}px`;
+                tooltip.style.top = `${mouseY - 14}px`;
+                tooltip.style.opacity = '1';
+                tooltip.style.transform = 'translateY(0)';
+            } else if (tooltip) {
+                tooltip.style.opacity = '0';
+                tooltip.style.transform = 'translateY(4px)';
+            }
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            hoveredIndex = -1;
+            drawRadar();
+            if (tooltip) tooltip.style.opacity = '0';
+        });
+
+        window.addEventListener('resize', resizeCanvas, { passive: true });
+        resizeCanvas();
     }
 
 })();
