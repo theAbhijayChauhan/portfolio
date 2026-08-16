@@ -100,9 +100,9 @@ const CONFIG = {
     name: "Abhijay Chauhan",
     initials: "theAbhijay",                          // 2-3 letters for top nav logo
     title: "DevOps Engineer & SRE",
-    tagline: "Fresher with a professional mindset — automating everything, breaking nothing, and building infrastructure that just works.",
-    email: "abhijaychauhan98@example.com",
-    phone: "+91 92501 XXXXX",
+    tagline: "Building reliable software, analyzing data, and turning complex problems into practical solutions.",
+    email: "abhijaychauhan.dev@gmail.com",
+    phone: "+91 92XXX XXX48",
     location: "Lucknow, Uttar Pradesh, India",
     available: true,                         // true = shows "Open to opportunities" badge
     instagramLink: "https://instagram.com/theabhijaychauhan",
@@ -157,10 +157,10 @@ const CONFIG = {
         name: "Abhijay Chauhan",
         role: "DevOps Engineer & SRE",
         location: "Lucknow, Uttar Pradesh, India",
-        email: "abhijaychauhan98@gmail.com",
+        email: "abhijaychauhan.dev@gmail.com",
         education: "B.Tech in Computer Science",
-        languages: ["Python", "Git", "Shell", "Docker"],
-        interests: ["Kubernetes", "CI/CD", "Cloud Native", "Observability"],
+        languages: ["Python", "C", "HTML5", "CSS3"],
+        interests: ["Docker", "CI/CD", "Cloud Native & Containerization", "Observability"],
     },
 
     // ── SKILLS ─────────────────────────────────────────────
@@ -185,8 +185,8 @@ const CONFIG = {
             year: "2023 — 2027",
             gpa: "8.5 / 10",
             highlights: [
-                "Relevant coursework: Operating Systems, Computer Networks, Cloud Computing, DBMS",
-                "Published a paper on container orchestration in XYZ Journal",
+                "Interested Subjects: Operating Systems, Computer Networks, Cloud Computing, DBMS",
+                "Published a paper on container orchestration in College Paper Fest",
                 "Led the college Cloud Computing Club",
             ],
         },
@@ -194,8 +194,11 @@ const CONFIG = {
             degree: "Higher Secondary (XII) — Science (PCM + CS)",
             institution: "St. Joseph Montessori School",
             year: "2021 — 2023",
-            gpa: "82%",
-            highlights: [],
+            gpa: "7.2 / 10",
+            highlights: [
+                "Vice-Captain of the Cricket Team",
+                "And more !"
+            ],
         },
     ],
 

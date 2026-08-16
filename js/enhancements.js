@@ -43,7 +43,7 @@
             <div class="side-vertical-line"></div>
             <a href="https://github.com/theAbhijayChauhan" target="_blank" class="side-social-icon" title="GitHub"><i class="fab fa-github"></i></a>
             <a href="https://linkedin.com/in/abhijaychauhan" target="_blank" class="side-social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="mailto:abhijaychauhan98@gmail.com" class="side-social-icon email-icon-tooltip" aria-label="abhijaychauhan98@gmail.com"><i class="fas fa-envelope"></i></a>
+            <a href="mailto:abhijaychauhan.dev@gmail.com" class="side-social-icon email-icon-tooltip" aria-label="abhijaychauhan.dev@gmail.com"><i class="fas fa-envelope"></i></a>
         `;
         document.body.appendChild(leftWidget);
 
@@ -885,7 +885,7 @@
         const cfg = window.CONFIG || {};
         const tLink = cfg.telegramLink || (cfg.links && cfg.links.telegram) || 'https://t.me/theabhijaychauhan';
         const iLink = cfg.instagramLink || (cfg.links && cfg.links.instagram) || 'https://instagram.com/theabhijaychauhan';
-        const userEmail = cfg.email || 'abhijaychauhan98@example.com';
+        const userEmail = cfg.email || 'abhijaychauhan.dev@gmail.com';
 
         if (telegramLink) telegramLink.href = tLink;
         if (instagramLink) instagramLink.href = iLink;

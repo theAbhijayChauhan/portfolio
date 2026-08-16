@@ -1000,10 +1000,10 @@ function initMobileParticles() {
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
-    // ── ROTATION STATE (FAST LIVELY 3D GLOBE ROTATION) ──
+    // ── ROTATION STATE (FAST DYNAMIC 3D GLOBE ROTATION) ──
     let angleX = 0.30;
     let angleY = 0.0;
-    const ROTATION_SPEED = 0.0036;
+    const ROTATION_SPEED = 0.0042;
 
     let scrollY = window.scrollY || 0;
     let targetScrollY = scrollY;
@@ -1027,8 +1027,8 @@ function initMobileParticles() {
         });
     }
 
-    // ── 2. 3D FIBONACCI SPHERE POINT CLOUD (VIBRANT & CRYSTAL CLEAR) ──
-    const TOTAL_POINTS = 420;
+    // ── 2. 3D FIBONACCI SPHERE POINT CLOUD (VIBRANT NEON GLOW) ──
+    const TOTAL_POINTS = 450;
     const spherePoints = [];
     const phi = Math.PI * (3 - Math.sqrt(5)); // Golden angle
 
@@ -1042,8 +1042,8 @@ function initMobileParticles() {
 
         spherePoints.push({
             x, y, z,
-            baseAlpha: Math.random() * 0.35 + 0.65,
-            size: Math.random() * 1.3 + 0.9,
+            baseAlpha: Math.random() * 0.35 + 0.70,
+            size: Math.random() * 1.4 + 1.0,
             color: Math.random() > 0.85 ? '#fbbf24' : (Math.random() > 0.4 ? '#00ffc8' : '#00f0ff')
         });
     }
@@ -1067,40 +1067,40 @@ function initMobileParticles() {
         { id: 'CAC1', label: 'CA-CENTRAL (MTL)',  lat: 45.5,  lon: -73.5,  color: '#00ffc8' }  // 14
     ];
 
-    // ── 4. MULTI-DIRECTIONAL 3D LASER DATA ARCS (1.60X SPEED TUNING) ──
+    // ── 4. MULTI-DIRECTIONAL 3D LASER DATA ARCS ──
     const ARCS = [
-        { from: 0, to: 3, packets: [{ t: 0.1, speed: 0.0025 }, { t: 0.6, speed: 0.0025 }] }, // US-East <-> Frankfurt
-        { from: 0, to: 4, packets: [{ t: 0.25, speed: 0.0024 }, { t: 0.75, speed: 0.0024 }] }, // US-East <-> London
-        { from: 0, to: 1, packets: [{ t: 0.05, speed: 0.0030 }, { t: 0.55, speed: 0.0030 }] }, // US-East <-> US-West
-        { from: 0, to: 2, packets: [{ t: 0.3, speed: 0.0032 }] },                            // US-East <-> Ohio
-        { from: 0, to: 14, packets: [{ t: 0.4, speed: 0.0028 }] },                           // US-East <-> Montreal
-        { from: 0, to: 11, packets: [{ t: 0.2, speed: 0.0024 }, { t: 0.7, speed: 0.0024 }] }, // US-East <-> São Paulo
-        { from: 14, to: 4, packets: [{ t: 0.2, speed: 0.0027 }, { t: 0.7, speed: 0.0027 }] }, // Montreal <-> London
-        { from: 14, to: 1, packets: [{ t: 0.35, speed: 0.0028 }] },                          // Montreal <-> US-West
-        { from: 11, to: 1, packets: [{ t: 0.45, speed: 0.0024 }] },                          // São Paulo <-> US-West
-        { from: 11, to: 13, packets: [{ t: 0.5, speed: 0.0022 }, { t: 0.95, speed: 0.0022 }] }, // São Paulo <-> Cape Town
-        { from: 3, to: 4, packets: [{ t: 0.15, speed: 0.0035 }, { t: 0.65, speed: 0.0035 }] }, // Frankfurt <-> London
-        { from: 3, to: 5, packets: [{ t: 0.35, speed: 0.0028 }, { t: 0.85, speed: 0.0028 }] }, // Frankfurt <-> Stockholm
-        { from: 4, to: 5, packets: [{ t: 0.2, speed: 0.0032 }] },                            // London <-> Stockholm
-        { from: 3, to: 12, packets: [{ t: 0.1, speed: 0.0025 }, { t: 0.6, speed: 0.0025 }] }, // Frankfurt <-> Bahrain
-        { from: 4, to: 12, packets: [{ t: 0.4, speed: 0.0024 }] },                           // London <-> Bahrain
-        { from: 3, to: 13, packets: [{ t: 0.3, speed: 0.0024 }, { t: 0.8, speed: 0.0024 }] }, // Frankfurt <-> Cape Town
-        { from: 12, to: 13, packets: [{ t: 0.25, speed: 0.0025 }] },                         // Bahrain <-> Cape Town
-        { from: 12, to: 6, packets: [{ t: 0.3, speed: 0.0028 }, { t: 0.8, speed: 0.0028 }] }, // Bahrain <-> Mumbai
-        { from: 3, to: 6, packets: [{ t: 0.2, speed: 0.0024 }, { t: 0.7, speed: 0.0024 }] },  // Frankfurt <-> Mumbai
-        { from: 6, to: 7, packets: [{ t: 0.05, speed: 0.0028 }, { t: 0.55, speed: 0.0028 }] }, // Mumbai <-> Singapore
-        { from: 6, to: 9, packets: [{ t: 0.35, speed: 0.0024 }] },                           // Mumbai <-> Seoul
-        { from: 7, to: 8, packets: [{ t: 0.4, speed: 0.0027 }, { t: 0.9, speed: 0.0027 }] },  // Singapore <-> Tokyo
-        { from: 7, to: 10, packets: [{ t: 0.25, speed: 0.0025 }, { t: 0.75, speed: 0.0025 }] }, // Singapore <-> Sydney
-        { from: 8, to: 9, packets: [{ t: 0.2, speed: 0.0035 }, { t: 0.7, speed: 0.0035 }] }, // Tokyo <-> Seoul
-        { from: 8, to: 10, packets: [{ t: 0.1, speed: 0.0024 }, { t: 0.6, speed: 0.0024 }] }, // Tokyo <-> Sydney
-        { from: 9, to: 10, packets: [{ t: 0.45, speed: 0.0024 }] },                          // Seoul <-> Sydney
-        { from: 1, to: 8, packets: [{ t: 0.15, speed: 0.0022 }, { t: 0.65, speed: 0.0022 }] }, // US-West <-> Tokyo
-        { from: 1, to: 9, packets: [{ t: 0.3, speed: 0.0024 }] },                            // US-West <-> Seoul
-        { from: 1, to: 10, packets: [{ t: 0.45, speed: 0.0022 }, { t: 0.9, speed: 0.0022 }] }, // US-West <-> Sydney
-        { from: 13, to: 10, packets: [{ t: 0.2, speed: 0.0022 }] },                          // Cape Town <-> Sydney
-        { from: 5, to: 8, packets: [{ t: 0.15, speed: 0.0022 }] },                           // Stockholm <-> Tokyo
-        { from: 2, to: 4, packets: [{ t: 0.35, speed: 0.0027 }] }                            // Ohio <-> London
+        { from: 0, to: 3, packets: [{ t: 0.1, speed: 0.0035 }, { t: 0.6, speed: 0.0035 }] }, // US-East <-> Frankfurt
+        { from: 0, to: 4, packets: [{ t: 0.25, speed: 0.0032 }, { t: 0.75, speed: 0.0032 }] }, // US-East <-> London
+        { from: 0, to: 1, packets: [{ t: 0.05, speed: 0.0038 }, { t: 0.55, speed: 0.0038 }] }, // US-East <-> US-West
+        { from: 0, to: 2, packets: [{ t: 0.3, speed: 0.0040 }] },                            // US-East <-> Ohio
+        { from: 0, to: 14, packets: [{ t: 0.4, speed: 0.0036 }] },                           // US-East <-> Montreal
+        { from: 0, to: 11, packets: [{ t: 0.2, speed: 0.0032 }, { t: 0.7, speed: 0.0032 }] }, // US-East <-> São Paulo
+        { from: 14, to: 4, packets: [{ t: 0.2, speed: 0.0035 }, { t: 0.7, speed: 0.0035 }] }, // Montreal <-> London
+        { from: 14, to: 1, packets: [{ t: 0.35, speed: 0.0036 }] },                          // Montreal <-> US-West
+        { from: 11, to: 1, packets: [{ t: 0.45, speed: 0.0032 }] },                          // São Paulo <-> US-West
+        { from: 11, to: 13, packets: [{ t: 0.5, speed: 0.0028 }, { t: 0.95, speed: 0.0028 }] }, // São Paulo <-> Cape Town
+        { from: 3, to: 4, packets: [{ t: 0.15, speed: 0.0045 }, { t: 0.65, speed: 0.0045 }] }, // Frankfurt <-> London
+        { from: 3, to: 5, packets: [{ t: 0.35, speed: 0.0036 }, { t: 0.85, speed: 0.0036 }] }, // Frankfurt <-> Stockholm
+        { from: 4, to: 5, packets: [{ t: 0.2, speed: 0.0040 }] },                            // London <-> Stockholm
+        { from: 3, to: 12, packets: [{ t: 0.1, speed: 0.0032 }, { t: 0.6, speed: 0.0032 }] }, // Frankfurt <-> Bahrain
+        { from: 4, to: 12, packets: [{ t: 0.4, speed: 0.0032 }] },                           // London <-> Bahrain
+        { from: 3, to: 13, packets: [{ t: 0.3, speed: 0.0032 }, { t: 0.8, speed: 0.0032 }] }, // Frankfurt <-> Cape Town
+        { from: 12, to: 13, packets: [{ t: 0.25, speed: 0.0034 }] },                         // Bahrain <-> Cape Town
+        { from: 12, to: 6, packets: [{ t: 0.3, speed: 0.0038 }, { t: 0.8, speed: 0.0038 }] }, // Bahrain <-> Mumbai
+        { from: 3, to: 6, packets: [{ t: 0.2, speed: 0.0032 }, { t: 0.7, speed: 0.0032 }] },  // Frankfurt <-> Mumbai
+        { from: 6, to: 7, packets: [{ t: 0.05, speed: 0.0038 }, { t: 0.55, speed: 0.0038 }] }, // Mumbai <-> Singapore
+        { from: 6, to: 9, packets: [{ t: 0.35, speed: 0.0032 }] },                           // Mumbai <-> Seoul
+        { from: 7, to: 8, packets: [{ t: 0.4, speed: 0.0036 }, { t: 0.9, speed: 0.0036 }] },  // Singapore <-> Tokyo
+        { from: 7, to: 10, packets: [{ t: 0.25, speed: 0.0034 }, { t: 0.75, speed: 0.0034 }] }, // Singapore <-> Sydney
+        { from: 8, to: 9, packets: [{ t: 0.2, speed: 0.0045 }, { t: 0.7, speed: 0.0045 }] }, // Tokyo <-> Seoul
+        { from: 8, to: 10, packets: [{ t: 0.1, speed: 0.0032 }, { t: 0.6, speed: 0.0032 }] }, // Tokyo <-> Sydney
+        { from: 9, to: 10, packets: [{ t: 0.45, speed: 0.0032 }] },                          // Seoul <-> Sydney
+        { from: 1, to: 8, packets: [{ t: 0.15, speed: 0.0030 }, { t: 0.65, speed: 0.0030 }] }, // US-West <-> Tokyo
+        { from: 1, to: 9, packets: [{ t: 0.3, speed: 0.0032 }] },                            // US-West <-> Seoul
+        { from: 1, to: 10, packets: [{ t: 0.45, speed: 0.0030 }, { t: 0.9, speed: 0.0030 }] }, // US-West <-> Sydney
+        { from: 13, to: 10, packets: [{ t: 0.2, speed: 0.0030 }] },                          // Cape Town <-> Sydney
+        { from: 5, to: 8, packets: [{ t: 0.15, speed: 0.0030 }] },                           // Stockholm <-> Tokyo
+        { from: 2, to: 4, packets: [{ t: 0.35, speed: 0.0036 }] }                            // Ohio <-> London
     ];
 
     const nodePings = [];
@@ -1216,52 +1216,64 @@ function initMobileParticles() {
         }
 
         // ══════════════════════════════════════════════════════════════
-        //  LAYER 2: 3D CYBER CLOUD GLOBE (EMERGES ON SCROLL)
+        //  LAYER 2: 3D CYBER HOLLOW CLOUD GLOBE (EMERGES ON SCROLL)
         // ══════════════════════════════════════════════════════════════
         if (globeOpacity > 0.02) {
             const cx = width * 0.5;
             const cy = height * 0.52;
-            const radius = Math.min(width * 0.72, height * 0.46, 360);
+            const radius = Math.min(width * 0.86, height * 0.48, 380);
 
-            // ── A. Atmospheric Halo Glow ──
-            const haloGrad = ctx.createRadialGradient(cx, cy, radius * 0.7, cx, cy, radius * 1.35);
-            haloGrad.addColorStop(0, 'rgba(0, 255, 200, ' + (0.05 * globeOpacity) + ')');
-            haloGrad.addColorStop(0.6, 'rgba(0, 180, 216, ' + (0.025 * globeOpacity) + ')');
+            // ── A. Deep Hollow Nebula Core Glow ──
+            const coreGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius * 0.95);
+            coreGlow.addColorStop(0, 'rgba(0, 255, 200, ' + (0.16 * globeOpacity) + ')');
+            coreGlow.addColorStop(0.55, 'rgba(0, 180, 216, ' + (0.08 * globeOpacity) + ')');
+            coreGlow.addColorStop(0.85, 'rgba(251, 191, 36, ' + (0.04 * globeOpacity) + ')');
+            coreGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+            ctx.beginPath();
+            ctx.arc(cx, cy, radius * 0.95, 0, Math.PI * 2);
+            ctx.fillStyle = coreGlow;
+            ctx.globalAlpha = globeOpacity;
+            ctx.fill();
+
+            // ── B. Outer Atmospheric Halo Glow ──
+            const haloGrad = ctx.createRadialGradient(cx, cy, radius * 0.75, cx, cy, radius * 1.38);
+            haloGrad.addColorStop(0, 'rgba(0, 255, 200, ' + (0.09 * globeOpacity) + ')');
+            haloGrad.addColorStop(0.6, 'rgba(0, 180, 216, ' + (0.045 * globeOpacity) + ')');
             haloGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
             ctx.beginPath();
-            ctx.arc(cx, cy, radius * 1.35, 0, Math.PI * 2);
+            ctx.arc(cx, cy, radius * 1.38, 0, Math.PI * 2);
             ctx.fillStyle = haloGrad;
             ctx.globalAlpha = globeOpacity;
             ctx.fill();
 
-            // ── B. Orbital Equatorial Ring ──
+            // ── C. Orbital Equatorial Ring ──
             ctx.beginPath();
-            const ringSteps = 42;
+            const ringSteps = 48;
             for (let i = 0; i <= ringSteps; i++) {
                 const theta = (i / ringSteps) * Math.PI * 2;
                 const rx = Math.cos(theta);
                 const rz = Math.sin(theta);
-                const ringProj = project3D({ x: rx, y: 0, z: rz }, radius * 1.16, cx, cy);
+                const ringProj = project3D({ x: rx, y: 0, z: rz }, radius * 1.18, cx, cy);
                 if (i === 0) ctx.moveTo(ringProj.projX, ringProj.projY);
                 else ctx.lineTo(ringProj.projX, ringProj.projY);
             }
-            ctx.strokeStyle = 'rgba(0, 255, 200, 0.16)';
-            ctx.lineWidth = 1.0;
+            ctx.strokeStyle = 'rgba(0, 255, 200, 0.22)';
+            ctx.lineWidth = 1.2;
             ctx.setLineDash([4, 6]);
-            ctx.globalAlpha = globeOpacity * 0.7;
+            ctx.globalAlpha = globeOpacity * 0.85;
             ctx.stroke();
             ctx.setLineDash([]);
 
-            // ── C. 3D Sphere Surface Point Cloud (Brighter & Crisp) ──
+            // ── D. 3D Sphere Surface Point Cloud (Crisp & Luminous) ──
             for (let i = 0; i < spherePoints.length; i++) {
                 const sp = spherePoints[i];
                 const proj = project3D(sp, radius, cx, cy);
 
                 const depthAlpha = proj.isFront
-                    ? sp.baseAlpha * (0.75 + proj.z * 0.45)
-                    : sp.baseAlpha * 0.32;
+                    ? sp.baseAlpha * (0.85 + proj.z * 0.45)
+                    : sp.baseAlpha * 0.28;
 
-                const dotSize = Math.max(0.6, sp.size * proj.scale * (proj.isFront ? 1.0 : 0.65));
+                const dotSize = Math.max(0.7, sp.size * proj.scale * (proj.isFront ? 1.05 : 0.6));
 
                 ctx.beginPath();
                 ctx.arc(proj.projX, proj.projY, dotSize, 0, Math.PI * 2);
@@ -1270,153 +1282,178 @@ function initMobileParticles() {
                 ctx.fill();
             }
 
-        // ── D. Projected Cloud Region Nodes ──
-        const projectedNodes = CLOUD_NODES.map(node => {
-            const vec = latLonToVector3D(node.lat, node.lon);
-            const proj = project3D(vec, radius, cx, cy);
-            return { ...node, vec, proj };
-        });
+            // ── E. Projected Cloud Region Nodes ──
+            const projectedNodes = CLOUD_NODES.map(node => {
+                const vec = latLonToVector3D(node.lat, node.lon);
+                const proj = project3D(vec, radius, cx, cy);
+                return { ...node, vec, proj };
+            });
 
-        // ── E. 3D Curved Laser Data Arcs & Packets ──
-        ARCS.forEach(arc => {
-            const n1 = projectedNodes[arc.from];
-            const n2 = projectedNodes[arc.to];
-            if (!n1 || !n2) return;
+            // ── F. 3D Curved Laser Data Arcs & Packets (Dual-Stroke Glow) ──
+            ARCS.forEach(arc => {
+                const n1 = projectedNodes[arc.from];
+                const n2 = projectedNodes[arc.to];
+                if (!n1 || !n2) return;
 
-            const midVec = {
-                x: (n1.vec.x + n2.vec.x) * 0.5,
-                y: (n1.vec.y + n2.vec.y) * 0.5,
-                z: (n1.vec.z + n2.vec.z) * 0.5
-            };
-            const midLen = Math.sqrt(midVec.x * midVec.x + midVec.y * midVec.y + midVec.z * midVec.z) || 1;
-            const arcAltitude = 1.30;
-            const p1 = {
-                x: (midVec.x / midLen) * arcAltitude,
-                y: (midVec.y / midLen) * arcAltitude,
-                z: (midVec.z / midLen) * arcAltitude
-            };
+                const midVec = {
+                    x: (n1.vec.x + n2.vec.x) * 0.5,
+                    y: (n1.vec.y + n2.vec.y) * 0.5,
+                    z: (n1.vec.z + n2.vec.z) * 0.5
+                };
+                const midLen = Math.sqrt(midVec.x * midVec.x + midVec.y * midVec.y + midVec.z * midVec.z) || 1;
+                const arcAltitude = 1.32;
+                const p1 = {
+                    x: (midVec.x / midLen) * arcAltitude,
+                    y: (midVec.y / midLen) * arcAltitude,
+                    z: (midVec.z / midLen) * arcAltitude
+                };
 
-            ctx.beginPath();
-            const arcSteps = 18;
-            let isArcVisible = false;
+                const arcSteps = 22;
+                let isArcVisible = false;
+                const arcPoints = [];
 
-            for (let step = 0; step <= arcSteps; step++) {
-                const t = step / arcSteps;
-                const curve3D = get3DBezierPoint(n1.vec, p1, n2.vec, t);
-                const ptProj = project3D(curve3D, radius, cx, cy);
-
-                if (ptProj.isFront) isArcVisible = true;
-
-                if (step === 0) ctx.moveTo(ptProj.projX, ptProj.projY);
-                else ctx.lineTo(ptProj.projX, ptProj.projY);
-            }
-
-            ctx.strokeStyle = isArcVisible ? 'rgba(0, 255, 200, 0.24)' : 'rgba(0, 255, 200, 0.05)';
-            ctx.lineWidth = 1.2;
-            ctx.globalAlpha = globeOpacity * (isArcVisible ? 0.85 : 0.2);
-            ctx.stroke();
-
-            // Animate Glowing Laser Data Packets along Arc
-            arc.packets.forEach(pkt => {
-                pkt.t += pkt.speed;
-                if (pkt.t > 1.0) {
-                    pkt.t = 0.0;
-                    nodePings.push({
-                        nodeIdx: arc.to,
-                        radius: 3,
-                        maxRadius: 20,
-                        alpha: 1.0
-                    });
+                for (let step = 0; step <= arcSteps; step++) {
+                    const t = step / arcSteps;
+                    const curve3D = get3DBezierPoint(n1.vec, p1, n2.vec, t);
+                    const ptProj = project3D(curve3D, radius, cx, cy);
+                    if (ptProj.isFront) isArcVisible = true;
+                    arcPoints.push(ptProj);
                 }
 
-                const pkt3D = get3DBezierPoint(n1.vec, p1, n2.vec, pkt.t);
-                const pktProj = project3D(pkt3D, radius, cx, cy);
+                // 1. Outer Neon Glow Path
+                ctx.beginPath();
+                for (let step = 0; step <= arcSteps; step++) {
+                    const pt = arcPoints[step];
+                    if (step === 0) ctx.moveTo(pt.projX, pt.projY);
+                    else ctx.lineTo(pt.projX, pt.projY);
+                }
+                ctx.strokeStyle = isArcVisible ? 'rgba(0, 255, 200, 0.42)' : 'rgba(0, 255, 200, 0.08)';
+                ctx.lineWidth = 2.6;
+                ctx.globalAlpha = globeOpacity * (isArcVisible ? 0.9 : 0.25);
+                ctx.stroke();
 
-                if (pktProj.isFront) {
+                // 2. Inner Sharp Path
+                ctx.strokeStyle = isArcVisible ? 'rgba(255, 255, 255, 0.85)' : 'rgba(0, 255, 200, 0.15)';
+                ctx.lineWidth = 1.0;
+                ctx.stroke();
+
+                // Animate Glowing Laser Data Packets along Arc
+                arc.packets.forEach(pkt => {
+                    pkt.t += pkt.speed;
+                    if (pkt.t > 1.0) {
+                        pkt.t = 0.0;
+                        nodePings.push({
+                            nodeIdx: arc.to,
+                            radius: 3,
+                            maxRadius: 22,
+                            alpha: 1.0
+                        });
+                    }
+
+                    const pkt3D = get3DBezierPoint(n1.vec, p1, n2.vec, pkt.t);
+                    const pktProj = project3D(pkt3D, radius, cx, cy);
+
+                    if (pktProj.isFront) {
+                        // Outer Halo
+                        ctx.beginPath();
+                        ctx.arc(pktProj.projX, pktProj.projY, 7.5 * pktProj.scale, 0, Math.PI * 2);
+                        ctx.fillStyle = 'rgba(251, 191, 36, 0.45)';
+                        ctx.globalAlpha = globeOpacity * 0.95;
+                        ctx.fill();
+
+                        // Mid Gold Core
+                        ctx.beginPath();
+                        ctx.arc(pktProj.projX, pktProj.projY, 4.0 * pktProj.scale, 0, Math.PI * 2);
+                        ctx.fillStyle = '#fbbf24';
+                        ctx.fill();
+
+                        // Inner White Spark
+                        ctx.beginPath();
+                        ctx.arc(pktProj.projX, pktProj.projY, 2.0 * pktProj.scale, 0, Math.PI * 2);
+                        ctx.fillStyle = '#ffffff';
+                        ctx.fill();
+                    }
+                });
+            });
+
+            // ── G. Cloud Nodes & HUD Badges ──
+            projectedNodes.forEach(node => {
+                if (node.proj.isFront) {
+                    const nodeScale = node.proj.scale;
+                    const dotRadius = Math.max(3.8, 5.5 * nodeScale);
+
+                    // Outer pulse ring
                     ctx.beginPath();
-                    ctx.arc(pktProj.projX, pktProj.projY, 3.2 * pktProj.scale, 0, Math.PI * 2);
-                    ctx.fillStyle = '#fbbf24';
+                    ctx.arc(node.proj.projX, node.proj.projY, dotRadius * 2.4, 0, Math.PI * 2);
+                    ctx.strokeStyle = node.color;
+                    ctx.lineWidth = 1.4;
+                    ctx.globalAlpha = globeOpacity * 0.85;
+                    ctx.stroke();
+
+                    // Node Core Dot
+                    ctx.beginPath();
+                    ctx.arc(node.proj.projX, node.proj.projY, dotRadius, 0, Math.PI * 2);
+                    ctx.fillStyle = node.color;
+                    ctx.globalAlpha = globeOpacity * 1.0;
+                    ctx.fill();
+
+                    // White center point
+                    ctx.beginPath();
+                    ctx.arc(node.proj.projX, node.proj.projY, dotRadius * 0.45, 0, Math.PI * 2);
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fill();
+
+                    // High-Contrast HUD Tag Badge
+                    const fontSize = Math.max(11, Math.floor(13 * nodeScale));
+                    ctx.font = `800 ${fontSize}px "JetBrains Mono", monospace`;
+                    const textWidth = ctx.measureText(node.id).width;
+                    const tagX = node.proj.projX + dotRadius * 2.0;
+                    const tagY = node.proj.projY - (fontSize * 0.5) - 3;
+
+                    ctx.fillStyle = 'rgba(8, 11, 18, 0.88)';
+                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.28)';
+                    ctx.lineWidth = 1.0;
+                    ctx.beginPath();
+                    if (ctx.roundRect) {
+                        ctx.roundRect(tagX - 4, tagY, textWidth + 8, fontSize + 6, 4);
+                    } else {
+                        ctx.rect(tagX - 4, tagY, textWidth + 8, fontSize + 6);
+                    }
                     ctx.globalAlpha = globeOpacity * 0.95;
                     ctx.fill();
+                    ctx.stroke();
 
-                    ctx.beginPath();
-                    ctx.arc(pktProj.projX, pktProj.projY, 6.0 * pktProj.scale, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(251, 191, 36, 0.35)';
-                    ctx.fill();
+                    ctx.fillStyle = '#ffffff';
+                    ctx.globalAlpha = globeOpacity * 1.0;
+                    ctx.textBaseline = 'top';
+                    ctx.fillText(node.id, tagX, tagY + 3);
                 }
             });
-        });
 
-        // ── F. Cloud Nodes & HUD Badges ──
-        projectedNodes.forEach(node => {
-            if (node.proj.isFront) {
-                const nodeScale = node.proj.scale;
-                const dotRadius = Math.max(3.5, 5.0 * nodeScale);
+            // ── H. Radar Pulse Ping Waves ──
+            for (let p = nodePings.length - 1; p >= 0; p--) {
+                const ping = nodePings[p];
+                const targetNode = projectedNodes[ping.nodeIdx];
 
-                ctx.beginPath();
-                ctx.arc(node.proj.projX, node.proj.projY, dotRadius, 0, Math.PI * 2);
-                ctx.fillStyle = node.color;
-                ctx.globalAlpha = globeOpacity * 0.98;
-                ctx.fill();
+                if (targetNode && targetNode.proj.isFront) {
+                    ping.radius += 0.85;
+                    ping.alpha -= 0.035;
 
-                ctx.beginPath();
-                ctx.arc(node.proj.projX, node.proj.projY, dotRadius * 2.2, 0, Math.PI * 2);
-                ctx.strokeStyle = node.color;
-                ctx.lineWidth = 1.3;
-                ctx.globalAlpha = globeOpacity * 0.75;
-                ctx.stroke();
+                    if (ping.alpha <= 0 || ping.radius >= ping.maxRadius) {
+                        nodePings.splice(p, 1);
+                        continue;
+                    }
 
-                // High-Contrast HUD Tag Badge
-                const fontSize = Math.max(11, Math.floor(13 * nodeScale));
-                ctx.font = `800 ${fontSize}px "JetBrains Mono", monospace`;
-                const textWidth = ctx.measureText(node.id).width;
-                const tagX = node.proj.projX + dotRadius * 2.0;
-                const tagY = node.proj.projY - (fontSize * 0.5) - 3;
-
-                ctx.fillStyle = 'rgba(8, 11, 18, 0.85)';
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
-                ctx.lineWidth = 1.0;
-                ctx.beginPath();
-                if (ctx.roundRect) {
-                    ctx.roundRect(tagX - 4, tagY, textWidth + 8, fontSize + 6, 4);
+                    ctx.beginPath();
+                    ctx.arc(targetNode.proj.projX, targetNode.proj.projY, ping.radius, 0, Math.PI * 2);
+                    ctx.strokeStyle = targetNode.color;
+                    ctx.lineWidth = 1.6;
+                    ctx.globalAlpha = ping.alpha * globeOpacity * 0.9;
+                    ctx.stroke();
                 } else {
-                    ctx.rect(tagX - 4, tagY, textWidth + 8, fontSize + 6);
-                }
-                ctx.globalAlpha = globeOpacity * 0.92;
-                ctx.fill();
-                ctx.stroke();
-
-                ctx.fillStyle = '#ffffff';
-                ctx.globalAlpha = globeOpacity * 1.0;
-                ctx.textBaseline = 'top';
-                ctx.fillText(node.id, tagX, tagY + 3);
-            }
-        });
-
-        // ── G. Radar Pulse Ping Waves ──
-        for (let p = nodePings.length - 1; p >= 0; p--) {
-            const ping = nodePings[p];
-            const targetNode = projectedNodes[ping.nodeIdx];
-
-            if (targetNode && targetNode.proj.isFront) {
-                ping.radius += 0.75;
-                ping.alpha -= 0.035;
-
-                if (ping.alpha <= 0 || ping.radius >= ping.maxRadius) {
                     nodePings.splice(p, 1);
-                    continue;
                 }
-
-                ctx.beginPath();
-                ctx.arc(targetNode.proj.projX, targetNode.proj.projY, ping.radius, 0, Math.PI * 2);
-                ctx.strokeStyle = targetNode.color;
-                ctx.lineWidth = 1.4;
-                ctx.globalAlpha = ping.alpha * globeOpacity * 0.85;
-                ctx.stroke();
-            } else {
-                nodePings.splice(p, 1);
             }
-        }
         } // End of if (globeOpacity > 0.02)
 
         ctx.globalAlpha = 1;
