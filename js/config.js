@@ -36,10 +36,14 @@ const CONFIG = {
         dynamicIsland: true,  // Apple-Style Dynamic Island Dock (Telegram, Instagram, Copy Email)
         skillRadarChart: true, // 6-Axis Interactive DevOps Skill Radar Chart (true = enable, false = disable)
         headerShade: true,    // Mint (#64e59a) top header shade tint on mobile (true = enable, false = disable)
+        scratchCard: false,   // Mobile Scratch-Off Hidden Talent Card (true = show, false = hide)
     },
 
     // ── MOBILE HEADER SHADE TOGGLE ─────────────────────────
     headerShade: true, // Set to false to disable #64e59a mint shade, true to enable
+
+    // ── MOBILE SCRATCH CARD TOGGLE ─────────────────────────
+    scratchCard: false, // Set to false to disable scratch card, true to enable
 
     // ── MOBILE MINI-GAMES TOGGLES (Set individual games to true/false) ──
     mobileGamesList: {
