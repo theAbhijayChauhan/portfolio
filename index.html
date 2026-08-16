@@ -207,6 +207,25 @@
             <h2 class="section-title reveal reveal-d1">
                 Tech <span class="text-[var(--accent2)]">Arsenal</span>
             </h2>
+            <!-- 6-AXIS DEVOPS SKILL RADAR CHART -->
+            <div id="skillRadarWrapper" class="skill-radar-wrapper reveal reveal-d1" style="display:none;">
+                <div class="skill-radar-card">
+                    <div class="skill-radar-header">
+                        <div class="radar-title-group">
+                            <span class="radar-badge"><i class="fas fa-satellite-dish"></i> SRE COMPETENCY RADAR</span>
+                            <h3 class="radar-heading">DevOps & Cloud Capabilities Analysis</h3>
+                        </div>
+                        <div class="radar-legend">
+                            <span class="legend-item"><span class="legend-dot current"></span> Proficiency Level</span>
+                        </div>
+                    </div>
+                    <div class="skill-radar-canvas-container">
+                        <canvas id="skillRadarCanvas" width="520" height="380"></canvas>
+                        <div id="radarTooltip" class="radar-tooltip"></div>
+                    </div>
+                </div>
+            </div>
+
             <div class="skills-grid" id="skillsGrid">
                 <!-- Populated by JS from CONFIG.skills -->
             </div>
@@ -357,7 +376,7 @@
     </footer>
 
     <!-- QUESTIONS TERMINAL MODAL -->
-    <div id="desktopQModal" class="desktop-qmodal" style="display:none">
+    <div id="desktopQModal" class="desktop-qmodal">
         <div class="desktop-qmodal-inner">
             <div class="dqmodal-header">
                 <span class="dqmodal-title"><i class="fas fa-terminal"></i> ask_me.sh</span>
@@ -378,6 +397,69 @@
             </div>
             <div class="dqmodal-body" id="desktopQModalBody">
                 <span class="t-line vis t-dim">> Select a question above to begin...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CERTIFICATION VERIFICATION MODAL -->
+    <div id="certModal" class="desktop-qmodal">
+        <div class="desktop-qmodal-inner" style="width: 520px;">
+            <div class="dqmodal-header">
+                <span class="dqmodal-title"><i class="fas fa-certificate"></i> Verify Credential</span>
+                <button id="closeCertModal" class="dqmodal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="dqmodal-body" id="certModalBody" style="background: var(--surface); color: var(--text); padding: 22px; font-family: 'Space Grotesk', sans-serif;">
+                <!-- Populated dynamically by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- APPLE-STYLE DYNAMIC ISLAND FLOATING DOCK (Telegram, Instagram, Copy Email) -->
+    <div id="dynamicIsland" class="dynamic-island" style="display: none;">
+        <div class="di-capsule">
+            <div class="di-idle-content">
+                <span class="di-pulse-dot"></span>
+                <span class="di-idle-text">SRE CONNECT</span>
+            </div>
+            <div class="di-expanded-content">
+                <a id="diTelegramLink" href="https://t.me/theabhijaychauhan" target="_blank" class="di-action-btn di-telegram" title="Chat on Telegram">
+                    <i class="fab fa-telegram-plane"></i>
+                    <span>Telegram</span>
+                </a>
+                <a id="diInstagramLink" href="https://instagram.com/theabhijaychauhan" target="_blank" class="di-action-btn di-instagram" title="Follow on Instagram">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <button id="diCopyEmailBtn" class="di-action-btn di-email" title="Copy Email Address">
+                    <i class="fas fa-copy"></i>
+                    <span id="diCopyEmailText">Copy Email</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FROSTED GLASS RESUME SLIDE-OVER DRAWER -->
+    <div id="resumeDrawerOverlay" class="resume-drawer-overlay" style="display: none;">
+        <div id="resumeDrawer" class="resume-drawer">
+            <div class="rd-header">
+                <div class="rd-header-title">
+                    <i class="fas fa-file-invoice" style="color: var(--accent);"></i>
+                    <span>Curriculum Vitae</span>
+                </div>
+                <div class="rd-header-actions">
+                    <a id="rdDownloadBtn" href="assets/resume.pdf" download class="rd-action-btn" title="Download PDF">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                    <button id="rdPrintBtn" class="rd-action-btn" title="Print Resume">
+                        <i class="fas fa-print"></i> Print
+                    </button>
+                    <button id="closeResumeDrawer" class="rd-close-btn" title="Close Drawer">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="rd-body" id="resumeDrawerBody">
+                <!-- Populated dynamically with high-resolution structured ATS resume preview -->
             </div>
         </div>
     </div>
