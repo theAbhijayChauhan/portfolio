@@ -1,6 +1,6 @@
-﻿# Search Engine Robots Configuration for Abhijay Chauhan Portfolio
+# Search Engine Robots Configuration for Abhijay Chauhan Portfolio
 User-agent: *
 Allow: /
 
 # Sitemap Location
-Sitemap: sitemap.xml
+Sitemap: https://theabhijaychauhan.github.io/portfolio/sitemap.xml
