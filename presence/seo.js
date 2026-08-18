@@ -1,4 +1,4 @@
-﻿// ══════════════════════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════════════════════
 //  SEO & GOOGLE KNOWLEDGE GRAPH INJECTION ENGINE
 //  Location: presence/seo.js
 //  Automatically injects JSON-LD Structured Data (schema.org/Person & WebSite),
@@ -90,6 +90,7 @@
     ensureMetaTag('author', name);
     ensureMetaTag('keywords', 'Abhijay Chauhan, theAbhijay, theAbhijayChauhan, Abhijay Chauhan DevOps, Abhijay Chauhan GitHub, Abhijay Chauhan LinkedIn, DevOps Engineer Lucknow, SRE Portfolio, Kubernetes, Cloud Engineer');
     ensureMetaTag('robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
+    ensureMetaTag('google-site-verification', 'google30f631b94936a53a');
 
     // 5. Inject Canonical Link if missing
     if (!document.querySelector("link[rel='canonical']")) {
