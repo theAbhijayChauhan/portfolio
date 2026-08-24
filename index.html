@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <script>
-        (function() {
+        (function () {
             var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
             if (isMobile) {
                 window.location.replace('smartphone/mobile.html');
@@ -11,28 +12,33 @@
         })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abhijay Chauhan — DevOps Engineer & SRE</title>
+    <title>Abhijay Chauhan — DevOps Engineer & Cloud Engineer</title>
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
     <!-- SEO & Social Media Share Meta Cards (OpenGraph / Twitter) -->
     <meta name="google-site-verification" content="google30f631b94936a53a">
-    <meta name="title" content="Abhijay Chauhan — DevOps Engineer & SRE">
-    <meta name="description" content="Fresher with a hacker's mindset — automating everything, breaking nothing, and building infrastructure that just works.">
+    <meta name="title" content="Abhijay Chauhan — DevOps Engineer & Cloud Engineer">
+    <meta name="description"
+        content="Fresher with a hacker's mindset — automating everything, breaking nothing, and building infrastructure that just works.">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Abhijay Chauhan — DevOps Engineer & SRE">
-    <meta property="og:description" content="Fresher with a hacker's mindset — automating everything, breaking nothing, and building infrastructure that just works.">
+    <meta property="og:title" content="Abhijay Chauhan — DevOps Engineer & Cloud Engineer">
+    <meta property="og:description"
+        content="Fresher with a hacker's mindset — automating everything, breaking nothing, and building infrastructure that just works.">
     <meta property="og:image" content="assets/photo.jpg">
 
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="Abhijay Chauhan — DevOps Engineer & SRE">
-    <meta property="twitter:description" content="Fresher with a hacker's mindset — automating everything, breaking nothing, and building infrastructure that just works.">
+    <meta property="twitter:title" content="Abhijay Chauhan — DevOps Engineer & Cloud Engineer">
+    <meta property="twitter:description"
+        content="Fresher with a hacker's mindset — automating everything, breaking nothing, and building infrastructure that just works.">
     <meta property="twitter:image" content="assets/photo.jpg">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script>
         tailwind.config = {
@@ -50,12 +56,15 @@
     <!-- OPTIONAL ENHANCEMENTS MODULE (Comment out or delete to disable all 5 extra features) -->
     <link rel="stylesheet" href="css/enhancements.css">
 </head>
+
 <body>
 
     <!-- LOADER -->
     <div id="loader">
         <div class="loader-logo font-display text-sm tracking-[6px] text-[var(--muted)] uppercase">Init</div>
-        <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+        <div class="loader-bar">
+            <div class="loader-bar-fill"></div>
+        </div>
         <div class="loader-boot-logs" id="bootLogsContainer"></div>
     </div>
 
@@ -87,7 +96,8 @@
                 <span id="instaBanner" class="insta-logo-glow" title="Instagram" aria-label="Instagram Profile">
                     <i class="fab fa-instagram"></i>
                 </span>
-                <a id="navLogo" href="https://instagram.com/theabhijaychauhan" target="_blank" rel="noopener noreferrer" class="font-display text-sm tracking-[3px] text-[var(--text)] hover:text-[var(--accent)] transition-colors">theAbhijay.</a>
+                <a id="navLogo" href="https://instagram.com/theabhijaychauhan" target="_blank" rel="noopener noreferrer"
+                    class="font-display text-sm tracking-[3px] text-[var(--text)] hover:text-[var(--accent)] transition-colors">theAbhijay.</a>
             </div>
             <div class="nav-links">
                 <a href="#about" class="nav-link">About</a>
@@ -97,7 +107,8 @@
                 <a href="#certifications" class="nav-link">Certs</a>
                 <a href="#contact" class="nav-btn">Contact</a>
             </div>
-            <button id="menuToggle" class="md:hidden text-[var(--text)] text-xl" onclick="toggleMobile()" aria-label="Menu">
+            <button id="menuToggle" class="md:hidden text-[var(--text)] text-xl" onclick="toggleMobile()"
+                aria-label="Menu">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
@@ -109,7 +120,8 @@
             <!-- HERO PROFILE AVATAR (Top, Centered, 140px x 140px) -->
             <div id="heroAvatarContainer" class="hero-avatar-wrapper reveal">
                 <div class="hero-main-avatar" title="Abhijay Chauhan">
-                    <img id="heroMiniPhoto" src="assets/photo.jpg" alt="Profile Photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <img id="heroMiniPhoto" src="assets/photo.jpg" alt="Profile Photo"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="hero-mini-fallback" style="display:none;"><i class="fas fa-user"></i></div>
                 </div>
             </div>
@@ -125,7 +137,8 @@
                 <span id="typingText" class="typing-cursor"></span>
             </div>
             <p id="heroTagline" class="hero-tagline reveal reveal-d3">
-                Fresher with a hacker's mindset — automating everything, breaking nothing, and building infrastructure that just works.
+                Fresher with a hacker's mindset — automating everything, breaking nothing, and building infrastructure
+                that just works.
             </p>
             <div class="hero-actions reveal reveal-d4">
                 <div class="hero-actions-row">
@@ -167,7 +180,7 @@
                     <div id="availabilityBadge" class="avail-badge reveal reveal-d4">
                         <div class="avail-photo">
                             <img id="profilePhoto" src="assets/photo.jpg" alt="Profile"
-                                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                             <div class="avail-photo-fallback" style="display:none;"><i class="fas fa-user"></i></div>
                         </div>
                         <div>
@@ -213,7 +226,8 @@
                 <div class="skill-radar-card">
                     <div class="skill-radar-header">
                         <div class="radar-title-group">
-                            <span class="radar-badge"><i class="fas fa-satellite-dish"></i> SRE COMPETENCY RADAR</span>
+                            <span class="radar-badge"><i class="fas fa-satellite-dish"></i> Cloud Engineer COMPETENCY
+                                RADAR</span>
                             <h3 class="radar-heading">DevOps & Cloud Capabilities Analysis</h3>
                         </div>
                         <div class="radar-legend">
@@ -311,7 +325,8 @@
                     </div>
                     <div class="form-group">
                         <label>Message</label>
-                        <textarea name="message" class="form-input" rows="5" placeholder="Tell me about your project..." required></textarea>
+                        <textarea name="message" class="form-input" rows="5" placeholder="Tell me about your project..."
+                            required></textarea>
                     </div>
                     <button type="submit" id="contactSubmitBtn" class="btn-primary w-full justify-center">
                         <i class="fas fa-paper-plane mr-2"></i>Send Message
@@ -358,8 +373,10 @@
     <section class="ai-statement-section">
         <div class="ai-statement-card reveal">
             <div class="ai-statement-icon"><i class="fas fa-brain"></i></div>
-            <p class="ai-statement-line1">"Yes, I built this with AI. In today's world, the real race isn't about avoiding the tools—it's about who can leverage them to build something better and faster,"</p>
-            <p class="ai-statement-line2">"Built efficiently using AI, guided by human strategy. Embracing the future of development means mastering the tools that accelerate execution."</p>
+            <p class="ai-statement-line1">"Yes, I built this with AI. In today's world, the real race isn't about
+                avoiding the tools—it's about who can leverage them to build something better and faster,"</p>
+            <p class="ai-statement-line2">"Built efficiently using AI, guided by human strategy. Embracing the future of
+                development means mastering the tools that accelerate execution."</p>
         </div>
     </section>
 
@@ -367,11 +384,13 @@
     <footer class="footer">
         <div class="footer-inner">
             <div class="text-sm md:text-base text-[var(--muted)] font-medium">
-                &copy; <span id="footerYear"></span> <span id="footerName">YOUR_NAME</span>. Engineered with <span class="text-[var(--accent)]">&hearts;</span> and caffeine.
+                &copy; <span id="footerYear"></span> <span id="footerName">YOUR_NAME</span>. Engineered with <span
+                    class="text-[var(--accent)]">&hearts;</span> and caffeine.
             </div>
             <div class="footer-status">
                 <span class="footer-dot"></span>
-                <span class="text-xs md:text-sm text-[var(--muted)] tracking-wider font-mono">All systems operational</span>
+                <span class="text-xs md:text-sm text-[var(--muted)] tracking-wider font-mono">All systems
+                    operational</span>
             </div>
         </div>
     </footer>
@@ -409,7 +428,8 @@
                 <span class="dqmodal-title"><i class="fas fa-certificate"></i> Verify Credential</span>
                 <button id="closeCertModal" class="dqmodal-close"><i class="fas fa-times"></i></button>
             </div>
-            <div class="dqmodal-body" id="certModalBody" style="background: var(--surface); color: var(--text); padding: 22px; font-family: 'Space Grotesk', sans-serif;">
+            <div class="dqmodal-body" id="certModalBody"
+                style="background: var(--surface); color: var(--text); padding: 22px; font-family: 'Space Grotesk', sans-serif;">
                 <!-- Populated dynamically by JS -->
             </div>
         </div>
@@ -420,14 +440,16 @@
         <div class="di-capsule">
             <div class="di-idle-content">
                 <span class="di-pulse-dot"></span>
-                <span class="di-idle-text">SRE CONNECT</span>
+                <span class="di-idle-text">QUICK CONNECT</span>
             </div>
             <div class="di-expanded-content">
-                <a id="diTelegramLink" href="https://t.me/theabhijaychauhan" target="_blank" class="di-action-btn di-telegram" title="Chat on Telegram">
+                <a id="diTelegramLink" href="https://t.me/theabhijaychauhan" target="_blank"
+                    class="di-action-btn di-telegram" title="Chat on Telegram">
                     <i class="fab fa-telegram-plane"></i>
                     <span>Telegram</span>
                 </a>
-                <a id="diInstagramLink" href="https://instagram.com/theabhijaychauhan" target="_blank" class="di-action-btn di-instagram" title="Follow on Instagram">
+                <a id="diInstagramLink" href="https://instagram.com/theabhijaychauhan" target="_blank"
+                    class="di-action-btn di-instagram" title="Follow on Instagram">
                     <i class="fab fa-instagram"></i>
                     <span>Instagram</span>
                 </a>
@@ -475,4 +497,5 @@
     <!-- OPTIONAL ENHANCEMENTS MODULE (Comment out or delete to disable all 5 extra features) -->
     <script src="js/enhancements.js?v=3.5"></script>
 </body>
+
 </html>
