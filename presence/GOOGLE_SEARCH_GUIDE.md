@@ -43,7 +43,7 @@ LinkedIn holds massive Google Domain Authority. When someone Googles "Abhijay Ch
 
 ### 3. Keyword-Dense Headline
 - Set your LinkedIn headline to:
-  > **Abhijay Chauhan | DevOps Engineer & SRE | Kubernetes • AWS • Terraform • Docker • CI/CD**
+  > **Abhijay Chauhan | DevOps Engineer & Cloud Engineer | Kubernetes • AWS • Terraform • Docker • CI/CD**
 
 ### 4. Link Back to Your Portfolio
 - Click **Edit Contact Info** on your profile.
@@ -59,7 +59,7 @@ GitHub profiles rank on the first page of Google for developer names when these 
 ### 1. Display Name Setting
 - Go to **GitHub Settings $\rightarrow$ Public Profile**.
 - **Name**: Set to Abhijay Chauhan (capitalized, full name).
-- **Bio**: DevOps Engineer & SRE | Automating infrastructure with Kubernetes, Terraform & AWS.
+- **Bio**: DevOps Engineer & Cloud Engineer | Automating infrastructure with Kubernetes, Terraform & AWS.
 - **Website/URL**: https://theabhijaychauhan.github.io/portfolio/
 - **Location**: Lucknow, Uttar Pradesh, India
 

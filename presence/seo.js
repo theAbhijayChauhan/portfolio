@@ -8,10 +8,10 @@
 (function initGooglePresenceSEO() {
     // 1. Target Data from CONFIG if available, with resilient fallbacks
     const name = (window.CONFIG && window.CONFIG.name) || 'Abhijay Chauhan';
-    const title = (window.CONFIG && window.CONFIG.title) || 'DevOps Engineer & SRE';
+    const title = (window.CONFIG && window.CONFIG.title) || 'DevOps Engineer & Cloud Engineer';
     const email = (window.CONFIG && window.CONFIG.email) || 'abhijaychauhan.dev@gmail.com';
     const siteUrl = 'https://theabhijaychauhan.github.io/portfolio/';
-    
+
     // Connected social and professional profiles (sameAs Entity Linking)
     const sameAsLinks = [
         'https://www.linkedin.com/in/abhijaychauhan',
@@ -37,13 +37,13 @@
                 "address": {
                     "@type": "PostalAddress",
                     "addressLocality": "Lucknow",
-                    "addressRegion": "Uttar Pradesh",
+                    "addresCloud Engineergion": "Uttar Pradesh",
                     "addressCountry": "IN"
                 },
                 "sameAs": sameAsLinks,
                 "knowsAbout": [
                     "DevOps",
-                    "Site Reliability Engineering (SRE)",
+                    "Cloud",
                     "Kubernetes",
                     "Docker",
                     "CI/CD Pipelines",
@@ -88,7 +88,7 @@
     }
 
     ensureMetaTag('author', name);
-    ensureMetaTag('keywords', 'Abhijay Chauhan, theAbhijay, theAbhijayChauhan, Abhijay Chauhan DevOps, Abhijay Chauhan GitHub, Abhijay Chauhan LinkedIn, DevOps Engineer Lucknow, SRE Portfolio, Kubernetes, Cloud Engineer');
+    ensureMetaTag('keywords', 'Abhijay Chauhan, theAbhijay, theAbhijayChauhan, Abhijay Chauhan DevOps, Abhijay Chauhan GitHub, Abhijay Chauhan LinkedIn, DevOps Engineer Lucknow, Cloud Engineer Portfolio, Kubernetes, Cloud Engineer');
     ensureMetaTag('robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1');
     ensureMetaTag('google-site-verification', 'google30f631b94936a53a');
 
