@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <!--
@@ -14,15 +15,19 @@
     <base href="../">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="google-site-verification" content="google30f631b94936a53a">
-    <title>Abhijay Chauhan — DevOps Engineer &amp; SRE</title>
+    <title>Abhijay Chauhan — DevOps Engineer &amp; Cloud Engineer</title>
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg?v=3.5">
-    <meta name="description" content="Fresher with a hacker's mindset — automating everything, breaking nothing, and building infrastructure that just works.">
+    <meta name="description"
+        content="Fresher with a hacker's mindset — automating everything, breaking nothing, and building infrastructure that just works.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Smartphone-specific stylesheet -->
     <link rel="stylesheet" href="smartphone/css/mobile.css?v=3.5">
 </head>
+
 <body>
 
     <!-- MOBILE BACKGROUND PARTICLE CANVAS -->
@@ -31,7 +36,9 @@
     <!-- LOADER (INIT Boot Screen) -->
     <div id="mobileLoader" class="mobile-loader">
         <div class="loader-logo">INIT</div>
-        <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+        <div class="loader-bar">
+            <div class="loader-bar-fill"></div>
+        </div>
         <div class="loader-boot-logs" id="mobileBootLogs"></div>
     </div>
 
@@ -64,7 +71,7 @@
         <section id="home" class="mobile-section hero-section">
             <div id="heroAvatarContainer" class="hero-avatar">
                 <img id="heroPhoto" src="assets/photo.jpg" alt="Profile Photo"
-                     onerror="this.style.display='none'; document.getElementById('heroInitials').style.display='flex'">
+                    onerror="this.style.display='none'; document.getElementById('heroInitials').style.display='flex'">
                 <div id="heroInitials" class="hero-initials" style="display:none"></div>
             </div>
             <div class="hero-badges">
@@ -84,12 +91,14 @@
                 <a id="resumeBtn" href="#" class="btn btn-primary" target="_blank" rel="noopener">
                     <i class="fas fa-eye"></i> Resume
                 </a>
-                <a href="javascript:void(0)" onclick="document.getElementById('projects')?.scrollIntoView({behavior:'smooth'})" class="btn btn-secondary">View Projects</a>
+                <a href="javascript:void(0)"
+                    onclick="document.getElementById('projects')?.scrollIntoView({behavior:'smooth'})"
+                    class="btn btn-secondary">View Projects</a>
                 <button id="shareBtn" class="btn btn-share" style="display:none" aria-label="Share portfolio">
                     <i class="fas fa-share-alt"></i>
                 </button>
             </div>
-            
+
             <!-- Questions terminal trigger -->
             <button id="questionsBtn" class="btn-questions">
                 <i class="fas fa-terminal"></i> Ask Me Anything
@@ -110,8 +119,7 @@
                 <p id="aboutP2" class="text-dim"></p>
                 <div id="availabilityBadge" class="avail-badge">
                     <div class="avail-photo">
-                        <img id="profilePhoto" src="assets/photo.jpg" alt="Profile"
-                             onerror="this.style.display='none'">
+                        <img id="profilePhoto" src="assets/photo.jpg" alt="Profile" onerror="this.style.display='none'">
                     </div>
                     <div>
                         <div class="avail-name">Currently Available</div>
@@ -145,23 +153,26 @@
         <section id="skills" class="mobile-section">
             <div class="section-label"><span>Skills</span></div>
             <h2 class="section-title">Tech <span class="clr-accent2">Arsenal</span></h2>
-            
+
             <!-- Feature 9: Skill Sphere -->
             <div id="skillSphereContainer" class="skill-sphere"></div>
-            
+
             <!-- Feature 1: Scratch Card -->
             <div class="scratch-card-container">
                 <div class="scratch-card-wrapper" id="scratchCardWrapper">
                     <div class="scratch-content" id="scratchContent">
                         <i class="fas fa-magic clr-accent scratch-icon"></i>
-                        <h4 class="scratch-title">Hidden Talent <span id="scratchTalentNum" class="clr-accent2">#1</span></h4>
-                        <p id="scratchTalentText" class="scratch-text">I automated my own coffee machine using an IoT relay & cron job! ☕</p>
+                        <h4 class="scratch-title">Hidden Talent <span id="scratchTalentNum"
+                                class="clr-accent2">#1</span></h4>
+                        <p id="scratchTalentText" class="scratch-text">I automated my own coffee machine using an IoT
+                            relay & cron job! ☕</p>
                     </div>
                     <canvas id="scratchCanvas" class="scratch-canvas"></canvas>
                 </div>
-                <button id="scratchNextBtn" class="scratch-next-btn"><i class="fas fa-sync-alt"></i> Scratch Another Talent</button>
+                <button id="scratchNextBtn" class="scratch-next-btn"><i class="fas fa-sync-alt"></i> Scratch Another
+                    Talent</button>
             </div>
-            
+
             <div class="skills-list" id="skillsGrid"></div>
         </section>
 
@@ -173,8 +184,10 @@
             <div class="projects-tinder-wrapper">
                 <div class="projects-stack" id="projectsGrid"></div>
                 <div class="tinder-controls">
-                    <button id="tinderPassBtn" class="tinder-btn tinder-pass" title="Pass / Next"><i class="fas fa-times"></i></button>
-                    <button id="tinderLikeBtn" class="tinder-btn tinder-like" title="Love project!"><i class="fas fa-heart"></i></button>
+                    <button id="tinderPassBtn" class="tinder-btn tinder-pass" title="Pass / Next"><i
+                            class="fas fa-times"></i></button>
+                    <button id="tinderLikeBtn" class="tinder-btn tinder-like" title="Love project!"><i
+                            class="fas fa-heart"></i></button>
                 </div>
             </div>
         </section>
@@ -204,7 +217,8 @@
         <section id="contact" class="mobile-section">
             <div class="section-label"><span>Contact</span></div>
             <h2 class="section-title">Let's <span class="clr-accent">Connect</span></h2>
-            <p class="section-subtitle text-dim">Got a challenging project? Looking for a motivated fresher? I'm all ears.</p>
+            <p class="section-subtitle text-dim">Got a challenging project? Looking for a motivated fresher? I'm all
+                ears.</p>
             <form id="contactForm" class="mobile-contact-form">
                 <div class="form-group">
                     <label>Name</label>
@@ -239,7 +253,8 @@
                     <div>
                         <div class="info-label">Phone</div>
                         <p id="contactPhone" class="info-value phone-toggle"></p>
-                        <p id="contactPhonePrivacy" class="info-value phone-toggle privacy-msg" style="display:none">🔒 Privacy matters — use LinkedIn or Email</p>
+                        <p id="contactPhonePrivacy" class="info-value phone-toggle privacy-msg" style="display:none">🔒
+                            Privacy matters — use LinkedIn or Email</p>
                     </div>
                 </div>
                 <div class="info-card">
@@ -279,8 +294,10 @@
         <section class="mobile-section ai-statement-section">
             <div class="ai-card">
                 <div class="ai-icon"><i class="fas fa-brain"></i></div>
-                <p class="ai-line1">"Yes, I built this with AI. In today's world, the real race isn't about avoiding the tools—it's about who can leverage them to build something better and faster."</p>
-                <p class="ai-line2">"Built efficiently using AI, guided by human strategy. Embracing the future of development means mastering the tools that accelerate execution."</p>
+                <p class="ai-line1">"Yes, I built this with AI. In today's world, the real race isn't about avoiding the
+                    tools—it's about who can leverage them to build something better and faster."</p>
+                <p class="ai-line2">"Built efficiently using AI, guided by human strategy. Embracing the future of
+                    development means mastering the tools that accelerate execution."</p>
             </div>
         </section>
 
@@ -295,15 +312,19 @@
 
                 <!-- QUICK CONNECT TRIGGER (Desktop-style QuickLink feature) -->
                 <div class="mobile-quicklinks-container">
-                    <button id="mobileQuickLinkBtn" class="mobile-quicklink-btn" aria-expanded="false" aria-label="Toggle Quick Links">
-                        <i class="fas fa-bolt"></i> <span>Quick Connect</span> <i class="fas fa-chevron-down mq-chevron" id="mqChevron"></i>
+                    <button id="mobileQuickLinkBtn" class="mobile-quicklink-btn" aria-expanded="false"
+                        aria-label="Toggle Quick Links">
+                        <i class="fas fa-bolt"></i> <span>Quick Connect</span> <i class="fas fa-chevron-down mq-chevron"
+                            id="mqChevron"></i>
                     </button>
                     <div id="mobileQuickLinkMenu" class="mobile-quicklink-menu" style="display: none;">
-                        <a id="mqTelegramLink" href="https://t.me/theabhijaychauhan" target="_blank" rel="noopener noreferrer" class="mq-btn mq-telegram">
+                        <a id="mqTelegramLink" href="https://t.me/theabhijaychauhan" target="_blank"
+                            rel="noopener noreferrer" class="mq-btn mq-telegram">
                             <i class="fab fa-telegram-plane"></i>
                             <span>Telegram</span>
                         </a>
-                        <a id="mqInstagramLink" href="https://instagram.com/theabhijaychauhan" target="_blank" rel="noopener noreferrer" class="mq-btn mq-instagram">
+                        <a id="mqInstagramLink" href="https://instagram.com/theabhijaychauhan" target="_blank"
+                            rel="noopener noreferrer" class="mq-btn mq-instagram">
                             <i class="fab fa-instagram"></i>
                             <span>Instagram</span>
                         </a>
@@ -318,7 +339,8 @@
 
         <!-- FOOTER -->
         <footer class="mobile-footer">
-            <p>&copy; <span id="footerYear"></span> <span id="footerName"></span>. Engineered with <span class="clr-accent">&hearts;</span> and caffeine.</p>
+            <p>&copy; <span id="footerYear"></span> <span id="footerName"></span>. Engineered with <span
+                    class="clr-accent">&hearts;</span> and caffeine.</p>
             <div class="footer-status">
                 <span class="footer-dot"></span>
                 <span>All systems operational</span>
@@ -330,7 +352,8 @@
     <div id="gameModal" class="game-modal" style="display:none">
         <div class="game-modal-inner">
             <div class="game-modal-header">
-                <button id="backArcadeBtn" class="game-modal-back" style="display:none"><i class="fas fa-arrow-left"></i></button>
+                <button id="backArcadeBtn" class="game-modal-back" style="display:none"><i
+                        class="fas fa-arrow-left"></i></button>
                 <span id="gameModalTitle" class="game-modal-title"><i class="fas fa-gamepad"></i> Cyber Arcade</span>
                 <button id="closeGameModal" class="game-modal-close"><i class="fas fa-times"></i></button>
             </div>
@@ -384,11 +407,16 @@
 
     <!-- BOTTOM NAV -->
     <nav class="bottom-nav" id="bottomNav">
-        <a href="javascript:void(0)" class="nav-item active" data-sec="home">    <i class="fas fa-home"></i>        <span>Home</span></a>
-        <a href="javascript:void(0)" class="nav-item" data-sec="about">          <i class="fas fa-user"></i>        <span>About</span></a>
-        <a href="javascript:void(0)" class="nav-item" data-sec="skills">         <i class="fas fa-code"></i>        <span>Skills</span></a>
-        <a href="javascript:void(0)" class="nav-item" data-sec="projects">       <i class="fas fa-layer-group"></i> <span>Work</span></a>
-        <a href="javascript:void(0)" class="nav-item" data-sec="contact">        <i class="fas fa-envelope"></i>    <span>Contact</span></a>
+        <a href="javascript:void(0)" class="nav-item active" data-sec="home"> <i class="fas fa-home"></i>
+            <span>Home</span></a>
+        <a href="javascript:void(0)" class="nav-item" data-sec="about"> <i class="fas fa-user"></i>
+            <span>About</span></a>
+        <a href="javascript:void(0)" class="nav-item" data-sec="skills"> <i class="fas fa-code"></i>
+            <span>Skills</span></a>
+        <a href="javascript:void(0)" class="nav-item" data-sec="projects"> <i class="fas fa-layer-group"></i>
+            <span>Work</span></a>
+        <a href="javascript:void(0)" class="nav-item" data-sec="contact"> <i class="fas fa-envelope"></i>
+            <span>Contact</span></a>
     </nav>
 
     <!-- SCRIPTS — config.js is shared from parent Portfolio 1/js/ -->
@@ -397,4 +425,5 @@
     <script src="presence/seo.js?v=1.0"></script>
     <script src="smartphone/js/mobile.js?v=3.5"></script>
 </body>
+
 </html>

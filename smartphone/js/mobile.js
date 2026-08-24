@@ -26,7 +26,7 @@ function initMobileBootLoader() {
     const loader = document.getElementById('mobileLoader');
     const logs = (CONFIG && CONFIG.bootLogs && CONFIG.bootLogs.length) ? CONFIG.bootLogs : [
         "[INIT] Mounting Mobile CSS v2.0...",
-        "[OK] Initializing SRE Neural Network...",
+        "[OK] Initializing Cloud Engineer Neural Network...",
         "[OK] Security Protocols Verified",
         "[READY] Welcome " + (CONFIG.name || 'User')
     ];
@@ -75,7 +75,7 @@ function populateMobileSite() {
     const mobileHeader = document.querySelector('.mobile-header');
     if (mobileHeader) {
         const isShadeEnabled = (C.headerShade !== undefined) ? !!C.headerShade :
-                               (S.headerShade !== false);
+            (S.headerShade !== false);
         if (isShadeEnabled) {
             mobileHeader.classList.add('has-shade');
         } else {
@@ -245,8 +245,8 @@ function populateMobileSite() {
                     <div class="timeline-school">${e.institution}</div>
                     <div class="timeline-gpa">GPA: ${e.gpa}</div>
                     ${e.highlights && e.highlights.length
-                        ? `<ul class="timeline-highlights">${e.highlights.map(h => `<li>${h}</li>`).join('')}</ul>`
-                        : ''}
+                    ? `<ul class="timeline-highlights">${e.highlights.map(h => `<li>${h}</li>`).join('')}</ul>`
+                    : ''}
                 </div>
             `).join('');
         } else if (eduSection) {
@@ -366,9 +366,9 @@ function buildSocialLinks() {
     const C = CONFIG;
     const icons = {
         linkedin: 'fab fa-linkedin-in',
-        github:   'fab fa-github',
-        devto:    'fab fa-dev',
-        youtube:  'fab fa-youtube',
+        github: 'fab fa-github',
+        devto: 'fab fa-dev',
+        youtube: 'fab fa-youtube',
     };
     return Object.entries(C.links)
         .filter(([, url]) => url)
@@ -488,7 +488,7 @@ function initTyping(strings) {
 function initBottomNav() {
     const navItems = document.querySelectorAll('.nav-item');
     const sectionIds = ['home', 'about', 'skills', 'projects', 'education', 'certifications', 'achievements', 'contact'];
-    
+
     // Add click handler to prevent any default anchor reload and smooth scroll instead
     navItems.forEach(item => {
         item.addEventListener('click', (e) => {
@@ -516,7 +516,7 @@ function initBottomNav() {
     // Scroll listener to update active item as user scrolls
     function updateActiveOnScroll() {
         const scrollPosition = window.pageYOffset + 150;
-        
+
         let currentSection = 'home';
         sectionIds.forEach(id => {
             const sec = document.getElementById(id);
@@ -528,7 +528,7 @@ function initBottomNav() {
                 }
             }
         });
-        
+
         // Edge case: reached bottom of page
         if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 60) {
             currentSection = 'contact';
@@ -564,7 +564,7 @@ function triggerConfetti() {
     const end = Date.now() + duration;
     const colors = ['#00ffc8', '#ff007f', '#ffbd2e', '#9d00ff', '#00e5ff', '#ffffff'];
     (function frame() {
-        confetti({ particleCount: 5, angle: 60,  spread: 55, origin: { x: 0 }, colors });
+        confetti({ particleCount: 5, angle: 60, spread: 55, origin: { x: 0 }, colors });
         confetti({ particleCount: 5, angle: 120, spread: 55, origin: { x: 1 }, colors });
         if (Date.now() < end) requestAnimationFrame(frame);
     }());
@@ -637,12 +637,12 @@ function initMatrixMode() {
     if (!photo) return;
     let tapCount = 0;
     let tapTimeout;
-    
+
     photo.addEventListener('click', (e) => {
         // Only trigger if they actually tapped fast, don't follow link yet if tapping
         tapCount++;
         clearTimeout(tapTimeout);
-        
+
         if (tapCount >= 5) {
             e.preventDefault();
             document.body.classList.toggle('matrix-mode');
@@ -659,9 +659,9 @@ function initMatrixMode() {
 async function initLiveTelemetry() {
     const statusSpan = document.getElementById('heroTelemetry');
     if (!statusSpan) return;
-    
+
     let telemetryString = '';
-    
+
     // Check battery only
     if (navigator.getBattery) {
         try {
@@ -669,7 +669,7 @@ async function initLiveTelemetry() {
             const level = Math.round(battery.level * 100);
             const isCharging = battery.charging ? '⚡' : '🔋';
             telemetryString = `Your Device: ${isCharging} ${level}%`;
-            
+
             // Listen for battery changes to update live
             battery.addEventListener('levelchange', () => initLiveTelemetry());
             battery.addEventListener('chargingchange', () => initLiveTelemetry());
@@ -679,7 +679,7 @@ async function initLiveTelemetry() {
     } else {
         telemetryString = 'System Operational';
     }
-    
+
     statusSpan.textContent = telemetryString;
 }
 
@@ -712,7 +712,7 @@ function initPhonePrivacyFlip() {
     let showPhone = true;
     setInterval(() => {
         showPhone = !showPhone;
-        phone.style.display   = showPhone ? '' : 'none';
+        phone.style.display = showPhone ? '' : 'none';
         privacy.style.display = showPhone ? 'none' : '';
     }, 2000);
 }
@@ -720,7 +720,7 @@ function initPhonePrivacyFlip() {
 // ── Terminal Swipe-to-Unlock (about_me) ──────────────
 function initTerminalSwipeUnlock() {
     const overlay = document.getElementById('terminalOverlay');
-    const thumb   = document.getElementById('swipeThumb');
+    const thumb = document.getElementById('swipeThumb');
     if (!overlay || !thumb) return;
 
     // Wait for layout to settle before reading width
@@ -746,7 +746,7 @@ function initTerminalSwipeUnlock() {
             if (curX < maxSwipe * 0.92) {
                 curX = 0;
                 thumb.style.transition = 'transform 0.3s ease';
-                thumb.style.transform  = 'translateX(0px)';
+                thumb.style.transform = 'translateX(0px)';
                 setTimeout(() => { thumb.style.transition = 'none'; }, 300);
             }
         });
@@ -755,10 +755,10 @@ function initTerminalSwipeUnlock() {
 
 // ── Questions Modal ─────────────────────────────────
 function initQuestionsModal() {
-    const openBtn  = document.getElementById('questionsBtn');
-    const modal    = document.getElementById('questionsModal');
+    const openBtn = document.getElementById('questionsBtn');
+    const modal = document.getElementById('questionsModal');
     const closeBtn = document.getElementById('closeQModal');
-    const body     = document.getElementById('qmodalBody');
+    const body = document.getElementById('qmodalBody');
     if (!openBtn || !modal || !closeBtn || !body) return;
 
     const responses = {
@@ -801,7 +801,7 @@ function initQuestionsModal() {
             '── Query: 5-Year Goal',
             '> Lead cloud infrastructure architect for scalable platforms.',
             '> Master multi-cloud resilience & zero-downtime deployment pipelines.',
-            '> Mentor the next wave of DevOps & SRE engineers.'
+            '> Mentor the next wave of DevOps & Cloud Engineer engineers.'
         ],
         outage: [
             '── Query: Handling Outages',
@@ -876,16 +876,16 @@ function initCyberpunkToggle() {
 function slowScrollToTop(durationMs = 1500) {
     const startPos = window.pageYOffset;
     const startTime = performance.now();
-    
+
     function step(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / durationMs, 1);
-        
+
         // Cubic ease-out for a smooth deceleration
         const easeProgress = 1 - Math.pow(1 - progress, 3);
-        
+
         window.scrollTo(0, startPos * (1 - easeProgress));
-        
+
         if (progress < 1) {
             requestAnimationFrame(step);
         }
@@ -898,24 +898,24 @@ function initHoldToDeploy() {
     const btn = document.getElementById('deployBtn');
     const progress = btn?.querySelector('.deploy-progress');
     if (!btn || !progress) return;
-    
+
     let holdTimer;
     let percent = 0;
     let isHolding = false;
-    
+
     function updateProgress() {
         if (!isHolding) return;
         percent += 2;
         progress.style.width = `${percent}%`;
-        
+
         if (percent > 30) btn.classList.add('launching');
-        
+
         if (percent >= 100) {
             isHolding = false;
             percent = 0;
             progress.style.width = '0%';
             btn.classList.remove('launching');
-            
+
             // Balanced festive confetti burst
             if (typeof confetti !== 'undefined') {
                 confetti({
@@ -925,7 +925,7 @@ function initHoldToDeploy() {
                     colors: ['#00ffc8', '#ff007f', '#ffbd2e', '#9d00ff', '#00e5ff', '#ffffff']
                 });
             }
-            
+
             // Slow smooth scroll back to top
             slowScrollToTop(1500);
             showToast('🚀 Deployment Successful!');
@@ -933,10 +933,10 @@ function initHoldToDeploy() {
             holdTimer = requestAnimationFrame(updateProgress);
         }
     }
-    
+
     const startHold = (e) => { e.preventDefault(); isHolding = true; percent = 0; updateProgress(); };
     const stopHold = () => { isHolding = false; percent = 0; progress.style.width = '0%'; btn.classList.remove('launching'); cancelAnimationFrame(holdTimer); };
-    
+
     btn.addEventListener('touchstart', startHold, { passive: false });
     btn.addEventListener('touchend', stopHold);
     btn.addEventListener('touchcancel', stopHold);
@@ -950,13 +950,13 @@ function initTerminalChatbot() {
     const chatUI = document.getElementById('terminalChatUI');
     const termBody = document.getElementById('terminalBody');
     if (!chatUI || !termBody) return;
-    
+
     const responses = {
         strength: ["My biggest strength?", "> I automate the boring stuff so humans can do the creative stuff.", "> I build systems that don't wake you up at 3 AM."],
         weakness: ["My weakness?", "> I sometimes over-engineer simple scripts just for fun.", "> I drink too much coffee."],
         hire: ["Why hire me?", "> Because I treat your infrastructure like it's my own.", "> I'm a fresher with a hacker's mindset and 10x the drive."]
     };
-    
+
     chatUI.querySelectorAll('.chat-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const q = btn.getAttribute('data-q');
@@ -982,7 +982,7 @@ function initMobileParticles() {
     const canvas = document.getElementById('mobileParticleCanvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    
+
     let width = 0;
     let height = 0;
     let dpr = 1;
@@ -1050,21 +1050,21 @@ function initMobileParticles() {
 
     // ── 3. CLOUD REGION DATACENTER NODES ────────────────────────────
     const CLOUD_NODES = [
-        { id: 'USE1', label: 'US-EAST (VA)',      lat: 38.0,  lon: -78.0,  color: '#00ffc8' }, // 0
-        { id: 'USW2', label: 'US-WEST (OR)',      lat: 45.5,  lon: -122.6, color: '#00f0ff' }, // 1
-        { id: 'USC1', label: 'US-CENTRAL (OH)',   lat: 40.0,  lon: -83.0,  color: '#38bdf8' }, // 2
-        { id: 'EUC1', label: 'EU-CENTRAL (FRA)',  lat: 50.1,  lon: 8.6,    color: '#fbbf24' }, // 3
-        { id: 'EUW1', label: 'EU-WEST (LON)',     lat: 51.5,  lon: -0.1,   color: '#00ffc8' }, // 4
-        { id: 'EUN1', label: 'EU-NORTH (STO)',    lat: 59.3,  lon: 18.0,   color: '#38bdf8' }, // 5
-        { id: 'APS1', label: 'AP-SOUTH (MUMBAI)', lat: 19.0,  lon: 72.8,   color: '#00ffc8' }, // 6
-        { id: 'APSE1', label: 'AP-SE (SG)',       lat: 1.35,  lon: 103.8,  color: '#fbbf24' }, // 7
-        { id: 'APE1', label: 'AP-EAST (TOKYO)',   lat: 35.6,  lon: 139.6,  color: '#00f0ff' }, // 8
-        { id: 'APNE2', label: 'AP-NE (SEOUL)',    lat: 37.5,  lon: 127.0,  color: '#38bdf8' }, // 9
-        { id: 'APSE2', label: 'AP-SE (SYDNEY)',   lat: -33.8, lon: 151.2,  color: '#00ffc8' }, // 10
-        { id: 'SAE1', label: 'SA-EAST (SP)',      lat: -23.5, lon: -46.6,  color: '#f59e0b' }, // 11
-        { id: 'MES1', label: 'ME-SOUTH (BHR)',    lat: 26.0,  lon: 50.5,   color: '#fbbf24' }, // 12
-        { id: 'AFS1', label: 'AF-SOUTH (CT)',     lat: -33.9, lon: 18.4,   color: '#00f0ff' }, // 13
-        { id: 'CAC1', label: 'CA-CENTRAL (MTL)',  lat: 45.5,  lon: -73.5,  color: '#00ffc8' }  // 14
+        { id: 'USE1', label: 'US-EAST (VA)', lat: 38.0, lon: -78.0, color: '#00ffc8' }, // 0
+        { id: 'USW2', label: 'US-WEST (OR)', lat: 45.5, lon: -122.6, color: '#00f0ff' }, // 1
+        { id: 'USC1', label: 'US-CENTRAL (OH)', lat: 40.0, lon: -83.0, color: '#38bdf8' }, // 2
+        { id: 'EUC1', label: 'EU-CENTRAL (FRA)', lat: 50.1, lon: 8.6, color: '#fbbf24' }, // 3
+        { id: 'EUW1', label: 'EU-WEST (LON)', lat: 51.5, lon: -0.1, color: '#00ffc8' }, // 4
+        { id: 'EUN1', label: 'EU-NORTH (STO)', lat: 59.3, lon: 18.0, color: '#38bdf8' }, // 5
+        { id: 'APS1', label: 'AP-SOUTH (MUMBAI)', lat: 19.0, lon: 72.8, color: '#00ffc8' }, // 6
+        { id: 'APSE1', label: 'AP-SE (SG)', lat: 1.35, lon: 103.8, color: '#fbbf24' }, // 7
+        { id: 'APE1', label: 'AP-EAST (TOKYO)', lat: 35.6, lon: 139.6, color: '#00f0ff' }, // 8
+        { id: 'APNE2', label: 'AP-NE (SEOUL)', lat: 37.5, lon: 127.0, color: '#38bdf8' }, // 9
+        { id: 'APSE2', label: 'AP-SE (SYDNEY)', lat: -33.8, lon: 151.2, color: '#00ffc8' }, // 10
+        { id: 'SAE1', label: 'SA-EAST (SP)', lat: -23.5, lon: -46.6, color: '#f59e0b' }, // 11
+        { id: 'MES1', label: 'ME-SOUTH (BHR)', lat: 26.0, lon: 50.5, color: '#fbbf24' }, // 12
+        { id: 'AFS1', label: 'AF-SOUTH (CT)', lat: -33.9, lon: 18.4, color: '#00f0ff' }, // 13
+        { id: 'CAC1', label: 'CA-CENTRAL (MTL)', lat: 45.5, lon: -73.5, color: '#00ffc8' }  // 14
     ];
 
     // ── 4. MULTI-DIRECTIONAL 3D LASER DATA ARCS ──
@@ -1466,7 +1466,7 @@ function initMobileParticles() {
 // ── FEATURE 1: Scratch-Off Card with Multi-Talents ──────────────
 function initScratchCard() {
     const isScratchEnabled = (CONFIG.scratchCard !== undefined) ? !!CONFIG.scratchCard :
-                             (CONFIG.showSections && CONFIG.showSections.scratchCard === true);
+        (CONFIG.showSections && CONFIG.showSections.scratchCard === true);
     const container = document.querySelector('.scratch-card-container');
     if (!isScratchEnabled) {
         if (container) container.style.display = 'none';
@@ -1476,7 +1476,7 @@ function initScratchCard() {
 
     const canvas = document.getElementById('scratchCanvas');
     const textEl = document.getElementById('scratchTalentText');
-    const numEl  = document.getElementById('scratchTalentNum');
+    const numEl = document.getElementById('scratchTalentNum');
     const nextBtn = document.getElementById('scratchNextBtn');
     if (!canvas || !textEl) return;
 
@@ -1499,7 +1499,7 @@ function initScratchCard() {
         ctx.fillStyle = '#1e293b';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.font = '600 13px sans-serif'; ctx.fillStyle = '#94a3b8'; ctx.textAlign = 'center';
-        ctx.fillText('✨ Scratch here to reveal talent', canvas.width/2, canvas.height/2 + 4);
+        ctx.fillText('✨ Scratch here to reveal talent', canvas.width / 2, canvas.height / 2 + 4);
         ctx.globalCompositeOperation = 'destination-out';
     }
 
@@ -1547,8 +1547,18 @@ function initScratchCard() {
 
 // ── FEATURE 9: Skill Sphere (Original Centered Fibonacci 3D Rotation — Non-Interactive) ──
 function initSkillSphere() {
+    const isSphereEnabled = (CONFIG.skillSphere !== undefined) ? !!CONFIG.skillSphere :
+                            (CONFIG.showSections && CONFIG.showSections.skillSphere === true);
     const container = document.getElementById('skillSphereContainer');
-    if (!container || !CONFIG.skills || !CONFIG.skills.length) return;
+    if (!container) return;
+
+    if (!isSphereEnabled) {
+        container.style.display = 'none';
+        return;
+    }
+    container.style.display = '';
+
+    if (!CONFIG.skills || !CONFIG.skills.length) return;
 
     container.innerHTML = '';
     const tags = CONFIG.skills.map(s => s.name);
@@ -2031,9 +2041,9 @@ function initMobileGames() {
                 ctx.fillStyle = '#ffffff';
                 ctx.font = '700 13px Space Grotesk';
                 ctx.textAlign = 'center';
-                ctx.fillText('CRITICAL TILT! ROCKET CRASHED', canvas.width/2, canvas.height/2 - 10);
+                ctx.fillText('CRITICAL TILT! ROCKET CRASHED', canvas.width / 2, canvas.height / 2 - 10);
                 ctx.font = '11px JetBrains Mono';
-                ctx.fillText(`Altitude: ${altitude} km`, canvas.width/2, canvas.height/2 + 15);
+                ctx.fillText(`Altitude: ${altitude} km`, canvas.width / 2, canvas.height / 2 + 15);
                 return;
             }
 
@@ -2045,7 +2055,7 @@ function initMobileGames() {
                 ctx.fillStyle = '#080d18';
                 ctx.font = '700 14px Space Grotesk';
                 ctx.textAlign = 'center';
-                ctx.fillText('🚀 ORBIT ACHIEVED! VICTORY!', canvas.width/2, canvas.height/2);
+                ctx.fillText('🚀 ORBIT ACHIEVED! VICTORY!', canvas.width / 2, canvas.height / 2);
                 return;
             }
 
@@ -2579,7 +2589,7 @@ function initMobileGames() {
 
                     let effectiveFans = fans + (turboFans ? 35 : 0);
                     let coolingFactor = (chEco => (!powerSaver && chEco ? 0.18 : 0.35))(challengesList[Math.min(challengesList.length - 1, challengeCount - 1)]?.checkEcoCooling);
-                    
+
                     let baseTemp = 20 + (cpuFreq * 10) + (gpuClock * 0.012) + (voltage * 18) + (threads * 1.8) + (busSpeed * 3.0) + extraHeat - (effectiveFans * coolingFactor);
 
                     if (throttleActive) baseTemp -= 14;
@@ -2899,11 +2909,11 @@ function initMobileGames() {
 // ── MOBILE QUICK CONNECT (3 Options with Collapsible Toggle) ──
 function initMobileQuickLinks() {
     const triggerBtn = document.getElementById('mobileQuickLinkBtn');
-    const menu       = document.getElementById('mobileQuickLinkMenu');
-    const telegram   = document.getElementById('mqTelegramLink');
-    const instagram  = document.getElementById('mqInstagramLink');
-    const copyBtn    = document.getElementById('mqCopyEmailBtn');
-    const copyLabel  = document.getElementById('mqEmailText');
+    const menu = document.getElementById('mobileQuickLinkMenu');
+    const telegram = document.getElementById('mqTelegramLink');
+    const instagram = document.getElementById('mqInstagramLink');
+    const copyBtn = document.getElementById('mqCopyEmailBtn');
+    const copyLabel = document.getElementById('mqEmailText');
     if (!triggerBtn || !menu) return;
 
     // Load custom links from CONFIG
@@ -2921,7 +2931,7 @@ function initMobileQuickLinks() {
         isOpen = !isOpen;
         triggerBtn.classList.toggle('open', isOpen);
         triggerBtn.setAttribute('aria-expanded', String(isOpen));
-        
+
         if (isOpen) {
             menu.style.display = 'flex';
             if (navigator.vibrate) navigator.vibrate(25);
