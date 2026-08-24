@@ -12,7 +12,7 @@ const CONFIG = {
         stats: true,          // Quick Stats Counter Bar under Hero (true = show, false = hide)
         about: true,          // About Me & Terminal section (true = show, false = hide)
         skills: true,         // Technical Skills Arsenal (true = show, false = hide)
-        projects: true,        // Featured Projects Grid (true = show, false = hide)
+        projects: false,        // Featured Projects Grid (true = show, false = hide)
         education: true,      // Academic Background & Timeline (true = show, false = hide)
         certifications: true, // Validated Certifications (true = show, false = hide)
         achievements: true,   // Achievements & Highlights (true = show, false = hide)
@@ -36,7 +36,8 @@ const CONFIG = {
         dynamicIsland: true,  // Apple-Style Dynamic Island Dock (Telegram, Instagram, Copy Email)
         skillRadarChart: true, // 6-Axis Interactive DevOps Skill Radar Chart (true = enable, false = disable)
         headerShade: true,    // Mint (#64e59a) top header shade tint on mobile (true = enable, false = disable)
-        scratchCard: false,   // Mobile Scratch-Off Hidden Talent Card (true = show, false = hide)
+        scratchCard: true,   // Mobile Scratch-Off Hidden Talent Card (true = show, false = hide)
+        skillSphere: false,   // 3D Floating Skill Word Sphere on mobile (true = show, false = hide)
     },
 
     // ── MOBILE HEADER SHADE TOGGLE ─────────────────────────
@@ -44,6 +45,9 @@ const CONFIG = {
 
     // ── MOBILE SCRATCH CARD TOGGLE ─────────────────────────
     scratchCard: false, // Set to false to disable scratch card, true to enable
+
+    // ── MOBILE SKILL SPHERE TOGGLE ─────────────────────────
+    skillSphere: false, // Set to false to hide skill sphere on mobile, true to show
 
     // ── MOBILE MINI-GAMES TOGGLES (Set individual games to true/false) ──
     mobileGamesList: {
@@ -62,7 +66,7 @@ const CONFIG = {
     // Edit/Add text lines below to customize the bootup text on page load/refresh
     bootLogs: [
         "[INIT] Mounting in CSS v2.0...",
-        "[OK] Initializing SRE Neural Network...",
+        "[OK] Initializing Cloud Engineer Neural Network...",
         "[OK] Security Protocols & Certificates Verified",
         "[READY] System Operational — Welcome to My Portfolio"
     ],
@@ -99,7 +103,7 @@ const CONFIG = {
     // ── BASIC INFO ──────────────────────────────────────────
     name: "Abhijay Chauhan",
     initials: "theAbhijay",                          // 2-3 letters for top nav logo
-    title: "DevOps Engineer & SRE",
+    title: "DevOps Engineer & Cloud Engineer",
     tagline: "Building reliable software, analyzing data, and turning complex problems into practical solutions.",
     email: "abhijaychauhan.dev@gmail.com",
     phone: "+91 92XXX XXX48",
@@ -123,39 +127,39 @@ const CONFIG = {
     //    Set any URL to "" to hide that social icon
     links: {
         linkedin: "www.linkedin.com/in/abhijaychauhan",
-        github:   "https://github.com/theAbhijayChauhan",
-        devto:    "https://dev.to/theabhijaychauhan",
-        youtube:  "",                        // leave empty to hide
+        github: "https://github.com/theAbhijayChauhan",
+        devto: "https://dev.to/theabhijaychauhan",
+        youtube: "",                        // leave empty to hide
     },
 
     // ── HERO TYPING STRINGS ────────────────────────────────
     typingStrings: [
         "DevOps Engineer",
-        "Site Reliability Engineer",
+        "Cloud Engineer",
         "Cloud Enthusiast",
         "Automation Builder",
         "Linux Tinkerer",
-        "Kubernetes Explorer",
+        "QA/Test Engineer",
     ],
 
     // ── STATS ──────────────────────────────────────────────
     stats: [
-        { value: 3,  suffix: "+", label: "Projects Built" },
-        { value: 8,   suffix: "+",  label: "Certifications" },
-        { value: 10,  suffix: "+", label: "Technologies" },
+        { value: 3, suffix: "+", label: "Projects Built" },
+        { value: 8, suffix: "+", label: "Certifications" },
+        { value: 10, suffix: "+", label: "Technologies" },
         { value: 500, suffix: "+", label: "GitHub Commits" },
     ],
 
     // ── ABOUT ──────────────────────────────────────────────
     about: [
-        "I'm a recent graduate passionate about DevOps, Site Reliability Engineering, and cloud-native technologies. While I may be a fresher by title, I've spent the last year building real infrastructure projects, earning industry certifications, and contributing to open source — because the best way to learn production systems is to build them.",
+        "I'm a recent graduate passionate about DevOps, and cloud-native technologies. While I may be a fresher by title, I've spent the last year building real infrastructure projects, earning industry certifications, and contributing to open source — because the best way to learn production systems is to build them.",
         "I believe in infrastructure as code, automation over manual work, and that every outage is a learning opportunity. I'm looking for a team where I can grow, contribute, and help build systems that are reliable at scale.",
     ],
 
     // ── TERMINAL INFO ──────────────────────────────────────
     terminal: {
         name: "Abhijay Chauhan",
-        role: "DevOps Engineer & SRE",
+        role: "DevOps Engineer & Cloud Engineer",
         location: "Lucknow, Uttar Pradesh, India",
         email: "abhijaychauhan.dev@gmail.com",
         education: "B.Tech in Computer Science",
@@ -166,15 +170,15 @@ const CONFIG = {
     // ── SKILLS ─────────────────────────────────────────────
     //    color options: "accent" (teal) or "accent2" (amber)
     skills: [
-        { name: "Docker & Containers",    icon: "fab fa-docker",         level: 85, color: "accent"  },
-        { name: "Kubernetes",             icon: "fas fa-dharmachakra",   level: 75, color: "accent"  },
-        { name: "CI/CD Pipelines",        icon: "fas fa-code-branch",    level: 80, color: "accent2" },
-        { name: "AWS Cloud",              icon: "fab fa-aws",            level: 70, color: "accent2" },
-        { name: "Terraform & IaC",        icon: "fas fa-cubes",          level: 72, color: "accent"  },
-        { name: "Linux Administration",   icon: "fab fa-linux",          level: 82, color: "accent2" },
-        { name: "Python Scripting",       icon: "fab fa-python",         level: 85, color: "accent"  },
-        { name: "Git & GitHub",           icon: "fab fa-github",         level: 88, color: "accent2" },
-        { name: "Monitoring & Logging",   icon: "fas fa-chart-area",     level: 68, color: "accent"  },
+        { name: "Docker & Containers", icon: "fab fa-docker", level: 85, color: "accent" },
+        { name: "Kubernetes", icon: "fas fa-dharmachakra", level: 75, color: "accent" },
+        { name: "CI/CD Pipelines", icon: "fas fa-code-branch", level: 80, color: "accent2" },
+        { name: "AWS Cloud", icon: "fab fa-aws", level: 70, color: "accent2" },
+        { name: "Terraform & IaC", icon: "fas fa-cubes", level: 72, color: "accent" },
+        { name: "Linux Administration", icon: "fab fa-linux", level: 82, color: "accent2" },
+        { name: "Python Scripting", icon: "fab fa-python", level: 85, color: "accent" },
+        { name: "Git & GitHub", icon: "fab fa-github", level: 88, color: "accent2" },
+        { name: "Monitoring & Logging", icon: "fas fa-chart-area", level: 68, color: "accent" },
     ],
 
     // ── EDUCATION ──────────────────────────────────────────

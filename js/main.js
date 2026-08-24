@@ -620,7 +620,7 @@ window.addEventListener('load', () => {
     const container = document.getElementById('bootLogsContainer');
     const logs = (CONFIG && CONFIG.bootLogs && CONFIG.bootLogs.length) ? CONFIG.bootLogs : [
         "[INIT] Mounting in CSS v2.0...",
-        "[OK] Initializing SRE Neural Network...",
+        "[OK] Initializing Cloud Engineer Neural Network...",
         "[OK] Security Protocols Verified",
         "[READY] Welcome Abhijay Chauhan"
     ];
@@ -670,10 +670,10 @@ function closeModalConveyor(modal) {
 
 // ── DESKTOP ASK ME ANYTHING TERMINAL ──────────────────────
 function initDesktopQuestions() {
-    const openBtn  = document.getElementById('desktopQuestionsBtn');
-    const modal    = document.getElementById('desktopQModal');
+    const openBtn = document.getElementById('desktopQuestionsBtn');
+    const modal = document.getElementById('desktopQModal');
     const closeBtn = document.getElementById('closeDesktopQModal');
-    const body     = document.getElementById('desktopQModalBody');
+    const body = document.getElementById('desktopQModalBody');
     if (!openBtn || !modal || !closeBtn || !body) return;
 
     const responses = {
@@ -695,13 +695,13 @@ function initDesktopQuestions() {
         hire: [
             '── Query: Why Hire You?',
             '> I treat your production infrastructure with the highest level of care & ownership.',
-            '> Fresher drive combined with a professional SRE mindset — 10x energy, 0 ego, fast learner.',
+            '> Fresher drive combined with a professional Cloud Engineer mindset — 10x energy, 0 ego, fast learner.',
             '> I don\'t just patch symptoms; I perform root-cause analysis so bugs never recur.',
             '> Multi-cloud fluency across AWS, GCP, Docker, Kubernetes, Prometheus, and Terraform.',
             '> Ready to contribute to your CI/CD pipelines & on-call reliability from Day 1.'
         ],
         devops: [
-            '── Query: Why DevOps & SRE?',
+            '── Query: Why DevOps & Cloud Engineer?',
             '> Closing the gap between software development & production ops is the ultimate challenge.',
             '> Owning the full lifecycle: local dev → containerization → CI/CD → multi-region cloud ship.',
             '> Infrastructure as Code turns hardware provisioning into version-controlled software.',
@@ -727,7 +727,7 @@ function initDesktopQuestions() {
             '── Query: 5-Year Vision',
             '> Lead Cloud Infrastructure & Reliability Architect for high-throughput global platforms.',
             '> Architect zero-downtime, multi-region failover systems handling millions of requests/sec.',
-            '> Author open-source SRE tools & contribute back to CNCF cloud projects.',
+            '> Author open-source Cloud Engineer tools & contribute back to CNCF cloud projects.',
             '> Mentor aspiring DevOps engineers and drive DevOps culture across engineering teams.'
         ],
         outage: [

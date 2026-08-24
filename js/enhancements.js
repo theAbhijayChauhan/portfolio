@@ -952,11 +952,11 @@
                 <!-- 1. EXECUTIVE DOSSIER HEADER -->
                 <div class="rd-card" style="border-left: 3px solid #00ffc8;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
-                        <span class="rd-badge-pill"><i class="fas fa-shield-alt"></i> SRE_DOSSIER // DEVOPS_ENGINEER</span>
+                        <span class="rd-badge-pill"><i class="fas fa-shield-alt"></i> Cloud Engineer_DOSSIER // DEVOPS_ENGINEER</span>
                         <span class="rd-badge-pill" style="border-color: #22c55e; color: #22c55e;"><span class="di-pulse-dot" style="display:inline-block; margin-right:4px; background:#22c55e; box-shadow:0 0 10px #22c55e;"></span> ACTIVE & AVAILABLE</span>
                     </div>
                     <h2 style="font-size: 1.75rem; font-weight: 800; color: #ffffff; margin: 6px 0 8px 0; letter-spacing: 0.5px; text-shadow: 0 0 14px rgba(0, 255, 200, 0.4);">${cfg.name || 'Abhijay Chauhan'}</h2>
-                    <p style="font-size: 1.15rem; color: #00ffc8; font-weight: 700; margin-bottom: 14px; font-family: 'JetBrains Mono', monospace;">${cfg.title || 'DevOps Engineer & SRE'}</p>
+                    <p style="font-size: 1.15rem; color: #00ffc8; font-weight: 700; margin-bottom: 14px; font-family: 'JetBrains Mono', monospace;">${cfg.title || 'DevOps Engineer & Cloud Engineer'}</p>
                     <div style="display: flex; flex-wrap: wrap; gap: 14px; font-size: 0.98rem; color: #cbd5e1;">
                         <span><i class="fas fa-map-marker-alt" style="color: #00ffc8;"></i> ${cfg.location || 'Lucknow, UP, India'}</span>
                         <span><i class="fas fa-envelope" style="color: #00ffc8;"></i> ${cfg.email || 'Email'}</span>
@@ -969,7 +969,7 @@
                 <div class="rd-card">
                     <div class="rd-card-title"><i class="fas fa-terminal"></i> Executive Technical Summary</div>
                     <p class="rd-summary">
-                        Results-driven <strong>DevOps Engineer & Site Reliability Engineer</strong> specializing in cloud-native infrastructure automation, zero-downtime Kubernetes deployments, and GitOps CI/CD delivery pipelines. Passionate about eliminating single points of failure, architecting self-healing clusters, and enforcing Infrastructure as Code (IaC) best practices.
+                        Results-driven <strong>DevOps Engineer & Cloud Engineer</strong> specializing in cloud-native infrastructure automation, zero-downtime Kubernetes deployments, and GitOps CI/CD delivery pipelines. Passionate about eliminating single points of failure, architecting self-healing clusters, and enforcing Infrastructure as Code (IaC) best practices.
                     </p>
                 </div>
 
@@ -1059,7 +1059,7 @@
                 <div class="rd-card">
                     <div class="rd-card-title"><i class="fas fa-graduation-cap"></i> Formal Education</div>
                     <p style="font-size: 1.15rem; font-weight: 700; color: #ffffff; margin-bottom: 4px;">Bachelor of Technology (B.Tech) in Computer Science & Engineering</p>
-                    <p style="font-size: 0.98rem; color: #00ffc8; font-family: 'JetBrains Mono', monospace;">Specialization: Cloud Computing, Distributed Systems & SRE</p>
+                    <p style="font-size: 0.98rem; color: #00ffc8; font-family: 'JetBrains Mono', monospace;">Specialization: Cloud Computing, Distributed Systems & Cloud Engineer</p>
                 </div>
             `;
         }
@@ -1112,11 +1112,11 @@
 
         // 6 DevOps Competency Dimensions
         const dimensions = [
-            { label: 'Cloud Architecture', score: 0.92, tech: 'AWS, GCP, VPC, Multi-Region SRE' },
+            { label: 'Cloud Architecture', score: 0.92, tech: 'AWS, GCP, VPC, Multi-Region Cloud Engineer' },
             { label: 'CI/CD Automation', score: 0.95, tech: 'GitHub Actions, Jenkins, ArgoCD, Pipelines' },
             { label: 'K8s & Containers', score: 0.90, tech: 'Kubernetes, Docker, Helm, Ingress, Pods' },
             { label: 'IaC & Terraform', score: 0.88, tech: 'Terraform Modules, Ansible, CloudFormation' },
-            { label: 'Observability & SRE', score: 0.86, tech: 'Prometheus, Grafana, Loki, Alertmanager' },
+            { label: 'Observability & Cloud Engineer', score: 0.86, tech: 'Prometheus, Grafana, Loki, Alertmanager' },
             { label: 'Linux & Security', score: 0.94, tech: 'Bash, Kernel Tuning, TLS, IAM, Hardening' }
         ];
 
