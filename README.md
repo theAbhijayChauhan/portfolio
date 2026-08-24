@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌐 Abhijay Chauhan — DevOps & SRE Interactive Portfolio
+# 🌐 Abhijay Chauhan — DevOps & Cloud Engineer Interactive Portfolio
 
 [![Live Demo](https://img.shields.io/badge/Live_Portfolio-00ffc8?style=for-the-badge&logo=google-chrome&logoColor=080b12)](https://theabhijaychauhan.github.io/portfolio/)
 [![Mobile App](https://img.shields.io/badge/Mobile_App-00b4d8?style=for-the-badge&logo=pwa&logoColor=080b12)](https://theabhijaychauhan.github.io/portfolio/smartphone/mobile.html)
@@ -10,7 +10,7 @@
 <br>
 
 <p align="center">
-  <b>A high-performance, futuristic 3D Cyber Cloud & SRE portfolio engineered with Vanilla JavaScript, hardware-accelerated Canvas projection, and adaptive multi-device architecture.</b>
+  <b>A high-performance, futuristic 3D Cyber Cloud & Cloud Engineer portfolio engineered with Vanilla JavaScript, hardware-accelerated Canvas projection, and adaptive multi-device architecture.</b>
 </p>
 
 <p align="center">
@@ -33,7 +33,7 @@ Built for resilience, speed, and visual impact. This portfolio showcases product
 $ curl -s https://theabhijaychauhan.github.io/portfolio/ | jq .
 {
   "name": "Abhijay Chauhan",
-  "role": "DevOps Engineer & Site Reliability Engineer (SRE)",
+  "role": "DevOps Engineer & Cloud Engineer",
   "mindset": "Automate everything, break nothing, build systems that never fail.",
   "location": "Lucknow, Uttar Pradesh, India",
   "status": "Open to high-impact engineering opportunities 🚀"
@@ -83,7 +83,7 @@ $ curl -s https://theabhijaychauhan.github.io/portfolio/ | jq .
 | **Cloud & Platforms** | ![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazon-aws&logoColor=white) ![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=flat-square&logo=kubernetes&logoColor=white) ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white) |
 | **Infrastructure as Code** | ![Terraform](https://img.shields.io/badge/Terraform-844FBA?style=flat-square&logo=terraform&logoColor=white) ![Ansible](https://img.shields.io/badge/Ansible-EE0000?style=flat-square&logo=ansible&logoColor=white) |
 | **CI / CD Pipelines** | ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=flat-square&logo=github-actions&logoColor=white) ![GitOps](https://img.shields.io/badge/GitOps-000000?style=flat-square&logo=git&logoColor=white) |
-| **Observability & SRE** | ![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=flat-square&logo=prometheus&logoColor=white) ![Grafana](https://img.shields.io/badge/Grafana-F46800?style=flat-square&logo=grafana&logoColor=white) |
+| **Observability & Cloud Engineer** | ![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=flat-square&logo=prometheus&logoColor=white) ![Grafana](https://img.shields.io/badge/Grafana-F46800?style=flat-square&logo=grafana&logoColor=white) |
 | **Scripting & Systems** | ![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black) ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=flat-square&logo=gnubash&logoColor=white) ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white) |
 | **Frontend & Graphics** | ![JavaScript](https://img.shields.io/badge/JavaScript_ES6+-F7DF1E?style=flat-square&logo=javascript&logoColor=black) ![HTML5 Canvas](https://img.shields.io/badge/HTML5_Canvas_2D/3D-E34F26?style=flat-square&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3_Glassmorphism-1572B6?style=flat-square&logo=css3&logoColor=white) |
 
