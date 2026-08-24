@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobilePremiumFeatures();
     initTinderProjects();
     initMobileQuickLinks();
+    initBackToTop();
     initMobiusRibbonFavicon();
 });
 
@@ -873,16 +874,17 @@ function initCyberpunkToggle() {
 }
 
 // ── Helper: Slow Smooth Scroll to Top ─────────────────────────
-function slowScrollToTop(durationMs = 1500) {
-    const startPos = window.pageYOffset;
+function slowScrollToTop(durationMs = 1300) {
+    const startPos = window.pageYOffset || document.documentElement.scrollTop || 0;
+    if (startPos <= 0) return;
     const startTime = performance.now();
 
     function step(currentTime) {
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / durationMs, 1);
 
-        // Cubic ease-out for a smooth deceleration
-        const easeProgress = 1 - Math.pow(1 - progress, 3);
+        // Quartic ease-out for ultra smooth deceleration
+        const easeProgress = 1 - Math.pow(1 - progress, 4);
 
         window.scrollTo(0, startPos * (1 - easeProgress));
 
@@ -893,53 +895,120 @@ function slowScrollToTop(durationMs = 1500) {
     requestAnimationFrame(step);
 }
 
-// ── FEATURE 2 (New): Hold to Deploy Rocket ───────────
+// ── FEATURE 2 (New): High-Precision Smooth Hold to Deploy ───────
 function initHoldToDeploy() {
     const btn = document.getElementById('deployBtn');
+    const textEl = btn?.querySelector('.deploy-text');
     const progress = btn?.querySelector('.deploy-progress');
+    const hintEl = document.querySelector('.deploy-hint');
     if (!btn || !progress) return;
 
-    let holdTimer;
-    let percent = 0;
+    const HOLD_DURATION = 1400; // 1.4 seconds smooth hold across 60/90/120Hz displays
+    let startTime = 0;
+    let holdAnimId = null;
     let isHolding = false;
+    let hasVibrated25 = false;
+    let hasVibrated50 = false;
+    let hasVibrated75 = false;
 
-    function updateProgress() {
+    function step(now) {
         if (!isHolding) return;
-        percent += 2;
-        progress.style.width = `${percent}%`;
+        const elapsed = now - startTime;
+        const pct = Math.min(100, Math.max(0, (elapsed / HOLD_DURATION) * 100));
 
-        if (percent > 30) btn.classList.add('launching');
+        progress.style.width = `${pct}%`;
 
-        if (percent >= 100) {
+        // Ramping haptic vibrations
+        if (pct >= 25 && !hasVibrated25) {
+            hasVibrated25 = true;
+            if (navigator.vibrate) navigator.vibrate(15);
+        }
+        if (pct >= 50 && !hasVibrated50) {
+            hasVibrated50 = true;
+            if (navigator.vibrate) navigator.vibrate(20);
+            if (textEl) textEl.innerHTML = '🔥 Charging Thrusters...';
+        }
+        if (pct >= 75 && !hasVibrated75) {
+            hasVibrated75 = true;
+            if (navigator.vibrate) navigator.vibrate(30);
+            if (textEl) textEl.innerHTML = '⚡ Ignition 100%...';
+        }
+
+        if (pct >= 100) {
+            // SUCCESSFUL LAUNCH!
             isHolding = false;
-            percent = 0;
-            progress.style.width = '0%';
-            btn.classList.remove('launching');
+            if (navigator.vibrate) navigator.vibrate([40, 60, 140]);
+            btn.classList.remove('charging');
+            btn.classList.add('launching');
+            if (textEl) textEl.innerHTML = '🚀 Liftoff!';
 
-            // Balanced festive confetti burst
+            // Dual-side festival confetti burst
             if (typeof confetti !== 'undefined') {
                 confetti({
-                    particleCount: 75,
+                    particleCount: 55,
+                    angle: 60,
                     spread: 70,
-                    origin: { y: 0.85 },
-                    colors: ['#00ffc8', '#ff007f', '#ffbd2e', '#9d00ff', '#00e5ff', '#ffffff']
+                    origin: { x: 0, y: 0.85 },
+                    colors: ['#00ffc8', '#00f0ff', '#fbbf24', '#ff007f', '#ffffff']
+                });
+                confetti({
+                    particleCount: 55,
+                    angle: 120,
+                    spread: 70,
+                    origin: { x: 1, y: 0.85 },
+                    colors: ['#00ffc8', '#00f0ff', '#fbbf24', '#ff007f', '#ffffff']
                 });
             }
 
-            // Slow smooth scroll back to top
-            slowScrollToTop(1500);
-            showToast('🚀 Deployment Successful!');
+            // Smooth deceleration scroll back to top
+            slowScrollToTop(1300);
+            showToast('🚀 Production Deployed Successfully!');
+
+            // Reset button state after animation
+            setTimeout(() => {
+                progress.style.width = '0%';
+                btn.classList.remove('launching');
+                if (textEl) textEl.innerHTML = '🚀 Hold to Deploy';
+                if (hintEl) hintEl.textContent = 'Hold until rockets launch you back to top!';
+            }, 1400);
         } else {
-            holdTimer = requestAnimationFrame(updateProgress);
+            holdAnimId = requestAnimationFrame(step);
         }
     }
 
-    const startHold = (e) => { e.preventDefault(); isHolding = true; percent = 0; updateProgress(); };
-    const stopHold = () => { isHolding = false; percent = 0; progress.style.width = '0%'; btn.classList.remove('launching'); cancelAnimationFrame(holdTimer); };
+    function startHold(e) {
+        if (e.type === 'mousedown' && e.button !== 0) return;
+        if (isHolding) return;
 
-    btn.addEventListener('touchstart', startHold, { passive: false });
-    btn.addEventListener('touchend', stopHold);
-    btn.addEventListener('touchcancel', stopHold);
+        isHolding = true;
+        hasVibrated25 = false;
+        hasVibrated50 = false;
+        hasVibrated75 = false;
+        startTime = performance.now();
+        btn.classList.add('charging');
+        if (navigator.vibrate) navigator.vibrate(20);
+        if (textEl) textEl.innerHTML = '⚡ Powering Up...';
+        if (hintEl) hintEl.textContent = 'Keep holding to launch...';
+
+        cancelAnimationFrame(holdAnimId);
+        holdAnimId = requestAnimationFrame(step);
+    }
+
+    function stopHold() {
+        if (!isHolding) return;
+        isHolding = false;
+        cancelAnimationFrame(holdAnimId);
+        btn.classList.remove('charging');
+        progress.style.width = '0%';
+        if (textEl) textEl.innerHTML = '🚀 Hold to Deploy';
+        if (hintEl) hintEl.textContent = 'Hold until rockets launch you back to top!';
+    }
+
+    // Touch listeners with passive support so touch scrolling is never blocked
+    btn.addEventListener('touchstart', startHold, { passive: true });
+    btn.addEventListener('touchend', stopHold, { passive: true });
+    btn.addEventListener('touchcancel', stopHold, { passive: true });
+
     btn.addEventListener('mousedown', startHold);
     btn.addEventListener('mouseup', stopHold);
     btn.addEventListener('mouseleave', stopHold);
@@ -3096,5 +3165,21 @@ function initMobiusRibbonFavicon() {
     requestAnimationFrame(drawFavicon);
 }
 
+// ── BACK TO TOP FLOATING BUTTON ───────────────────────────────
+function initBackToTop() {
+    const btn = document.getElementById('backToTop');
+    if (!btn) return;
 
+    window.addEventListener('scroll', () => {
+        if ((window.pageYOffset || document.documentElement.scrollTop) > 350) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
+        }
+    }, { passive: true });
 
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        slowScrollToTop(1100);
+    });
+}
