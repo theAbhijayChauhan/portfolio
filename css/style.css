@@ -179,10 +179,9 @@ body {
     display: flex; align-items: center; justify-content: space-between;
 }
 .nav-links {
-    display: none;
+    display: flex;
     align-items: center; gap: 28px;
 }
-@media (min-width: 768px) { .nav-links { display: flex; } }
 
 .nav-link {
     font-size: 11px; letter-spacing: 2px;
