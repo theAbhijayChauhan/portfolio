@@ -339,15 +339,20 @@ function initNav() {
 // ── MOBILE MENU ────────────────────────────────────────
 let mobileOpen = false;
 function toggleMobile() {
+    const menu = document.getElementById('mobileMenu');
+    const toggle = document.getElementById('menuToggle');
+    if (!menu || !toggle) return;
     mobileOpen = !mobileOpen;
-    document.getElementById('mobileMenu').classList.toggle('open', mobileOpen);
-    document.getElementById('menuToggle').innerHTML =
-        mobileOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    menu.classList.toggle('open', mobileOpen);
+    toggle.innerHTML = mobileOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
 }
 function closeMobile() {
+    const menu = document.getElementById('mobileMenu');
+    const toggle = document.getElementById('menuToggle');
+    if (!menu || !toggle) return;
     mobileOpen = false;
-    document.getElementById('mobileMenu').classList.remove('open');
-    document.getElementById('menuToggle').innerHTML = '<i class="fas fa-bars"></i>';
+    menu.classList.remove('open');
+    toggle.innerHTML = '<i class="fas fa-bars"></i>';
 }
 
 
